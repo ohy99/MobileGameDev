@@ -4,34 +4,45 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 
-public class SplashScreen extends Activity implements OnClickListener {
-
-    private Button btn_start;
+public class SplashScreen extends Activity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash_screen);
 
-        btn_start = (Button)findViewById(R.id.button);
-        btn_start.setOnClickListener(this);
+        // hide title
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        // hide top bar
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        setContentView(R.layout.activity_splash_screen);
     }
 
     @Override
-    public void onClick(View v)
-    {
-        Intent intent = new Intent();
+    public boolean onTouchEvent(MotionEvent event) {
 
-        if(v == btn_start)
-        {
-            intent.setClass(SplashScreen.this, MainMenu.class);
-            startActivity(intent);
-            //MainMenu.this.finish();
+        int action = event.getActionMasked();
+
+        switch (action) {
+
+            case MotionEvent.ACTION_DOWN:
+                Intent intent = new Intent();
+                intent.setClass(SplashScreen.this, MainMenu.class);
+                startActivity(intent);
+                SplashScreen.this.finish();
+                break;
         }
 
+        return super.onTouchEvent(event);
     }
+
+
 }

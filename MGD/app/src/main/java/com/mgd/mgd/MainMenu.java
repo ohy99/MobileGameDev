@@ -51,7 +51,7 @@ public class MainMenu extends Activity implements OnClickListener {
         if(v == btn_start) {
             intent.setClass(MainMenu.this, SplashScreen.class);
             startActivity(intent);
-            //MainMenu.this.finish();
+            MainMenu.this.finish();
         }
 
         if(v == btn_facebook) {
