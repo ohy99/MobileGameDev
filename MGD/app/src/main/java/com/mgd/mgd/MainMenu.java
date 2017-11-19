@@ -13,6 +13,9 @@ public class MainMenu extends Activity implements OnClickListener {
 
     //Define button as an obj
     private Button btn_start;
+    private Button btn_settings;
+    private Button btn_highscore;
+    private Button btn_facebook;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,14 @@ public class MainMenu extends Activity implements OnClickListener {
         // set listener to button
         btn_start = (Button)findViewById(R.id.play_button);
         btn_start.setOnClickListener(this);
+        btn_settings = (Button)findViewById(R.id.settings_button);
+        btn_settings.setOnClickListener(this);
+        btn_highscore = (Button)findViewById(R.id.highscore_button);
+        btn_highscore.setOnClickListener(this);
+        btn_facebook = (Button)findViewById(R.id.facebook_button);
+        btn_facebook.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -37,13 +48,23 @@ public class MainMenu extends Activity implements OnClickListener {
     {
         Intent intent = new Intent();
 
-        if(v == btn_start)
-        {
+        if(v == btn_start) {
             intent.setClass(MainMenu.this, SplashScreen.class);
             startActivity(intent);
             //MainMenu.this.finish();
         }
 
+        if(v == btn_facebook) {
+
+        }
+
+        if (v == btn_settings) {
+
+        }
+
+        if(v == btn_highscore) {
+
+        }
     }
 }
 
