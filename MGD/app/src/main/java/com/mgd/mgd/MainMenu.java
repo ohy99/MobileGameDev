@@ -41,7 +41,7 @@ public class MainMenu extends Activity implements OnClickListener {
         {
             intent.setClass(MainMenu.this, SplashScreen.class);
             startActivity(intent);
-            //MainMenu.this.finish();
+            MainMenu.this.finish();
         }
 
     }
