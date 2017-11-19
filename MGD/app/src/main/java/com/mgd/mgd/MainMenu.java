@@ -31,6 +31,7 @@ public class MainMenu extends Activity implements OnClickListener {
         btn_start.setOnClickListener(this);
     }
 
+    @Override
     //Invoke a callback on clicked event on a view
     public void onClick(View v)
     {
