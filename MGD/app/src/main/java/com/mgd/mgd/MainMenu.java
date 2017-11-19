@@ -27,8 +27,8 @@ public class MainMenu extends Activity implements OnClickListener {
         //setContentView(new GameView(this));
 
         // set listener to button
-        //btn_start = (Button)findViewById(R.id.btn_start);
-       // btn_start.setOnClickListener(this);
+        btn_start = (Button)findViewById(R.id.start_button);
+        btn_start.setOnClickListener(this);
     }
 
     //Invoke a callback on clicked event on a view
@@ -37,8 +37,9 @@ public class MainMenu extends Activity implements OnClickListener {
         Intent intent = new Intent();
 
         if(v == btn_start)
-            intent.setClass(this, SampleGame.class);
+            intent.setClass(this, SplashScreen.class);
 
         startActivity(intent);
     }
 }
+
