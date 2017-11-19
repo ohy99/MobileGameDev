@@ -27,7 +27,7 @@ public class MainMenu extends Activity implements OnClickListener {
         //setContentView(new GameView(this));
 
         // set listener to button
-        btn_start = (Button)findViewById(R.id.start_button);
+        btn_start = (Button)findViewById(R.id.play_button);
         btn_start.setOnClickListener(this);
     }
 
