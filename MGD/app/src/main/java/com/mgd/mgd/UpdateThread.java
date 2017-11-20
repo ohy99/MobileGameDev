@@ -7,6 +7,8 @@ import android.view.SurfaceView;
 
 public class UpdateThread extends Thread
 {
+    static final long targetFPS = 60;
+
     private GameView view = null;
     private SurfaceHolder holder = null;
     private boolean isRunning = false;
@@ -17,6 +19,7 @@ public class UpdateThread extends Thread
         holder = _view.getHolder();
 
         // init here
+        SampleGame.Instance.Init(view);
     }
 
     public boolean IsRunning() {return isRunning;}
@@ -27,10 +30,23 @@ public class UpdateThread extends Thread
     @Override
     public void run()
     {
+        long framePerSec = 1000 / targetFPS;
+        long startTime = 0;
+        long prevTime = System.nanoTime();
+
         while(isRunning)
         {
-            // here can be statemanager update
+            // Update
 
+            /*-- Frame Limiter/Time Counter--*/
+            startTime = System.currentTimeMillis();
+            long currTime = System.nanoTime();
+            float dt = (float)((currTime - prevTime)/1000000000.0f);
+            prevTime = currTime;
+
+            SampleGame.Instance.Update(dt);
+
+            // Render
             Canvas canvas = holder.lockCanvas(null);
             if(canvas != null)
             {
@@ -40,13 +56,29 @@ public class UpdateThread extends Thread
                     // render whole screen black
                     canvas.drawColor(Color.BLACK);
 
-                    //insert stuff here
-                    // SampleGame::Instance.Render();
+                    //render other stuff here
+                    SampleGame.Instance.Render(canvas);
                 }
                 holder.unlockCanvasAndPost(canvas);
             }
 
-            // should have something to limit framerate
+            // Post Update/Render
+            try {
+                long sleepTime = framePerSec - (System.currentTimeMillis() - startTime);
+
+                if(sleepTime > 0)
+                    sleep(sleepTime);
+            }
+            catch (InterruptedException e) {
+                Terminate();
+            }
+
+            // here can be statemanager update
+
+
+
+
+
         }
     }
 }
