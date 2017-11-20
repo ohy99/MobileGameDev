@@ -19,8 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SplashScreen"
-                  android:screenOrientation="landscape" >
+        <activity android:name=".SplashScreen" >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

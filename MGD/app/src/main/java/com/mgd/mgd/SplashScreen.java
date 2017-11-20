@@ -2,6 +2,7 @@ package com.mgd.mgd;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -22,8 +23,32 @@ public class SplashScreen extends Activity{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         // hide top bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_splash_screen);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+
+        final Thread SplashThread = new Thread()
+        {
+
+            @Override
+            public void run()
+            {
+                try{
+                    int waited = 0;
+                    while (waited < 2000){
+                        sleep(200);
+                        waited += 200;
+                    }
+                }catch (InterruptedException e){
+
+                } finally {
+                    Intent intent = new Intent();
+                    intent.setClass(SplashScreen.this, MainMenu.class);
+                    startActivity(intent);
+                    SplashScreen.this.finish();
+                }
+            }
+        };
+        SplashThread.start();
     }
 
     @Override
@@ -43,6 +68,31 @@ public class SplashScreen extends Activity{
 
         return super.onTouchEvent(event);
     }
+
+  @Override
+    protected void onPause() {
+      super.onPause();
+  }
+
+  @Override
+    protected void onStart() {
+      super.onStart();
+  }
+
+  @Override
+    protected void onResume(){
+      super.onResume();
+  }
+
+  @Override
+    protected void onStop() {
+      super.onStop();
+  }
+
+  @Override
+    protected void onDestroy() {
+      super.onDestroy();
+  }
 
 
 }
