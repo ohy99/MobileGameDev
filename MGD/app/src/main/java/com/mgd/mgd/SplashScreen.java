@@ -80,9 +80,7 @@ public class SplashScreen extends Activity{
   }
 
   @Override
-    protected void onResume(){
-      super.onResume();
-  }
+    protected void onResume(){ super.onResume(); }
 
   @Override
     protected void onStop() {
