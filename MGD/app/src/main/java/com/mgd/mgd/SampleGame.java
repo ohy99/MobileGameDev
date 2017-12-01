@@ -3,11 +3,17 @@ package com.mgd.mgd;
 import android.graphics.Canvas;
 import android.view.SurfaceView;
 
+import com.mgd.mgd.Common.Player;
+import com.mgd.mgd.Common.ResourceHandler;
+import com.mgd.mgd.Components.RenderManager;
+
 // Remark: Too lazy to change classname
 
 public class SampleGame{
     public final static SampleGame Instance = new SampleGame();
     float timer = 0.0f;
+
+    Player player = new Player();
 
     private SampleGame()
     {
@@ -16,6 +22,9 @@ public class SampleGame{
     public void Init(SurfaceView _view)
     {
       EntityManager.Instance.Init(_view);
+        ResourceHandler.Instance.Init(_view);
+
+        player.Init();
     }
 
     public void Update(float _deltaTime)
@@ -31,6 +40,7 @@ public class SampleGame{
 
     protected void Render(Canvas _canvas)
     {
+        RenderManager.Instance.Render(_canvas);
         EntityManager.Instance.Render(_canvas);
     }
 }

@@ -63,9 +63,7 @@ public class SampleEntity implements EntityBase, Collidable {
     }
 
     @Override
-    public String GetType() {
-        return "SampleEntity";
-    }
+    public String GetType() { return "SampleEntity"; }
 
     @Override
     public float GetPosX() {
@@ -84,7 +82,7 @@ public class SampleEntity implements EntityBase, Collidable {
 
     @Override
     public void OnHit(Collidable _other) {
-        if(_other.GetType()=="SampleEntity") {
+        if(_other.GetType().equals("SampleEntity")) {
             SetIsDone(true);
         }
     }
