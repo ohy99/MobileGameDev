@@ -1,6 +1,7 @@
 package com.mgd.mgd.Enemy;
 
 import com.mgd.mgd.Common.Enemy;
+import com.mgd.mgd.Common.Vector3;
 
 import java.util.LinkedList;
 
@@ -19,7 +20,8 @@ public class EnemyManager {
         BOTULISM,
         CLOSTRIDIUM,
         SHIGELLA,
-        LISTERIA
+        LISTERIA,
+        MINIBOTULISM
     }
 
     public void Init() {
@@ -44,11 +46,13 @@ public class EnemyManager {
     }
 
 
-    public void SpawnEnemy(EnemyType type) {
+    public void SpawnEnemy(EnemyType type, Vector3 spawnPos) {
         switch(type)
         {
             case BOTULISM:
                 Botulism b = new Botulism();
+                b.Init();
+                EnemyList.add(b);
                 break;
             case CLOSTRIDIUM:
                 Clostridium c = new Clostridium();
@@ -58,6 +62,11 @@ public class EnemyManager {
                 break;
             case LISTERIA:
                 Listeria l = new Listeria();
+                break;
+            case MINIBOTULISM:
+                MiniBotulism mb = new MiniBotulism(spawnPos);
+                mb.Init();
+                EnemyList.add(mb);
                 break;
         }
 

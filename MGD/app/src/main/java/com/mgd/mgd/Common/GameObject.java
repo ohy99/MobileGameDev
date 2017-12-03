@@ -21,5 +21,9 @@ public class GameObject{
     public void Destroy(){
 
     }
+
+    public ComponentBase GetComponent(String str) {
+        return components.get(str);
+    }
 }
 
