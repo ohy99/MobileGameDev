@@ -6,7 +6,7 @@ public class Physics implements ComponentBase{
 
     boolean gravity = false;
     public Transform transform;
-    float speed = 1.0f;
+    float speed = 10.0f;
 
     @Override
     public void Init() {
@@ -15,13 +15,13 @@ public class Physics implements ComponentBase{
 
     @Override
     public void Update(double dt) {
+        Vector3 pos;
+        pos = transform.GetPosition();
         if (gravity)
         {
-            Vector3 pos;
-            pos = transform.GetPosition();
             pos.y -= 10.f * dt;
-            pos.x += transform.GetDir().x * speed;
-            pos.y += transform.GetDir().y * speed;
         }
+        pos.x += transform.GetDir().x * speed * dt;
+        pos.y += transform.GetDir().y * speed * dt;
     }
 }

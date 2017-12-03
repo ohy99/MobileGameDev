@@ -12,7 +12,7 @@ public class GenericRenderable extends GameObject{
 
         Transform transform = new Transform();
         transform.Init();
-        transform.SetScale(100, 200);
+        transform.SetScale(200, 100);
         this.components.put("transform", transform);
 
         Render render = new Render();

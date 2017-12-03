@@ -5,10 +5,14 @@ import android.view.SurfaceView;
 
 import com.mgd.mgd.Common.GameObject;
 import com.mgd.mgd.Common.GameObjectManager;
+import com.mgd.mgd.Common.GenericRenderable;
 import com.mgd.mgd.Common.Player;
 import com.mgd.mgd.Common.ResourceHandler;
+import com.mgd.mgd.Common.Vector3;
 import com.mgd.mgd.Components.Collision.CollisionManager;
 import com.mgd.mgd.Components.RenderManager;
+import com.mgd.mgd.Enemy.Botulism;
+import com.mgd.mgd.Enemy.EnemyManager;
 
 // Remark: Too lazy to change classname
 
@@ -29,17 +33,17 @@ public class SampleGame{
 
         player.Init();
 
-        //create static objs
+      //create static objs
+        GenericRenderable renderable = new GenericRenderable();
+        renderable.Init();
 
+        for(int i =0;i<4;++i) {
+            EnemyManager.Instance.SpawnEnemy(EnemyManager.EnemyType.BOTULISM, new Vector3(0,0,0));
+        }
     }
 
     public void Update(float _deltaTime)
     {
-//        timer += _deltaTime;
-//        if(timer > 1.0f) {
-//            SampleEntity.Create();
-//            timer = 0.0f;
-//        }
 
         EntityManager.Instance.Update(_deltaTime);
         GameObjectManager.Instance.Update(_deltaTime);

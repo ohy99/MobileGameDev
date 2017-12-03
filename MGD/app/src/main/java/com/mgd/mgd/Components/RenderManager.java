@@ -14,7 +14,13 @@ public class RenderManager{
     public final static RenderManager Instance = new RenderManager();
     Vector<Render> renderables = new Vector<>();
 
+    private float canvasWidth = 0;
+    private float canvasHeight = 0;
+
     public void Render(Canvas canvas){
+
+        canvasWidth = canvas.getWidth();
+        canvasHeight = canvas.getHeight();
 
         //sort render order by z-axis
         quick_sort(renderables, 0, renderables.size() - 1);
@@ -26,7 +32,8 @@ public class RenderManager{
             Matrix mtx= new Matrix();
 
             //have a function to get the x and y base on z also
-            mtx.setTranslate(transform.GetPosition().x, 100.f - transform.GetPosition().y);
+           // mtx.setTranslate(transform.GetPosition().x, 100.f);
+
 
             //our x is the longer length of the phone
             float worldX = 100.f * (canvas.getWidth() / (float)canvas.getHeight());
@@ -48,6 +55,12 @@ public class RenderManager{
             Log.i("transformX", String.valueOf(transform.GetScale().x));
             Log.i("transformY", String.valueOf(transform.GetScale().y));
 
+
+            mtx.postTranslate((transform.GetPosition().x / worldX) * ((float)canvas.getWidth()),
+                    (1.0f - (transform.GetPosition().y / 100.f)) * ((float)canvas.getHeight()) - bmpHeight);
+                    //(1.f - (transform.GetPosition().y / 100.f)) * ((float)canvas.getHeight()) - bmpHeight);
+            //mtx.postScale((transform.GetScale().x / worldX) * ((float)canvas.getWidth()/(float)bmpWidth),
+             //       (transform.GetScale().y / 100.f) * ((float)canvas.getHeight()/(float)bmpHeight));
             canvas.drawBitmap(bmp, mtx ,null);
 
         }
@@ -59,6 +72,8 @@ public class RenderManager{
 
         canvas.drawText("Score:" + String.valueOf(ss.GetScore()), 1350, 70, paint);
         canvas.drawText("Combo:" + String.valueOf(ss.GetCombo()),1350,120,paint);
+
+
     }
 
     public void AddRenderable(Render render) {renderables.add(render);}
@@ -102,4 +117,11 @@ public class RenderManager{
 //        data_list.get(second_index) = temp;
     }
 
+    public float getCanvasHeight() {
+        return canvasHeight;
+    }
+
+    public float getCanvasWidth() {
+        return canvasWidth;
+    }
 }

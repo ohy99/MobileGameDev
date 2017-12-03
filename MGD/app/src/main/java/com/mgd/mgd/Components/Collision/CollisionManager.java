@@ -24,12 +24,14 @@ public class CollisionManager{
             {
                 Collider second = colliderVector.get(j).first;
 
-                if (Collision.SphereSphere(1,2,3,4,5,6))
-                {
-                    //i , j then j , i
-                    first.response.Response(colliderVector.get(j).second, colliderVector.get(i).second);
-                    second.response.Response(colliderVector.get(i).second, colliderVector.get(j).second);
-                }
+//                if (Collision.SphereSphere(1,2,3,4,5,6))
+//                {
+//                    //i , j then j , i
+//                    first.response.Response(colliderVector.get(j).second, colliderVector.get(i).second);
+//                    second.response.Response(colliderVector.get(i).second, colliderVector.get(j).second);
+//
+//                    Log.i("CManager", "boom");
+//                }
             }
         }
 

@@ -1,6 +1,7 @@
 package com.mgd.mgd.Enemy;
 
 import com.mgd.mgd.Common.Enemy;
+import com.mgd.mgd.Common.Player;
 import com.mgd.mgd.Common.ResourceHandler;
 import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
@@ -10,6 +11,8 @@ import com.mgd.mgd.States.BotulismStates.StateSummon;
 import com.mgd.mgd.States.StateAttack;
 import com.mgd.mgd.States.StateMoving;
 
+import java.util.Random;
+
 /**
  * Created by 161832Q on 3/12/2017.
  */
@@ -18,17 +21,17 @@ import com.mgd.mgd.States.StateMoving;
 public class Botulism extends Enemy {
 
     public Botulism() {}
-
+    Random r = new Random();
     @Override
     public void Init() {
         Transform transform = new Transform();
-        //transform.Init();
-        //transform.SetScale(50,50);
+        transform.SetPosition(r.nextInt(100),0,r.nextInt(50));
+        transform.SetScale(20,20);
         this.components.put("transform" ,transform);
 
         Render render = new Render();
         render.Init();
-        //render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.settings), transform);
+        render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.botulism), transform);
         this.components.put("render", render);
         RenderManager.Instance.AddRenderable(render);
 

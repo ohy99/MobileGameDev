@@ -6,8 +6,8 @@ package com.mgd.mgd.Components;
 
 public class ScoreSystem implements ComponentBase {
 
-    int CurrentScore;
-    int Combo;
+    int CurrentScore = 0;
+    int Combo = 0;
 
     @Override
     public void Init() {

@@ -1,6 +1,8 @@
 package com.mgd.mgd.Common;
 
 
+import android.util.Log;
+
 import java.util.Vector;
 
 public class GameObjectManager{
@@ -20,6 +22,8 @@ public class GameObjectManager{
              ) {
             go.Update(dt);
         }
+
+        Log.i("GOManager", String.valueOf(gameObjects.size()));
     }
 
 
