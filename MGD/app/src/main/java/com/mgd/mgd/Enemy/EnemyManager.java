@@ -32,10 +32,15 @@ public class EnemyManager {
         for(Enemy enemy : EnemyList) {
             enemy.Update(dt);
 
-
+            if(enemy.GetIsDead() == true)
+                RemovalList.add(enemy);
         }
 
-
+        // Removal of dead enemies
+        for(Enemy enemy : RemovalList) {
+            EnemyList.remove(enemy);
+        }
+        RemovalList.clear();
     }
 
 
@@ -43,19 +48,19 @@ public class EnemyManager {
         switch(type)
         {
             case BOTULISM:
+                Botulism b = new Botulism();
                 break;
             case CLOSTRIDIUM:
+                Clostridium c = new Clostridium();
                 break;
             case SHIGELLA:
+                Shigella s = new Shigella();
                 break;
             case LISTERIA:
+                Listeria l = new Listeria();
                 break;
         }
 
     }
-
-    //public void RemoveEnemy() {
-
-    //}
 }
 

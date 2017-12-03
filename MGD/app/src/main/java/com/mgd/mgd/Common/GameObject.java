@@ -7,7 +7,7 @@ import java.util.Vector;
 
 public class GameObject{
 
-    Vector<ComponentBase> components = new Vector<>();
+    protected Vector<ComponentBase> components = new Vector<>();
 
     public void Init(){
 
@@ -15,7 +15,6 @@ public class GameObject{
     public void Update(double dt) {
 
     }
-
 
 }
 

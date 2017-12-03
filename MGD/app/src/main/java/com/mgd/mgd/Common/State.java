@@ -1,7 +1,7 @@
 package com.mgd.mgd.Common;
 
 /**
- * Created by USER on 3/12/2017.
+ * Created by 161832Q on 3/12/2017.
  */
 
 public class State {
