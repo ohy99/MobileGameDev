@@ -14,7 +14,7 @@ public class StateManager {
     StateBase CurrState;
     StateBase NextState;
 
-    StateManager() {}
+    public StateManager() {}
 
     public void AddState(StateBase NewState) {
         if(NewState == null)
