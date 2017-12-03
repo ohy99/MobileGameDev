@@ -6,6 +6,7 @@ import com.mgd.mgd.Components.Collision.Collider;
 import com.mgd.mgd.Components.Collision.PlayerResponse;
 import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
+import com.mgd.mgd.Components.ScoreSystem;
 import com.mgd.mgd.Components.Transform;
 import com.mgd.mgd.R;
 import com.mgd.mgd.TouchManager;
@@ -33,6 +34,11 @@ public class Player extends GameObject{
         collider.Init();
         collider.response = playerResponse;
         this.components.add(collider);
+
+
+        ScoreSystem score = new ScoreSystem();
+        score.Init();
+        this.components.add(score);
     }
 
     @Override
