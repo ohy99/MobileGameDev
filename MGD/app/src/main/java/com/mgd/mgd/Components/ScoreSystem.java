@@ -19,27 +19,27 @@ public class ScoreSystem implements ComponentBase {
 
     }
 
-    void AddScore(int DmgDealt) {
+    public void AddScore(int DmgDealt) {
         CurrentScore += (DmgDealt * (0.02 * Combo + 1));
     }
 
-    void MinusScore(int DmgReceived) {
+    public void MinusScore(int DmgReceived) {
         CurrentScore -= (DmgReceived * 0.1);
     }
 
-    void IncreaseCombo() {
+    public void IncreaseCombo() {
         Combo += 1;
     }
 
-    void ResetCombo() {
+    public void ResetCombo() {
         Combo = 0;
     }
 
-    int GetCombo() {
+    public int GetCombo() {
         return Combo;
     }
 
-    int GetScore() {
+    public int GetScore() {
         return CurrentScore;
     }
 }
