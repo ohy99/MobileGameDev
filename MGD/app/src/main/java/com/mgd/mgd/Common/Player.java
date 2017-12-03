@@ -53,10 +53,6 @@ public class Player extends GameObject{
     public void Update(double dt) {
 
         UpdateMovement(dt);
-
-        ScoreSystem score = (ScoreSystem) this.components.get("score");
-        Log.i("Score", String.valueOf(score.GetScore()));
-        Log.i("Combo",String.valueOf(score.GetCombo()));
     }
 
     @Override

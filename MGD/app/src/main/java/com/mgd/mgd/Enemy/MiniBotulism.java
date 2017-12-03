@@ -1,10 +1,12 @@
 package com.mgd.mgd.Enemy;
 
 import com.mgd.mgd.Common.Enemy;
+import com.mgd.mgd.Common.ResourceHandler;
 import com.mgd.mgd.Common.Vector3;
 import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.Transform;
+import com.mgd.mgd.R;
 import com.mgd.mgd.States.StateAttack;
 import com.mgd.mgd.States.StateIdle;
 import com.mgd.mgd.States.StateMoving;
@@ -24,12 +26,12 @@ public class MiniBotulism extends Enemy {
     public void Init() {
         Transform transform = new Transform();
         transform.SetPosition(spawnPos.x, spawnPos.y, spawnPos.z);
-        transform.SetScale(3,3);
+        transform.SetScale(10,10);
         this.components.put("transform" ,transform);
 
         Render render = new Render();
         render.Init();
-        //render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.settings), transform);
+        render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.botulism), transform);
         this.components.put("render", render);
         RenderManager.Instance.AddRenderable(render);
 
