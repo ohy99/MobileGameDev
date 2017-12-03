@@ -9,7 +9,11 @@ public class ProjectileResponse extends CollisionResponse{
 
     public boolean Response(GameObject other, GameObject me){
 
-        if (other instanceof Player)
+        if (other instanceof Player){
             GameObjectManager.Instance.RequestDeletion(me);
+            return true;
+        }
+
+        return false;
     }
 }
