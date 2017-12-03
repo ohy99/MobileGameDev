@@ -11,6 +11,7 @@ import com.mgd.mgd.R;
  * Created by 161832Q on 3/12/2017.
  */
 
+// PuppetMaster
 public class Botulism extends Enemy {
 
     public Botulism() {}

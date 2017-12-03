@@ -9,6 +9,7 @@ import com.mgd.mgd.Components.Transform;
  * Created by 161832Q on 3/12/2017.
  */
 
+// Range
 public class Listeria extends Enemy {
 
     public Listeria() {};
