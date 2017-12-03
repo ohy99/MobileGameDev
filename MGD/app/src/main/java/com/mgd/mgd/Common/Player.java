@@ -17,6 +17,8 @@ public class Player extends GameObject{
     public final static Player Instance = new Player();
     private Player() {}
     public int health = 100;
+    final int maxHealth = 100;
+
     @Override
     public void Init(){
         Transform transform = new Transform();
@@ -77,6 +79,10 @@ public class Player extends GameObject{
 
     public int GetHealth() {return health;}
 
+    // used for rendering hp bar
+    public float GetPercentageHealth() {
+        return health / maxHealth;
+    }
 }
 
 
