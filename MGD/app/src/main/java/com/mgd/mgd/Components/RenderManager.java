@@ -2,8 +2,11 @@ package com.mgd.mgd.Components;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.util.Log;
+import android.graphics.Paint;
+import com.mgd.mgd.Common.Player;
 
 import java.util.Vector;
 
@@ -49,6 +52,13 @@ public class RenderManager{
 
         }
 
+        Paint paint = new Paint();
+        paint.setColor(Color.BLUE);
+        paint.setTextSize(60);
+        ScoreSystem ss = (ScoreSystem) Player.Instance.GetComponent("score");
+
+        canvas.drawText("Score:" + String.valueOf(ss.GetScore()), 1350, 70, paint);
+        canvas.drawText("Combo:" + String.valueOf(ss.GetCombo()),1350,120,paint);
     }
 
     public void AddRenderable(Render render) {renderables.add(render);}

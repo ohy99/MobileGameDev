@@ -9,6 +9,7 @@ import com.mgd.mgd.Components.Transform;
  * Created by 161832Q on 3/12/2017.
  */
 
+// Charger
 public class Shigella extends Enemy {
 
     public Shigella() {}

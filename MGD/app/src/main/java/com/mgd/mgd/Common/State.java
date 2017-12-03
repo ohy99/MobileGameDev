@@ -11,7 +11,7 @@ public class State {
         return StateID;
     }
 
-    State(final String _StateID) {
+    protected State(final String _StateID) {
         StateID = _StateID;
     }
 

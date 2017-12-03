@@ -14,6 +14,10 @@ import com.mgd.mgd.R;
 import com.mgd.mgd.TouchManager;
 
 public class Player extends GameObject{
+    public final static Player Instance = new Player();
+    private Player() {}
+    public int health = 100;
+    final int maxHealth = 100;
 
     @Override
     public void Init(){
@@ -52,6 +56,7 @@ public class Player extends GameObject{
 
         ScoreSystem score = (ScoreSystem) this.components.get("score");
         Log.i("Score", String.valueOf(score.GetScore()));
+        Log.i("Combo",String.valueOf(score.GetCombo()));
     }
 
     @Override
@@ -70,6 +75,14 @@ public class Player extends GameObject{
         }
     }
 
+    public void SetHealth(int hp) { health = hp;}
+
+    public int GetHealth() {return health;}
+
+    // used for rendering hp bar
+    public float GetPercentageHealth() {
+        return health / maxHealth;
+    }
 }
 
 

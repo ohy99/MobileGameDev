@@ -16,7 +16,7 @@ public class SampleGame{
     public final static SampleGame Instance = new SampleGame();
     float timer = 0.0f;
 
-    Player player = new Player();
+    Player player = Player.Instance;
 
     private SampleGame()
     {

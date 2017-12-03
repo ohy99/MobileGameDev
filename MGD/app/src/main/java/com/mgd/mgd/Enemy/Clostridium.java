@@ -5,6 +5,7 @@ import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.Transform;
 
+// Kamikazi
 public class Clostridium extends Enemy {
 
         public Clostridium() {}
