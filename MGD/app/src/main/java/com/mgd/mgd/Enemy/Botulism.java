@@ -25,8 +25,8 @@ public class Botulism extends Enemy {
     @Override
     public void Init() {
         Transform transform = new Transform();
-        transform.SetPosition(r.nextInt(100),0,r.nextInt(50));
-        transform.SetScale(20,20);
+        transform.SetPosition(r.nextInt(100),0,r.nextInt(500));
+        transform.SetScale(40,20);
         this.components.put("transform" ,transform);
 
         Render render = new Render();

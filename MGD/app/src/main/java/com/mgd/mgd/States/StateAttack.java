@@ -21,7 +21,12 @@ public class StateAttack extends State{
     }
 
     @Override
-    public void Enter() { etAttack = 0.f;
+    public void Enter() {
+        if(enemy.GetName().equals("shigella")) {
+            etAttack = 5.f; // dmg upon impact since shigella is a charger type ai
+        } else {
+            etAttack = 0.f;
+        }
     }
 
     @Override
