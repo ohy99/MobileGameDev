@@ -26,7 +26,7 @@ public class RenderManager{
             Matrix mtx= new Matrix();
 
             //have a function to get the x and y base on z also
-            mtx.setTranslate(transform.GetPosition().x, transform.GetPosition().y);
+            mtx.setTranslate(transform.GetPosition().x, 100.f - transform.GetPosition().y);
 
             //our x is the longer length of the phone
             float worldX = 100.f * (canvas.getWidth() / (float)canvas.getHeight());
@@ -35,7 +35,7 @@ public class RenderManager{
             int bmpWidth = bmp.getWidth();
             int bmpHeight = bmp.getHeight();
             mtx.setScale((transform.GetScale().x / worldX) * ((float)canvas.getWidth()/(float)bmpWidth),
-                    (1.0f - (transform.GetScale().y / 100.f)) * ((float)canvas.getHeight()/(float)bmpHeight));
+                     (transform.GetScale().y / 100.f) * ((float)canvas.getHeight()/(float)bmpHeight));
 
             Log.i("Canvas width", String.valueOf(canvas.getWidth()));
             Log.i("Canvas height", String.valueOf(canvas.getHeight()));

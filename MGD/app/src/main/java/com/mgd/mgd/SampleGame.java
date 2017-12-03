@@ -28,15 +28,18 @@ public class SampleGame{
         ResourceHandler.Instance.Init(_view);
 
         player.Init();
+
+        //create static objs
+
     }
 
     public void Update(float _deltaTime)
     {
-        timer += _deltaTime;
-        if(timer > 1.0f) {
-            SampleEntity.Create();
-            timer = 0.0f;
-        }
+//        timer += _deltaTime;
+//        if(timer > 1.0f) {
+//            SampleEntity.Create();
+//            timer = 0.0f;
+//        }
 
         EntityManager.Instance.Update(_deltaTime);
         GameObjectManager.Instance.Update(_deltaTime);
