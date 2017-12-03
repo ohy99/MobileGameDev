@@ -16,6 +16,8 @@ public class GameObject{
 
     }
 
+    public void Destroy(){
 
+    }
 }
 
