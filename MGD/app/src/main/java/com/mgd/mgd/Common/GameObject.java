@@ -2,12 +2,14 @@ package com.mgd.mgd.Common;
 
 import com.mgd.mgd.Components.ComponentBase;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.Vector;
 
 public class GameObject{
 
-    protected Vector<ComponentBase> components = new Vector<>();
+    protected Map<String, ComponentBase> components = new HashMap<>();
 
     public void Init(){
 

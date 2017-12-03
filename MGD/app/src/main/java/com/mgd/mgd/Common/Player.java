@@ -1,6 +1,8 @@
 package com.mgd.mgd.Common;
 
 import android.graphics.PointF;
+import android.util.Log;
+import android.util.Pair;
 
 import com.mgd.mgd.Components.Collision.Collider;
 import com.mgd.mgd.Components.Collision.PlayerResponse;
@@ -18,12 +20,12 @@ public class Player extends GameObject{
         Transform transform = new Transform();
         transform.Init();
         transform.SetScale(50,50);
-        this.components.add(transform);
+        this.components.put("transform", transform);
 
         Render render = new Render();
         render.Init();
         render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.settings), transform);
-        this.components.add(render);
+        this.components.put("render", render);
         RenderManager.Instance.AddRenderable(render);
 
         //init collision
@@ -33,18 +35,23 @@ public class Player extends GameObject{
         Collider collider = new Collider();
         collider.Init();
         collider.response = playerResponse;
-        this.components.add(collider);
+        this.components.put("collider", collider);
 
 
         ScoreSystem score = new ScoreSystem();
         score.Init();
-        this.components.add(score);
+        this.components.put("score",score);
+
+        GameObjectManager.Instance.AddGo(this);
     }
 
     @Override
     public void Update(double dt) {
 
         UpdateMovement(dt);
+
+        ScoreSystem score = (ScoreSystem) this.components.get("score");
+        Log.i("Score", String.valueOf(score.GetScore()));
     }
 
     @Override
