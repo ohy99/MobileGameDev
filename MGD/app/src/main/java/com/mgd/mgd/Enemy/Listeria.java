@@ -23,7 +23,7 @@ public class Listeria extends Enemy {
 
         Render render = new Render();
         render.Init();
-        //render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.settings), transform);
+        //render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.listeria), transform);
         this.components.put("render", render);
         RenderManager.Instance.AddRenderable(render);
 
