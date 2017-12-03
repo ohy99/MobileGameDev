@@ -5,7 +5,7 @@ import com.mgd.mgd.Common.Vector3;
 public class Physics implements ComponentBase{
 
     boolean gravity = false;
-    Transform transform;
+    public Transform transform;
     float speed = 1.0f;
 
     @Override

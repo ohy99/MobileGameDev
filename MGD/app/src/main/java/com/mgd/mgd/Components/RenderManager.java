@@ -3,6 +3,7 @@ package com.mgd.mgd.Components;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.util.Log;
 
 import java.util.Vector;
 
@@ -30,8 +31,19 @@ public class RenderManager{
             int screenHeight = canvas.getHeight();
             int bmpWidth = bmp.getWidth();
             int bmpHeight = bmp.getHeight();
-            mtx.setScale((transform.GetScale().x / worldX) * (bmp.getWidth() / (float)canvas.getWidth()),
-            (transform.GetScale().y / 100) * (bmp.getHeight() / (float)canvas.getHeight()));
+            mtx.setScale((transform.GetScale().x / worldX) * ((float)canvas.getWidth()/(float)bmpWidth),
+                    (1.0f - (transform.GetScale().y / 100.f)) * ((float)canvas.getHeight()/(float)bmpHeight));
+
+            Log.i("Canvas width", String.valueOf(canvas.getWidth()));
+            Log.i("Canvas height", String.valueOf(canvas.getHeight()));
+
+            Log.i("bmp width", String.valueOf(bmp.getWidth()));
+            Log.i("bmp height", String.valueOf(bmp.getHeight()));
+
+            Log.i("worldX", String.valueOf(worldX));
+
+            Log.i("transformX", String.valueOf(transform.GetScale().x));
+            Log.i("transformY", String.valueOf(transform.GetScale().y));
 
             canvas.drawBitmap(bmp, mtx ,null);
 
