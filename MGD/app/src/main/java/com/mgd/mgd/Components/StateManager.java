@@ -1,6 +1,6 @@
 package com.mgd.mgd.Components;
 
-import com.mgd.mgd.Common.StateBase;
+import com.mgd.mgd.Common.State;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,17 +10,17 @@ import java.util.Map;
  */
 
 public class StateManager {
-    Map<String, StateBase> StateMap = new HashMap<>();
-    StateBase CurrState;
-    StateBase NextState;
+    Map<String, State> StateMap = new HashMap<>();
+    State CurrState;
+    State NextState;
 
     public StateManager() {}
 
-    public void AddState(StateBase NewState) {
+    public void AddState(State NewState) {
         if(NewState == null)
             return;
 
-        for(Map.Entry<String,StateBase> i : StateMap.entrySet()) {
+        for(Map.Entry<String,State> i : StateMap.entrySet()) {
             if(i == NewState)
                 return;
 
@@ -32,7 +32,7 @@ public class StateManager {
     }
 
     public void SetNextState(String nextStateID) {
-        for(Map.Entry<String,StateBase> i : StateMap.entrySet()) {
+        for(Map.Entry<String,State> i : StateMap.entrySet()) {
             if(nextStateID.equals(i.getKey()))
                 NextState = i.getValue();
         }
