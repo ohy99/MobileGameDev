@@ -27,4 +27,5 @@ public class GameObjectManager{
     {
         removalList.add(go);
     }
+    public void AddGo(GameObject go) {gameObjects.add(go);}
 }

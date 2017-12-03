@@ -15,12 +15,12 @@ public class Clostridium extends Enemy {
                 Transform transform = new Transform();
                 //transform.Init();
                 //transform.SetScale(50,50);
-                this.components.add(transform);
+                this.components.put("transform", transform);
 
                 Render render = new Render();
                 render.Init();
                 //render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.settings), transform);
-                this.components.add(render);
+                this.components.put ("render", render);
                 RenderManager.Instance.AddRenderable(render);
 
                 //add states here
