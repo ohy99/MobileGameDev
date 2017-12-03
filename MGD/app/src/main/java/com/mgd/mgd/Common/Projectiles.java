@@ -34,15 +34,15 @@ public class Projectiles extends GameObject {
 
     @Override
     public void Init() {
-       switch(type)
-       {
-           case BULLET:
-               yInterference = 0.0f;
-               break;
-           case GRENADE:
-               yInterference = -9.8f;
-               break;
-       }
+//       switch(type)
+//       {
+//           case BULLET:
+//               yInterference = 0.0f;
+//               break;
+//           case GRENADE:
+//               yInterference = -9.8f;
+//               break;
+//       }
 
 
        //construct components
@@ -85,6 +85,8 @@ public class Projectiles extends GameObject {
     @Override
     public void Destroy(){
         GameObjectManager.Instance.RequestDeletion(this);
+        CollisionManager.instance.removeCollider((Collider) this.components.get("collider"), this);
+        RenderManager.Instance.RemoveRenderable((Render) this.components.get("render"));
     }
 
     public void Set(Vector3 pos, PointF dir, PointF scale){

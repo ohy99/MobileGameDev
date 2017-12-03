@@ -1,7 +1,11 @@
 package com.mgd.mgd.Common;
 
 
+import android.graphics.PointF;
 import android.util.Log;
+
+import com.mgd.mgd.Components.RenderManager;
+import com.mgd.mgd.Components.Transform;
 
 import java.util.Vector;
 
@@ -9,6 +13,7 @@ public class GameObjectManager{
     public final static GameObjectManager Instance = new GameObjectManager();
     Vector<GameObject> gameObjects = new Vector<>();
     Vector<GameObject> removalList = new Vector<>();
+    Vector<GameObject> additionList = new Vector<>();
 
     public void Update(double dt)
     {
@@ -21,7 +26,22 @@ public class GameObjectManager{
         for (GameObject go: gameObjects
              ) {
             go.Update(dt);
+
+            PointF canvasSize = new PointF(RenderManager.Instance.getCanvasWidth(), RenderManager.Instance.getCanvasHeight());
+            float ratio = canvasSize.x / canvasSize.y;
+            float worldwidth = ratio * 100.f;
+            Transform transform = (Transform) go.GetComponent("transform");
+            if(transform.GetPosition().x > worldwidth || transform.GetPosition().x < 0
+                    || transform.GetPosition().y < 0 || transform.GetPosition().y > 100.f){
+                go.Destroy();
+            }
         }
+
+        for (GameObject go: additionList
+             ) {
+            gameObjects.add(go);
+        }
+        additionList.clear();
 
         Log.i("GOManager", String.valueOf(gameObjects.size()));
     }
@@ -31,5 +51,5 @@ public class GameObjectManager{
     {
         removalList.add(go);
     }
-    public void AddGo(GameObject go) {gameObjects.add(go);}
+    public void AddGo(GameObject go) {additionList.add(go);}
 }

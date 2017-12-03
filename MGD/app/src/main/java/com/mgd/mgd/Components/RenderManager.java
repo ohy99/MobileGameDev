@@ -32,7 +32,7 @@ public class RenderManager{
             Matrix mtx= new Matrix();
 
             //have a function to get the x and y base on z also
-           // mtx.setTranslate(transform.GetPosition().x, 100.f);
+
 
 
             //our x is the longer length of the phone
@@ -41,7 +41,8 @@ public class RenderManager{
             int screenHeight = canvas.getHeight();
             int bmpWidth = bmp.getWidth();
             int bmpHeight = bmp.getHeight();
-            mtx.setScale((transform.GetScale().x / worldX) * ((float)canvas.getWidth()/(float)bmpWidth),
+            mtx.setTranslate(0, -bmpHeight);
+            mtx.postScale((transform.GetScale().x / worldX) * ((float)canvas.getWidth()/(float)bmpWidth),
                      (transform.GetScale().y / 100.f) * ((float)canvas.getHeight()/(float)bmpHeight));
 
             Log.i("Canvas width", String.valueOf(canvas.getWidth()));
@@ -56,9 +57,12 @@ public class RenderManager{
             Log.i("transformY", String.valueOf(transform.GetScale().y));
 
 
+            //mtx.postTranslate((transform.GetPosition().x / worldX) * ((float)canvas.getWidth()),
+            //        (1.0f - (transform.GetPosition().y / 100.f)) * ((float)canvas.getHeight()) - bmpHeight);
             mtx.postTranslate((transform.GetPosition().x / worldX) * ((float)canvas.getWidth()),
-                    (1.0f - (transform.GetPosition().y / 100.f)) * ((float)canvas.getHeight()) - bmpHeight);
-                    //(1.f - (transform.GetPosition().y / 100.f)) * ((float)canvas.getHeight()) - bmpHeight);
+                    //transform.GetPosition().y);
+                    (1.f - (transform.GetPosition().y / 100.f)) * ((float)canvas.getHeight()) -
+                            (transform.GetScale().y / 100.f) * ((float)canvas.getHeight()/(float)bmpHeight));
             //mtx.postScale((transform.GetScale().x / worldX) * ((float)canvas.getWidth()/(float)bmpWidth),
              //       (transform.GetScale().y / 100.f) * ((float)canvas.getHeight()/(float)bmpHeight));
             canvas.drawBitmap(bmp, mtx ,null);

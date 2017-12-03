@@ -88,7 +88,7 @@ public class Player extends GameObject{
             //shoot
             Projectiles proj = new Projectiles(Projectiles.ProjectileType.BULLET);
             proj.Init();
-            proj.Set(transform.GetPosition(), dir, new PointF(3,3));
+            proj.Set(transform.GetPosition(), dir, new PointF(7,7));
         }
     }
 
