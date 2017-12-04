@@ -1,8 +1,15 @@
 package com.mgd.mgd.Enemy;
 
+import android.util.Log;
+
+import com.mgd.mgd.Collision;
 import com.mgd.mgd.Common.Enemy;
+import com.mgd.mgd.Common.GameObjectManager;
 import com.mgd.mgd.Common.Player;
 import com.mgd.mgd.Common.ResourceHandler;
+import com.mgd.mgd.Components.Collision.Collider;
+import com.mgd.mgd.Components.Collision.CollisionManager;
+import com.mgd.mgd.Components.Collision.ProjectileResponse;
 import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.Transform;
@@ -26,7 +33,7 @@ public class Botulism extends Enemy {
     public void Init() {
         Transform transform = new Transform();
         transform.SetPosition(r.nextInt(100),0,r.nextInt(500));
-        transform.SetScale(40,20);
+        transform.SetScale(20,20);
         this.components.put("transform" ,transform);
 
         Render render = new Render();
@@ -34,6 +41,16 @@ public class Botulism extends Enemy {
         render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.botulism), transform);
         this.components.put("render", render);
         RenderManager.Instance.AddRenderable(render);
+
+        ProjectileResponse response = new ProjectileResponse();
+        response.Init();
+
+        Collider collider = new Collider();
+        collider.Init();
+        collider.transform = transform;
+        collider.response = response;
+        this.components.put("collider", collider);
+        CollisionManager.instance.addCollider(collider, this);
 
 
         // add variables here
@@ -60,4 +77,12 @@ public class Botulism extends Enemy {
             SetIsDead(true);
     }
 
+
+    @Override
+    public  void Destroy(){
+        RenderManager.Instance.RemoveRenderable((Render) this.components.get("render"));
+        CollisionManager.instance.removeCollider((Collider) this.components.get("collider"), this);
+
+        Log.i("Boi", "Deleted");
+    }
 }

@@ -1,5 +1,7 @@
 package com.mgd.mgd.Enemy;
 
+import android.util.Log;
+
 import com.mgd.mgd.Common.Enemy;
 import com.mgd.mgd.Common.Vector3;
 
@@ -40,9 +42,12 @@ public class EnemyManager {
 
         // Removal of dead enemies
         for(Enemy enemy : RemovalList) {
+            enemy.Destroy();
             EnemyList.remove(enemy);
         }
         RemovalList.clear();
+
+        Log.i("Enemy", String.valueOf(EnemyList.size()));
     }
 
 

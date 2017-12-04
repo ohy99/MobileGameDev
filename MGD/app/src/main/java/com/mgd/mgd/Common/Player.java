@@ -25,6 +25,7 @@ public class Player extends GameObject{
         Transform transform = new Transform();
         transform.Init();
         transform.SetScale(50,50);
+        transform.SetPosition(0,0,1);
         this.components.put("transform", transform);
 
         Render render = new Render();
@@ -40,6 +41,7 @@ public class Player extends GameObject{
         Collider collider = new Collider();
         collider.Init();
         collider.response = playerResponse;
+        collider.transform=transform;
         this.components.put("collider", collider);
         CollisionManager.instance.addCollider(collider, this);
 
@@ -88,7 +90,7 @@ public class Player extends GameObject{
             //shoot
             Projectiles proj = new Projectiles(Projectiles.ProjectileType.BULLET);
             proj.Init();
-            proj.Set(transform.GetPosition(), dir, new PointF(7,7));
+            proj.Set(new Vector3(transform.GetPosition().x, transform.GetPosition().y, 2), dir, new PointF(7,7));
         }
     }
 

@@ -47,7 +47,7 @@ public class SampleGame{
 
         EntityManager.Instance.Update(_deltaTime);
         GameObjectManager.Instance.Update(_deltaTime);
-
+        EnemyManager.Instance.Update(_deltaTime);
         //Collision Update
         CollisionManager.instance.Update(_deltaTime);
     }

@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class StateManager {
     Map<String, State> StateMap = new HashMap<>();
-    State CurrState;
-    State NextState;
+    State CurrState = null;
+    State NextState = null;
 
     public StateManager() {}
 
@@ -46,6 +46,8 @@ public class StateManager {
     }
 
     public void Update(double dt) {
+        if (CurrState == null)
+            return;
         if(NextState != CurrState) {
             CurrState.Exit();
             CurrState = NextState;

@@ -1,6 +1,7 @@
 package com.mgd.mgd.Common;
 
 import android.graphics.PointF;
+import android.util.Log;
 
 import com.mgd.mgd.Components.Collision.Collider;
 import com.mgd.mgd.Components.Collision.CollisionManager;
@@ -56,6 +57,7 @@ public class Projectiles extends GameObject {
         ProjectileResponse response = new ProjectileResponse();
         response.Init();
         collider.response = response;
+        collider.transform = transform;
         this.components.put("collider", collider);
 
         Render render = new Render();
@@ -71,6 +73,8 @@ public class Projectiles extends GameObject {
 
         GameObjectManager.Instance.AddGo(this);
         CollisionManager.instance.addCollider(collider, this);
+
+        Log.i("Proj", "Created");
     }
 
     @Override
@@ -87,6 +91,8 @@ public class Projectiles extends GameObject {
         GameObjectManager.Instance.RequestDeletion(this);
         CollisionManager.instance.removeCollider((Collider) this.components.get("collider"), this);
         RenderManager.Instance.RemoveRenderable((Render) this.components.get("render"));
+
+        Log.i("Proj", "Destroyed");
     }
 
     public void Set(Vector3 pos, PointF dir, PointF scale){
