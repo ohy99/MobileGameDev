@@ -17,7 +17,7 @@ public class GenericRenderable extends GameObject{
 
         Render render = new Render();
         render.Init();
-        render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.facebook), transform);
+        render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.background), transform);
         this.components.put("render", render);
 
         RenderManager.Instance.AddRenderable(render);
