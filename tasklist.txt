@@ -1,0 +1,12 @@
+Task List
+Marcus - ScoreSystem, Enemies (2 of 4) (states, statemanager), Mainmenu, Splashscreen
+
+Hong Yu - Render (Camera under render), Collision, Projectile, Player Controls, 
+ResourceHandler, Transform
+
+Not done 
+Marcus - Enemies (2 out of 4), Highscore, Pause, UI, UI feedback, Timeattack mode, 
+Screens (Settings, Highscore, Gamemode selection screen)
+
+Hong Yu - Social Media, Sounds, Accelerometer(?), Vibration, yolo mode
+

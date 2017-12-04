@@ -27,13 +27,13 @@ public class Player extends GameObject{
     public void Init(){
         Transform transform = new Transform();
         transform.Init();
-        transform.SetScale(50,50);
+        transform.SetScale(30,30);
         transform.SetPosition(0,0,1);
         this.components.put("transform", transform);
 
         Render render = new Render();
         render.Init();
-        render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.settings), transform);
+        render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.player), transform);
         this.components.put("render", render);
         RenderManager.Instance.AddRenderable(render);
 

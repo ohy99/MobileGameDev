@@ -1,5 +1,7 @@
 package com.mgd.mgd.States;
 
+import android.util.Log;
+
 import com.mgd.mgd.Common.Enemy;
 import com.mgd.mgd.Common.Player;
 import com.mgd.mgd.Common.State;
@@ -29,11 +31,15 @@ public class StateIdle extends State{
         float distSq = (transform.GetPosition().Subtract(playerTransform.GetPosition().Negate())).LengthSquared();
 
         if (enemy.GetName().equals("botulism")) {   //botulism detectrange is used for summon to movement, so there is a need for an offset from idle to summon
-            if(distSq < (enemy.GetDetectRange() + 20.f) * (enemy.GetDetectRange() + 20.f))
+            if(distSq < (enemy.GetDetectRange() + 20.f) * (enemy.GetDetectRange() + 20.f)) {
+                Log.i("TRANSITION", "FKIT");
                 enemy.sm.SetNextState("summon");
+            }
         } else {
-            if (distSq < enemy.GetDetectRange() * enemy.GetDetectRange())
+            if (distSq < enemy.GetDetectRange() * enemy.GetDetectRange()){
+                Log.i("TRANSITION", "OKAY");
                 enemy.sm.SetNextState("moving");
+            }
         }
 
 

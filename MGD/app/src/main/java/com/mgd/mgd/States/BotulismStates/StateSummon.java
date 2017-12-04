@@ -33,14 +33,16 @@ public class StateSummon extends State {
 
         float distSq = (transform.GetPosition().Subtract(playerTransform.GetPosition().Negate())).LengthSquared();
 
-        if(distSq < e.GetDetectRange() * e.GetDetectRange())
+        if(distSq < e.GetDetectRange() * e.GetDetectRange()) {
             e.sm.SetNextState("moving");
+            Log.i("TRANSITION", "WORKING");
+        }
+        else if(distSq > (e.GetDetectRange() + 25.f) * (e.GetDetectRange() + 25.f)) {
+            e.sm.SetNextState("idle");
+        }
+        //Log.i("spawn", "update");
 
-        //if(distSq > (e.GetDetectRange() + 25.f) * (e.GetDetectRange() + 25.f))
-           // e.sm.SetNextState("idle");
-        Log.i("spawn", "update");
-
-        // Summon 1 puppet every 4s
+        // Summon 1 puppet every 2s
         etSummon += dt;
         if(etSummon > 2.f) {
             EnemyManager.Instance.SpawnEnemy(EnemyManager.EnemyType.MINIBOTULISM, transform.GetPosition());
