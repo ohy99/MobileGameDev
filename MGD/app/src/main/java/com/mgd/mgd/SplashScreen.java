@@ -15,6 +15,8 @@ import android.widget.Button;
 
 public class SplashScreen extends Activity{
 
+    Thread SplashThread;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +28,7 @@ public class SplashScreen extends Activity{
         setContentView(R.layout.activity_splash_screen);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 
-        final Thread SplashThread = new Thread()
+        SplashThread = new Thread()
         {
 
             @Override
@@ -45,6 +47,7 @@ public class SplashScreen extends Activity{
                     intent.setClass(SplashScreen.this, MainMenu.class);
                     startActivity(intent);
                     SplashScreen.this.finish();
+
                 }
             }
         };
@@ -63,6 +66,7 @@ public class SplashScreen extends Activity{
                 intent.setClass(SplashScreen.this, MainMenu.class);
                 startActivity(intent);
                 SplashScreen.this.finish();
+                SplashThread.interrupt();
                 break;
         }
 
