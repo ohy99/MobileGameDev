@@ -6,6 +6,7 @@ import com.mgd.mgd.Common.Enemy;
 import com.mgd.mgd.Common.GameObject;
 import com.mgd.mgd.Common.GameObjectManager;
 import com.mgd.mgd.Common.Player;
+import com.mgd.mgd.Components.ScoreSystem;
 
 public class ProjectileResponse extends CollisionResponse{
 
@@ -22,6 +23,10 @@ public class ProjectileResponse extends CollisionResponse{
                 me.Destroy();
                 Enemy e = (Enemy) other;
                 e.SetIsDead(true);
+                ScoreSystem score = (ScoreSystem) Player.Instance.GetComponent("score");
+                score.IncreaseCombo();
+                score.AddScore(100);
+
                 Log.i("Proj Res", "e.ISDead");
                 this.isHit = true;
                 return true;
