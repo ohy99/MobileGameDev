@@ -88,6 +88,9 @@ public class Player extends GameObject{
             PointF touchWorld = new PointF(touch.x / canvasSize.x * worldwidth, touch.y / canvasSize.y * 100.f);
             dir.x = -pos.x + touchWorld.x;
             dir.y = -pos.y + touchWorld.y;
+            double len = Math.sqrt((double) (dir.x * dir.x) + (double) (dir.y * dir.y));
+            dir.x = dir.x / (float)len;
+            dir.y = dir.y / (float)len;
             transform.SetDir(dir.x, dir.y);
 
             //shoot
@@ -117,6 +120,7 @@ public class Player extends GameObject{
                 PointF displacement = new PointF();
                 displacement.x = -prevPoint.x + touchWorld.x;
                 displacement.y = -prevPoint.y + touchWorld.y;
+
 
                 Vector3 pos3 = transform.GetPosition();
                 pos3.x += displacement.x * 10.f * dt;

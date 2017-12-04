@@ -3,6 +3,9 @@ package com.mgd.mgd.Enemy;
 import com.mgd.mgd.Common.Enemy;
 import com.mgd.mgd.Common.ResourceHandler;
 import com.mgd.mgd.Common.Vector3;
+import com.mgd.mgd.Components.Collision.Collider;
+import com.mgd.mgd.Components.Collision.CollisionManager;
+import com.mgd.mgd.Components.Collision.ProjectileResponse;
 import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.Transform;
@@ -36,6 +39,16 @@ public class MiniBotulism extends Enemy {
         this.components.put("render", render);
         RenderManager.Instance.AddRenderable(render);
 
+        ProjectileResponse response = new ProjectileResponse();
+        response.Init();
+
+        Collider collider = new Collider();
+        collider.Init();
+        collider.transform = transform;
+        collider.response = response;
+        this.components.put("collider", collider);
+        CollisionManager.instance.addCollider(collider, this);
+
         // add variables here
         attack = 10;
         movespeed = 25;
@@ -61,5 +74,11 @@ public class MiniBotulism extends Enemy {
 
         if(health <= 0)
             SetIsDead(true);
+    }
+
+    @Override
+    public void Destroy(){
+        RenderManager.Instance.RemoveRenderable((Render) this.components.get("render"));
+        CollisionManager.instance.removeCollider((Collider) this.components.get("collider"), this);
     }
 }
