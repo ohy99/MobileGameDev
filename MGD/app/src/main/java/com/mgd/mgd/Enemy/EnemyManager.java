@@ -14,6 +14,7 @@ import java.util.LinkedList;
 public class EnemyManager {
     public final static EnemyManager Instance = new EnemyManager();
     LinkedList<Enemy> EnemyList = new LinkedList<Enemy>();
+    LinkedList<Enemy> AdditionList = new LinkedList<>();
 
     private EnemyManager() {}
 
@@ -27,11 +28,17 @@ public class EnemyManager {
     }
 
     public void Init() {
-
+        for(int i = 0; i < 2; ++i) {
+           SpawnEnemy(EnemyType.BOTULISM, new Vector3(0,0,0));
+            SpawnEnemy(EnemyType.SHIGELLA, new Vector3(0,0,0));
+        }
     }
 
     public void Update(double dt) {
         LinkedList<Enemy> RemovalList = new LinkedList<Enemy>();
+
+        EnemyList.addAll(AdditionList);
+        AdditionList.clear();
 
         for(Enemy enemy : EnemyList) {
             enemy.Update(dt);
@@ -64,6 +71,8 @@ public class EnemyManager {
                 break;
             case SHIGELLA:
                 Shigella s = new Shigella();
+                s.Init();
+                EnemyList.add(s);
                 break;
             case LISTERIA:
                 Listeria l = new Listeria();
@@ -71,7 +80,7 @@ public class EnemyManager {
             case MINIBOTULISM:
                 MiniBotulism mb = new MiniBotulism(spawnPos);
                 mb.Init();
-                EnemyList.add(mb);
+                AdditionList.add(mb);
                 break;
         }
 

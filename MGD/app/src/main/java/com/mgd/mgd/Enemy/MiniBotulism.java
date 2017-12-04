@@ -25,8 +25,9 @@ public class MiniBotulism extends Enemy {
     @Override
     public void Init() {
         Transform transform = new Transform();
-        transform.SetPosition(spawnPos.x, spawnPos.y, spawnPos.z);
-        transform.SetScale(20,10);
+        transform.Init();
+        transform.SetPosition(spawnPos.x, spawnPos.y, spawnPos.z + 1);
+        transform.SetScale(10,10);
         this.components.put("transform" ,transform);
 
         Render render = new Render();
@@ -48,7 +49,7 @@ public class MiniBotulism extends Enemy {
     sm.AddState(new StateIdle("idle",this));
     sm.AddState(new StateMoving("moving",this));
     sm.AddState(new StateAttack("attack",this));
-
+    sm.SetNextState("idle");
 
 
 

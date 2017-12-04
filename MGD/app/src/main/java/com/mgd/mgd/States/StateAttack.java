@@ -34,9 +34,9 @@ public class StateAttack extends State{
         Transform playerTransform = (Transform) Player.Instance.GetComponent("transform");
         Transform transform = (Transform) enemy.GetComponent("transform");
 
-        float distSq = (transform.GetPosition().Subtract(playerTransform.GetPosition())).LengthSquared();
+        float distSq = (transform.GetPosition().Subtract(playerTransform.GetPosition().Negate())).LengthSquared();
 
-        if(distSq > enemy.GetAttackRange() + 5.f)
+        if(distSq > (enemy.GetAttackRange() + 5.f) * (enemy.GetAttackRange() + 5.f))
             enemy.sm.SetNextState("moving");
 
         etAttack += dt;

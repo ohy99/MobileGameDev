@@ -31,13 +31,13 @@ public class StateMoving extends State {
         Vector3 tempPos = transform.GetPosition().Add(moveDir.Multiply(e.GetMoveSpeed() * (float)dt)) ;
         transform.SetPosition(tempPos.x,tempPos.y,tempPos.z);
 
-        float distSq = (transform.GetPosition().Subtract(playerTransform.GetPosition())).LengthSquared();
+        float distSq = (transform.GetPosition().Subtract(playerTransform.GetPosition().Negate())).LengthSquared();
 
-        if(distSq < e.GetAttackRange())
+        if(distSq < e.GetAttackRange() * e.GetAttackRange())
             e.sm.SetNextState("attack");
 
 
-            if(distSq > e.GetDetectRange() + 5.f) {
+            if(distSq > (e.GetDetectRange() + 5.f) * (e.GetDetectRange() + 5.f)) {
                 if(e.GetName().equals("botulism")) {
                     e.sm.SetNextState("summon");
                 } else {

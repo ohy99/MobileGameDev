@@ -10,6 +10,8 @@ import com.mgd.mgd.States.StateAttack;
 import com.mgd.mgd.States.StateIdle;
 import com.mgd.mgd.States.StateMoving;
 
+import java.util.Random;
+
 /**
  * Created by 161832Q on 3/12/2017.
  */
@@ -18,12 +20,13 @@ import com.mgd.mgd.States.StateMoving;
 public class Shigella extends Enemy {
 
     public Shigella() {}
-
+    Random r = new Random();
     @Override
     public void Init() {
         Transform transform = new Transform();
-        //transform.Init();
-        //transform.SetScale(50,50);
+        transform.Init();
+        transform.SetPosition(r.nextInt(100),r.nextInt(70),2.5f);
+        transform.SetScale(20,20);
         this.components.put("transform", transform);
 
         Render render = new Render();
@@ -45,6 +48,7 @@ public class Shigella extends Enemy {
         sm.AddState(new StateIdle("idle",this));
         sm.AddState(new StateAttack("attack",this));
         sm.AddState(new StateMoving("moving",this));
+        sm.SetNextState("moving");
     }
 
     @Override

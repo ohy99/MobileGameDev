@@ -1,5 +1,7 @@
 package com.mgd.mgd.States.BotulismStates;
 
+import android.util.Log;
+
 import com.mgd.mgd.Common.Enemy;
 import com.mgd.mgd.Common.Player;
 import com.mgd.mgd.Common.State;
@@ -29,18 +31,20 @@ public class StateSummon extends State {
         Transform transform = (Transform) e.GetComponent("transform");
         Transform playerTransform = (Transform) Player.Instance.GetComponent("transform");
 
-        float distSq = (transform.GetPosition().Subtract(playerTransform.GetPosition())).LengthSquared();
+        float distSq = (transform.GetPosition().Subtract(playerTransform.GetPosition().Negate())).LengthSquared();
 
-        if(distSq < e.GetDetectRange())
+        if(distSq < e.GetDetectRange() * e.GetDetectRange())
             e.sm.SetNextState("moving");
 
-        if(distSq > e.GetDetectRange() + 25.f)
-            e.sm.SetNextState("idle");
+        //if(distSq > (e.GetDetectRange() + 25.f) * (e.GetDetectRange() + 25.f))
+           // e.sm.SetNextState("idle");
+        Log.i("spawn", "update");
 
         // Summon 1 puppet every 4s
         etSummon += dt;
-        if(etSummon > 4.f) {
+        if(etSummon > 2.f) {
             EnemyManager.Instance.SpawnEnemy(EnemyManager.EnemyType.MINIBOTULISM, transform.GetPosition());
+            Log.i("spawn", "true");
             etSummon = 0.f;
         }
     }

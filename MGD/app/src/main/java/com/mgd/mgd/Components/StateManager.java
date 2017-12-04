@@ -1,5 +1,7 @@
 package com.mgd.mgd.Components;
 
+import android.support.v4.view.NestedScrollingChild;
+
 import com.mgd.mgd.Common.State;
 
 import java.util.HashMap;
@@ -17,18 +19,18 @@ public class StateManager {
     public StateManager() {}
 
     public void AddState(State NewState) {
-        if(NewState == null)
-            return;
-
-        for(Map.Entry<String,State> i : StateMap.entrySet()) {
-            if(i == NewState)
-                return;
-
-            if(CurrState == null)
-                CurrState = NextState = NewState;
+//         if(NewState == null)
+//            return;
+//
+//        for(Map.Entry<String,State> i : StateMap.entrySet()) {
+//            if(i == NewState)
+//                return;
+//
+//            if(CurrState == null)
+//                CurrState = NextState = NewState;
 
             StateMap.put(NewState.GetStateID(), NewState);
-        }
+//        }
     }
 
     public void SetNextState(String nextStateID) {
@@ -36,6 +38,9 @@ public class StateManager {
             if(nextStateID.equals(i.getKey()))
                 NextState = i.getValue();
         }
+
+        if (CurrState == null)
+            CurrState = NextState;
     }
 
     public final String GetCurrentState() {
@@ -48,11 +53,12 @@ public class StateManager {
     public void Update(double dt) {
         if (CurrState == null)
             return;
+        CurrState.Update(dt);
         if(NextState != CurrState) {
             CurrState.Exit();
             CurrState = NextState;
             NextState.Enter();
         }
-        NextState.Update(dt);
+       // NextState.Update(dt);
     }
 }

@@ -16,6 +16,7 @@ import com.mgd.mgd.Components.Transform;
 import com.mgd.mgd.R;
 import com.mgd.mgd.States.BotulismStates.StateSummon;
 import com.mgd.mgd.States.StateAttack;
+import com.mgd.mgd.States.StateIdle;
 import com.mgd.mgd.States.StateMoving;
 
 import java.util.Random;
@@ -32,7 +33,8 @@ public class Botulism extends Enemy {
     @Override
     public void Init() {
         Transform transform = new Transform();
-        transform.SetPosition(r.nextInt(100),0,r.nextInt(500));
+        transform.Init();
+        transform.SetPosition(r.nextInt(150),r.nextInt(70),2);
         transform.SetScale(20,20);
         this.components.put("transform" ,transform);
 
@@ -66,6 +68,8 @@ public class Botulism extends Enemy {
         sm.AddState(new StateSummon("summon",this));
         sm.AddState(new StateMoving("moving",this));
         sm.AddState(new StateAttack("attack",this));
+        sm.AddState(new StateIdle("idle",this));
+        sm.SetNextState("summon");
 
     }
 

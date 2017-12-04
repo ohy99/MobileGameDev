@@ -26,13 +26,13 @@ public class StateIdle extends State{
         Transform playerTransform = (Transform) Player.Instance.GetComponent("transform");
         Transform transform = (Transform) enemy.GetComponent("transform");
 
-        float distSq = (transform.GetPosition().Subtract(playerTransform.GetPosition())).LengthSquared();
+        float distSq = (transform.GetPosition().Subtract(playerTransform.GetPosition().Negate())).LengthSquared();
 
         if (enemy.GetName().equals("botulism")) {   //botulism detectrange is used for summon to movement, so there is a need for an offset from idle to summon
-            if(distSq < enemy.GetDetectRange() + 20.f)
+            if(distSq < (enemy.GetDetectRange() + 20.f) * (enemy.GetDetectRange() + 20.f))
                 enemy.sm.SetNextState("summon");
         } else {
-            if (distSq < enemy.GetDetectRange())
+            if (distSq < enemy.GetDetectRange() * enemy.GetDetectRange())
                 enemy.sm.SetNextState("moving");
         }
 
