@@ -6,7 +6,7 @@ public class Physics implements ComponentBase{
 
     boolean gravity = false;
     public Transform transform;
-    float speed = 1.0f;
+    float speed = 25.0f;
 
     @Override
     public void Init() {
