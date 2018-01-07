@@ -21,6 +21,7 @@ public class SampleGame{
     public final static SampleGame Instance = new SampleGame();
     float timer = 0.0f;
     private boolean isPaused = false;
+    private boolean gameover = false;
 
     Player player = Player.Instance;
 
@@ -58,7 +59,11 @@ public class SampleGame{
 
         EntityManager.Instance.Update(_deltaTime);
 
-        if(!isPaused) {
+        if(player.GetHealth() <= 0) {
+            gameover = true;
+        }
+        
+        if(!isPaused || gameover) {
             GameObjectManager.Instance.Update(_deltaTime);
             EnemyManager.Instance.Update(_deltaTime);
             //Collision Update
