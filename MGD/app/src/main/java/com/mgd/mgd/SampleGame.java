@@ -1,9 +1,9 @@
 package com.mgd.mgd;
 
 import android.graphics.Canvas;
+import android.provider.MediaStore;
 import android.view.SurfaceView;
 
-import com.mgd.mgd.Common.GameObject;
 import com.mgd.mgd.Common.GameObjectManager;
 import com.mgd.mgd.Common.GenericRenderable;
 import com.mgd.mgd.Common.Player;
@@ -11,7 +11,6 @@ import com.mgd.mgd.Common.ResourceHandler;
 import com.mgd.mgd.Common.Vector3;
 import com.mgd.mgd.Components.Collision.CollisionManager;
 import com.mgd.mgd.Components.RenderManager;
-import com.mgd.mgd.Enemy.Botulism;
 import com.mgd.mgd.Enemy.EnemyManager;
 
 // Remark: Too lazy to change classname
@@ -30,6 +29,10 @@ public class SampleGame{
     {
       EntityManager.Instance.Init(_view);
         ResourceHandler.Instance.Init(_view);
+
+        MediaManager.Instance.Init(_view.getContext());
+        MediaManager.Instance.PlayBGMusic(R.raw.yaruta, true);
+        //MediaManager.Instance.PlaySound(R.raw.blast);
 
         player.Init();
 
@@ -50,6 +53,9 @@ public class SampleGame{
         EnemyManager.Instance.Update(_deltaTime);
         //Collision Update
         CollisionManager.instance.Update(_deltaTime);
+
+        //Update Media
+        MediaManager.Instance.Update(_deltaTime);
     }
 
     protected void Render(Canvas _canvas)

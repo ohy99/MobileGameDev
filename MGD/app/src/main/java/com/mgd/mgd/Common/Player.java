@@ -11,6 +11,7 @@ import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.ScoreSystem;
 import com.mgd.mgd.Components.Transform;
+import com.mgd.mgd.MediaManager;
 import com.mgd.mgd.R;
 import com.mgd.mgd.TouchManager;
 
@@ -97,6 +98,10 @@ public class Player extends GameObject{
             Projectiles proj = new Projectiles(Projectiles.ProjectileType.BULLET);
             proj.Init();
             proj.Set(new Vector3(transform.GetPosition().x, transform.GetPosition().y, 2), dir, new PointF(7,7));
+
+
+            //Play Sound
+            MediaManager.Instance.PlaySound(R.raw.blast);
         }
 
         if (TouchManager.Instance.HasTouch())
