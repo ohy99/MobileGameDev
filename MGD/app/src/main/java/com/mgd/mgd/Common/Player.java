@@ -29,7 +29,7 @@ public class Player extends GameObject{
         Transform transform = new Transform();
         transform.Init();
         transform.SetScale(30,30);
-        transform.SetPosition(0,0,1);
+        transform.SetPosition(0,0,2);
         this.components.put("transform", transform);
 
         Render render = new Render();

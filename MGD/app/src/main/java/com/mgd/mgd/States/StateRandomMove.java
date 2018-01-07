@@ -35,7 +35,7 @@ public class StateRandomMove extends State {
         Transform thisTransform = (Transform) enemy.GetComponent("transform");
 
         Vector3 tempPos = thisTransform.GetPosition().Add(direction.Multiply(enemy.GetMoveSpeed() * (float)(dt)));
-        thisTransform.SetPosition(tempPos.x,tempPos.y,tempPos.z);
+        thisTransform.SetPosition(tempPos.x,tempPos.y,2);
 
         Vector3 wad = thisTransform.GetPosition();
         Vector3 wad2 = playerTransform.GetPosition().Negate();
