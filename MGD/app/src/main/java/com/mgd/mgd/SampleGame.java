@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.provider.MediaStore;
 import android.view.SurfaceView;
 
+import com.mgd.mgd.Buttons.MuteButton;
 import com.mgd.mgd.Buttons.PauseButton;
 import com.mgd.mgd.Common.GameObjectManager;
 import com.mgd.mgd.Common.GenericRenderable;
@@ -41,6 +42,7 @@ public class SampleGame{
 
         //create button
         PauseButton.Create();
+        MuteButton.Create();
 
       //create static objs
         GenericRenderable renderable = new GenericRenderable();
