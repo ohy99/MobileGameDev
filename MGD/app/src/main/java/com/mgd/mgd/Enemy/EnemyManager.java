@@ -29,7 +29,7 @@ public class EnemyManager {
     public void Init() {
         for(int i = 0; i < 2; ++i) {
            SpawnEnemy(EnemyType.BOTULISM, new Vector3(0,0,0));
-            SpawnEnemy(EnemyType.SHIGELLA, new Vector3(0,0,0));
+           // SpawnEnemy(EnemyType.SHIGELLA, new Vector3(0,0,0));
         }
     }
 
@@ -63,7 +63,7 @@ public class EnemyManager {
             case BOTULISM:
                 Botulism b = new Botulism();
                 b.Init();
-                EnemyList.add(b);
+                AdditionList.add(b);
                 break;
             case CLOSTRIDIUM:
                 Clostridium c = new Clostridium();
@@ -71,7 +71,7 @@ public class EnemyManager {
             case SHIGELLA:
                 Shigella s = new Shigella(spawnPos);
                 s.Init();
-                EnemyList.add(s);
+                AdditionList.add(s);
                 break;
             case LISTERIA:
                 Listeria l = new Listeria();

@@ -34,6 +34,7 @@ public class SampleGame{
         MediaManager.Instance.Init(_view.getContext());
         MediaManager.Instance.PlayBGMusic(R.raw.yaruta, true);
         //MediaManager.Instance.PlaySound(R.raw.blast);
+        EnemyManager.Instance.Init();
 
         player.Init();
 
@@ -41,9 +42,9 @@ public class SampleGame{
         GenericRenderable renderable = new GenericRenderable();
         renderable.Init();
 
-        for(int i =0;i<4;++i) {
+/*        for(int i =0;i<4;++i) {
             EnemyManager.Instance.SpawnEnemy(EnemyManager.EnemyType.BOTULISM, new Vector3(0,0,0));
-        }
+        }*/
     }
 
     public void Update(float _deltaTime)

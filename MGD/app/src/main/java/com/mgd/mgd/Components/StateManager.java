@@ -24,11 +24,16 @@ public class StateManager {
     }
 
     public void SetNextState(String nextStateID) {
+
+/*        //Lol why? this is map bruh
         for(Map.Entry<String,State> i : StateMap.entrySet()) {
-            if(nextStateID.equals(i.getKey()))
+            if (nextStateID.equals(i.getKey()))
                 NextState = i.getValue();
 
-        }
+        }*/
+        NextState = StateMap.get(nextStateID);
+        if (NextState == null)//cant find
+            return;
 
         if (CurrState == null)
             CurrState = NextState;

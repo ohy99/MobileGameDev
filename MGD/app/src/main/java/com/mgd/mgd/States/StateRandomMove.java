@@ -37,8 +37,12 @@ public class StateRandomMove extends State {
         Vector3 tempPos = thisTransform.GetPosition().Add(direction.Multiply(enemy.GetMoveSpeed() * (float)(dt)));
         thisTransform.SetPosition(tempPos.x,tempPos.y,tempPos.z);
 
-        float distSquared = (thisTransform.GetPosition().Subtract(playerTransform.GetPosition().Negate())).LengthSquared();
+        Vector3 wad = thisTransform.GetPosition();
+        Vector3 wad2 = playerTransform.GetPosition().Negate();
+        float distSquared = (thisTransform.GetPosition().Add(playerTransform.GetPosition().Negate())).LengthSquared();
 
+
+        //enemy.sm.SetNextState("summon");
         // transition
         if(distSquared > (enemy.GetDetectRange() + enemy.GetTransitionOffset()) * (enemy.GetDetectRange() + enemy.GetTransitionOffset()) ) {
             if(enemy.GetName().equals("botulism")) {
