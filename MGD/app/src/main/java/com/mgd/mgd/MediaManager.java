@@ -27,6 +27,8 @@ public class MediaManager
     Vector<MediaPlayer> sound = new Vector<>();
     Vector<MediaPlayer> music = new Vector<>();
 
+    float defaultVolume = 0.1f;
+    float currentVolume = defaultVolume;
 
     public void Init(Context context)
     {
@@ -39,13 +41,13 @@ public class MediaManager
     public void Update(double dt)
     {
         Log.i("soundSize", Integer.toString(sound.size()));
-        for (MediaPlayer s: sound) {
-            if (s == null)
+/*        for (MediaPlayer s: sound) {
+            if (!s.isPlaying())
             {
                 //because released?
                 sound.remove(s);
             }
-        }
+        }*/
     }
 
     //can add more params to edit the file
@@ -79,9 +81,11 @@ public class MediaManager
                     public void onCompletion(MediaPlayer mp) {
                         mp.reset();
                         mp.release();
+                        MediaManager.Instance.RemoveSound(mp);
                     }
                 });
                 tempMediaPlayer.start();
+                tempMediaPlayer.setVolume(currentVolume,currentVolume);
                 sound.add(tempMediaPlayer);
 
                 return true;
@@ -105,6 +109,7 @@ public class MediaManager
                     }
                 });
                 tempMediaPlayer.setLooping(true);
+                tempMediaPlayer.setVolume(currentVolume,currentVolume);
                 tempMediaPlayer.start();
                 music.add(tempMediaPlayer);
 
@@ -130,4 +135,38 @@ public class MediaManager
         music.clear();
     }
 
+    public void ToggleSound()
+    {
+        if (currentVolume == 0.f)
+            UnMuteSound();
+        else
+            MuteSound();
+    }
+
+    public void MuteSound()
+    {
+        currentVolume = 0.f;
+        for (MediaPlayer s: sound) {
+            s.setVolume(currentVolume, currentVolume);
+        }
+        for (MediaPlayer s: music) {
+            s.setVolume(currentVolume, currentVolume);
+        }
+    }
+    public void UnMuteSound()
+    {
+        currentVolume = defaultVolume;
+        for (MediaPlayer s: sound) {
+            s.setVolume(currentVolume, currentVolume);
+        }
+        for (MediaPlayer s: music) {
+            s.setVolume(currentVolume, currentVolume);
+        }
+    }
+
+
+    public void RemoveSound(MediaPlayer mp)
+    {
+        sound.remove(mp);
+    }
 }

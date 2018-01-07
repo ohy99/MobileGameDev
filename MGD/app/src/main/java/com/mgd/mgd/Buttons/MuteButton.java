@@ -8,6 +8,7 @@ import com.mgd.mgd.Collision;
 import com.mgd.mgd.Common.ResourceHandler;
 import com.mgd.mgd.EntityBase;
 import com.mgd.mgd.EntityManager;
+import com.mgd.mgd.MediaManager;
 import com.mgd.mgd.R;
 import com.mgd.mgd.SampleGame;
 import com.mgd.mgd.TouchManager;
@@ -50,6 +51,7 @@ public class MuteButton implements EntityBase {
             {
                 // Button clicked!
                // do stuff
+                MediaManager.Instance.ToggleSound();
             }
         }
     }

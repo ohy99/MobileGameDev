@@ -25,3 +25,4 @@ public class Physics implements ComponentBase{
         pos.y += transform.GetDir().y * speed * dt;
     }
 }
+
