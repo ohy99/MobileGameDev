@@ -26,6 +26,7 @@ public class StateAttack extends State{
 
     @Override
     public void Enter() {
+        etAttack = 0.0;
     }
 
     @Override
