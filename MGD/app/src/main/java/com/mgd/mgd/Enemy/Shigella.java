@@ -2,13 +2,14 @@ package com.mgd.mgd.Enemy;
 
 import com.mgd.mgd.Common.Enemy;
 import com.mgd.mgd.Common.ResourceHandler;
+import com.mgd.mgd.Common.Vector3;
 import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.Transform;
 import com.mgd.mgd.R;
 import com.mgd.mgd.States.StateAttack;
-import com.mgd.mgd.States.StateIdle;
-import com.mgd.mgd.States.StateMoving;
+import com.mgd.mgd.States.StateMove;
+import com.mgd.mgd.States.StateRandomMove;
 
 import java.util.Random;
 
@@ -16,16 +17,19 @@ import java.util.Random;
  * Created by 161832Q on 3/12/2017.
  */
 
-// Charger
+// Puppet
 public class Shigella extends Enemy {
+    Vector3 spawnPos;
+    public Shigella(Vector3 spawn) {
+        spawnPos = spawn;
+    }
 
-    public Shigella() {}
     Random r = new Random();
     @Override
     public void Init() {
         Transform transform = new Transform();
         transform.Init();
-        transform.SetPosition(r.nextInt(100),r.nextInt(70),2.5f);
+        transform.SetPosition(spawnPos.x,spawnPos.y,spawnPos.z + 0.5f);
         transform.SetScale(20,20);
         this.components.put("transform", transform);
 
@@ -39,16 +43,17 @@ public class Shigella extends Enemy {
         movespeed = 50;
         health = 60;
         attack = 50;
-        attackRange = 4;
+        attackRange = 10;
         detectRange = 60;
         attackspeed = 2.f;
+        transitionOffset = 10.f;
         name = "shigella";
 
         //add states here
-        sm.AddState(new StateIdle("idle",this));
+        sm.AddState(new StateMove("move",this));
+        sm.AddState(new StateRandomMove("randommove",this));
         sm.AddState(new StateAttack("attack",this));
-        sm.AddState(new StateMoving("moving",this));
-        sm.SetNextState("moving");
+        sm.SetNextState("randommove");
     }
 
     @Override

@@ -16,27 +16,18 @@ public class StateManager {
     State CurrState = null;
     State NextState = null;
 
+
     public StateManager() {}
 
     public void AddState(State NewState) {
-//         if(NewState == null)
-//            return;
-//
-//        for(Map.Entry<String,State> i : StateMap.entrySet()) {
-//            if(i == NewState)
-//                return;
-//
-//            if(CurrState == null)
-//                CurrState = NextState = NewState;
-
             StateMap.put(NewState.GetStateID(), NewState);
-//        }
     }
 
     public void SetNextState(String nextStateID) {
         for(Map.Entry<String,State> i : StateMap.entrySet()) {
             if(nextStateID.equals(i.getKey()))
                 NextState = i.getValue();
+
         }
 
         if (CurrState == null)
@@ -59,6 +50,5 @@ public class StateManager {
             CurrState = NextState;
             NextState.Enter();
         }
-       // NextState.Update(dt);
     }
 }

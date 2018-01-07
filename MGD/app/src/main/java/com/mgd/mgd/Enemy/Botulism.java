@@ -2,10 +2,7 @@ package com.mgd.mgd.Enemy;
 
 import android.util.Log;
 
-import com.mgd.mgd.Collision;
 import com.mgd.mgd.Common.Enemy;
-import com.mgd.mgd.Common.GameObjectManager;
-import com.mgd.mgd.Common.Player;
 import com.mgd.mgd.Common.ResourceHandler;
 import com.mgd.mgd.Components.Collision.Collider;
 import com.mgd.mgd.Components.Collision.CollisionManager;
@@ -14,10 +11,8 @@ import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.Transform;
 import com.mgd.mgd.R;
-import com.mgd.mgd.States.BotulismStates.StateSummon;
-import com.mgd.mgd.States.StateAttack;
-import com.mgd.mgd.States.StateIdle;
-import com.mgd.mgd.States.StateMoving;
+import com.mgd.mgd.States.StateRandomMove;
+import com.mgd.mgd.States.StateSummon;
 
 import java.util.Random;
 
@@ -62,15 +57,13 @@ public class Botulism extends Enemy {
         detectRange = 40;
         attackspeed = 1.5f;
         health = 100;
+        transitionOffset = 10;
         name = "botulism";
 
         //add states here
         sm.AddState(new StateSummon("summon",this));
-        sm.AddState(new StateMoving("moving",this));
-        sm.AddState(new StateAttack("attack",this));
-        sm.AddState(new StateIdle("idle",this));
+        sm.AddState(new StateRandomMove("randommove",this));
         sm.SetNextState("summon");
-
     }
 
     @Override

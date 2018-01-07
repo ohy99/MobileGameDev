@@ -45,6 +45,21 @@ public class SampleBackground implements EntityBase {
         _canvas.drawBitmap(bmp,xPos - bmp.getWidth() * 0.5f + xOffset, yPos - bmp.getHeight() * 0.5f,null);
     }
 
+    @Override
+    public boolean IsInit() {
+        return false;
+    }
+
+    @Override
+    public int GetRenderLayer() {
+        return 0;
+    }
+
+    @Override
+    public void SetRenderLayer(int _newLayer) {
+
+    }
+
     public static SampleBackground Create() {
         SampleBackground result = new SampleBackground();
         EntityManager.Instance.AddEntity(result);

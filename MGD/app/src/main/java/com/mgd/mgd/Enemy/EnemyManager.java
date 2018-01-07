@@ -23,8 +23,7 @@ public class EnemyManager {
         BOTULISM,
         CLOSTRIDIUM,
         SHIGELLA,
-        LISTERIA,
-        MINIBOTULISM
+        LISTERIA
     }
 
     public void Init() {
@@ -70,17 +69,12 @@ public class EnemyManager {
                 Clostridium c = new Clostridium();
                 break;
             case SHIGELLA:
-                Shigella s = new Shigella();
+                Shigella s = new Shigella(spawnPos);
                 s.Init();
                 EnemyList.add(s);
                 break;
             case LISTERIA:
                 Listeria l = new Listeria();
-                break;
-            case MINIBOTULISM:
-                MiniBotulism mb = new MiniBotulism(spawnPos);
-                mb.Init();
-                AdditionList.add(mb);
                 break;
         }
 

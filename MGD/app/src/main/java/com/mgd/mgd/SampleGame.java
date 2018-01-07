@@ -18,6 +18,7 @@ import com.mgd.mgd.Enemy.EnemyManager;
 public class SampleGame{
     public final static SampleGame Instance = new SampleGame();
     float timer = 0.0f;
+    private boolean isPaused = false;
 
     Player player = Player.Instance;
 
@@ -63,5 +64,8 @@ public class SampleGame{
         RenderManager.Instance.Render(_canvas);
         EntityManager.Instance.Render(_canvas);
     }
+
+    public boolean GetIsPaused() {return isPaused;}
+    public void SetIsPaused(boolean p) {isPaused = p;}
 }
 

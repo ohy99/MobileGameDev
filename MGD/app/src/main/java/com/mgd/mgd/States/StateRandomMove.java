@@ -3,7 +3,7 @@ package com.mgd.mgd.States;
 import com.mgd.mgd.Common.Enemy;
 import com.mgd.mgd.Common.Player;
 import com.mgd.mgd.Common.State;
-import com.mgd.mgd.Components.ScoreSystem;
+import com.mgd.mgd.Common.Vector3;
 import com.mgd.mgd.Components.Transform;
 
 import java.util.Random;
@@ -12,42 +12,45 @@ import java.util.Random;
  * Created by 161832Q on 7/1/2018.
  */
 
-public class StateAttack extends State{
-
+public class StateRandomMove extends State {
     Enemy enemy;
-    double etAttack;
     Random random = new Random();
-    ScoreSystem score = (ScoreSystem) Player.Instance.GetComponent("score");
+    Vector3 direction = new Vector3(0,0,0);
 
-    public StateAttack(String _StateID, Enemy e) {
+    public StateRandomMove(String _StateID, Enemy e) {
         super(_StateID);
         enemy = e;
     }
 
     @Override
     public void Enter() {
+
     }
 
     @Override
     public void Update(double dt) {
+        direction.Set(random.nextFloat() - 0.5f, random.nextFloat() - 0.5f,1);
+
         Transform playerTransform = (Transform) Player.Instance.GetComponent("transform");
         Transform thisTransform = (Transform) enemy.GetComponent("transform");
+
+        Vector3 tempPos = thisTransform.GetPosition().Add(direction.Multiply(enemy.GetMoveSpeed() * (float)(dt)));
+        thisTransform.SetPosition(tempPos.x,tempPos.y,tempPos.z);
 
         float distSquared = (thisTransform.GetPosition().Subtract(playerTransform.GetPosition().Negate())).LengthSquared();
 
         // transition
-        if(distSquared > (enemy.GetAttackRange() + enemy.GetTransitionOffset()) * (enemy.GetAttackRange() + enemy.GetTransitionOffset()) )
-            enemy.sm.SetNextState("move");
-
-        etAttack += dt;
-        if(etAttack > enemy.GetAttackSpeed()) {
-            float dmgDealt = (random.nextFloat() + 0.5f) * enemy.GetAttack();
-            Player.Instance.SetHealth(Player.Instance.GetHealth() - (int)dmgDealt);
-            score.MinusScore((int)dmgDealt);
-            score.ResetCombo();
-
-            etAttack = 0.0;
+        if(distSquared > (enemy.GetDetectRange() + enemy.GetTransitionOffset()) * (enemy.GetDetectRange() + enemy.GetTransitionOffset()) ) {
+            if(enemy.GetName().equals("botulism")) {
+                enemy.sm.SetNextState("summon");
+            }
+            else {
+                enemy.sm.SetNextState("move");
+            }
         }
+
+
+
 
     }
 

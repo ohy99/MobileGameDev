@@ -18,6 +18,7 @@ public class Enemy extends GameObject {
     protected float attackRange = 0.f;
     protected float detectRange = 0.f;
     protected String name = "";
+    protected float transitionOffset = 0.f;
 
     @Override
     public void Init() {
@@ -47,4 +48,6 @@ public class Enemy extends GameObject {
     public float GetAttackRange() { return attackRange;}
     public float GetDetectRange() {return detectRange;}
     public String GetName() {return name;}
+
+    public float GetTransitionOffset() {return transitionOffset;}
 }

@@ -55,6 +55,21 @@ public class SampleEntity implements EntityBase, Collidable {
         _canvas.drawBitmap(bmp,xPos - bmp.getWidth() * 0.5f,yPos - bmp.getHeight() * 0.5f,null);
     }
 
+    @Override
+    public boolean IsInit() {
+        return false;
+    }
+
+    @Override
+    public int GetRenderLayer() {
+        return 0;
+    }
+
+    @Override
+    public void SetRenderLayer(int _newLayer) {
+
+    }
+
     //global create func, allow anyone to create "SampleEntity"
     public static SampleEntity Create() {
         SampleEntity result = new SampleEntity();
