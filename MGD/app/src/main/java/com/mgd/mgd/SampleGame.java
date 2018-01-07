@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.provider.MediaStore;
 import android.view.SurfaceView;
 
+import com.mgd.mgd.Buttons.PauseButton;
 import com.mgd.mgd.Common.GameObjectManager;
 import com.mgd.mgd.Common.GenericRenderable;
 import com.mgd.mgd.Common.Player;
@@ -38,6 +39,9 @@ public class SampleGame{
 
         player.Init();
 
+        //create button
+        PauseButton.Create();
+
       //create static objs
         GenericRenderable renderable = new GenericRenderable();
         renderable.Init();
@@ -51,11 +55,13 @@ public class SampleGame{
     {
 
         EntityManager.Instance.Update(_deltaTime);
-        GameObjectManager.Instance.Update(_deltaTime);
-        EnemyManager.Instance.Update(_deltaTime);
-        //Collision Update
-        CollisionManager.instance.Update(_deltaTime);
 
+        if(!isPaused) {
+            GameObjectManager.Instance.Update(_deltaTime);
+            EnemyManager.Instance.Update(_deltaTime);
+            //Collision Update
+            CollisionManager.instance.Update(_deltaTime);
+        }
         //Update Media
         MediaManager.Instance.Update(_deltaTime);
     }

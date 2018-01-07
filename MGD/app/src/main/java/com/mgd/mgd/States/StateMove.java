@@ -31,7 +31,7 @@ public class StateMove extends State {
         Vector3 tempPos = thisTransform.GetPosition().Add(moveDirection.Multiply(enemy.GetMoveSpeed() * (float)(dt)));
         thisTransform.SetPosition(tempPos.x,tempPos.y,tempPos.z);
 
-        float distSquared = (thisTransform.GetPosition().Subtract(playerTransform.GetPosition().Negate())).LengthSquared();
+        float distSquared = (thisTransform.GetPosition().Add(playerTransform.GetPosition().Negate())).LengthSquared();
 
         if(distSquared < enemy.GetAttackRange() * enemy.GetAttackRange()) {
             enemy.sm.SetNextState("attack");

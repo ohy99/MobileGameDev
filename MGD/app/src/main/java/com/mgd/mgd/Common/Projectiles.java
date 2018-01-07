@@ -12,6 +12,7 @@ import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.Transform;
 import com.mgd.mgd.R;
+import com.mgd.mgd.SampleGame;
 
 import java.util.Map;
 
@@ -79,10 +80,12 @@ public class Projectiles extends GameObject {
 
     @Override
     public void Update(double dt) {
-        for (Map.Entry<String, ComponentBase> entry : components.entrySet()) {
+        if(!SampleGame.Instance.GetIsPaused()) {
+            for (Map.Entry<String, ComponentBase> entry : components.entrySet()) {
 
-            //physics component will update its movement
-            entry.getValue().Update(dt);
+                //physics component will update its movement
+                entry.getValue().Update(dt);
+            }
         }
     }
 

@@ -34,7 +34,7 @@ public class StateAttack extends State{
         Transform playerTransform = (Transform) Player.Instance.GetComponent("transform");
         Transform thisTransform = (Transform) enemy.GetComponent("transform");
 
-        float distSquared = (thisTransform.GetPosition().Subtract(playerTransform.GetPosition().Negate())).LengthSquared();
+        float distSquared = (thisTransform.GetPosition().Add(playerTransform.GetPosition().Negate())).LengthSquared();
 
         // transition
         if(distSquared > (enemy.GetAttackRange() + enemy.GetTransitionOffset()) * (enemy.GetAttackRange() + enemy.GetTransitionOffset()) )

@@ -1,8 +1,13 @@
 package com.mgd.mgd.Enemy;
 
+import android.util.Log;
+
 import com.mgd.mgd.Common.Enemy;
 import com.mgd.mgd.Common.ResourceHandler;
 import com.mgd.mgd.Common.Vector3;
+import com.mgd.mgd.Components.Collision.Collider;
+import com.mgd.mgd.Components.Collision.CollisionManager;
+import com.mgd.mgd.Components.Collision.ProjectileResponse;
 import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.Transform;
@@ -39,13 +44,22 @@ public class Shigella extends Enemy {
         this.components.put("render", render);
         RenderManager.Instance.AddRenderable(render);
 
+        ProjectileResponse response = new ProjectileResponse();
+        response.Init();
+        Collider collider = new Collider();
+        collider.Init();
+        collider.transform = transform;
+        collider.response = response;
+        this.components.put("collider", collider);
+        CollisionManager.instance.addCollider(collider, this);
+
         //add variables here
         movespeed = 50;
         health = 60;
         attack = 50;
         attackRange = 10;
         detectRange = 60;
-        attackspeed = 2.f;
+        attackspeed = 1.f;
         transitionOffset = 10.f;
         name = "shigella";
 
@@ -53,7 +67,7 @@ public class Shigella extends Enemy {
         sm.AddState(new StateMove("move",this));
         sm.AddState(new StateRandomMove("randommove",this));
         sm.AddState(new StateAttack("attack",this));
-        sm.SetNextState("randommove");
+        sm.SetNextState("move");
     }
 
     @Override
@@ -64,6 +78,12 @@ public class Shigella extends Enemy {
             SetIsDead(true);
     }
 
+    @Override
+    public void Destroy(){
+        RenderManager.Instance.RemoveRenderable((Render) this.components.get("render"));
+        CollisionManager.instance.removeCollider((Collider) this.components.get("collider"), this);
 
+        Log.i("Boi", "Deleted");
+    }
 
 }

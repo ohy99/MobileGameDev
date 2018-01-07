@@ -34,7 +34,7 @@ public class PauseButton implements EntityBase {
     @Override
     public void Init(SurfaceView _view) {
         bmp = ResourceHandler.Instance.GetBitmap(R.drawable.pause);
-        xPos = 800;
+        xPos = 100;
         yPos = 100;
     }
 

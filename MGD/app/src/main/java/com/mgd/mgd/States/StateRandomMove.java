@@ -44,7 +44,7 @@ public class StateRandomMove extends State {
 
         //enemy.sm.SetNextState("summon");
         // transition
-        if(distSquared > (enemy.GetDetectRange() + enemy.GetTransitionOffset()) * (enemy.GetDetectRange() + enemy.GetTransitionOffset()) ) {
+        if(distSquared < (enemy.GetDetectRange() + enemy.GetTransitionOffset()) * (enemy.GetDetectRange() + enemy.GetTransitionOffset()) ) {
             if(enemy.GetName().equals("botulism")) {
                 enemy.sm.SetNextState("summon");
             }

@@ -25,7 +25,7 @@ public class StateManager {
 
     public void SetNextState(String nextStateID) {
 
-/*        //Lol why? this is map bruh
+        /*//Lol why? this is map bruh
         for(Map.Entry<String,State> i : StateMap.entrySet()) {
             if (nextStateID.equals(i.getKey()))
                 NextState = i.getValue();
