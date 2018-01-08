@@ -3,12 +3,14 @@ package com.mgd.mgd;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.SurfaceView;
 
 import com.mgd.mgd.Buttons.MuteButton;
 import com.mgd.mgd.Buttons.PauseButton;
 import com.mgd.mgd.Common.GameObjectManager;
 import com.mgd.mgd.Common.GenericRenderable;
+import com.mgd.mgd.Common.ParticleManager;
 import com.mgd.mgd.Common.Player;
 import com.mgd.mgd.Common.ResourceHandler;
 import com.mgd.mgd.Common.Vector3;
@@ -68,13 +70,16 @@ public class SampleGame {
             gameover = true;
         }
 
-        if (isPaused || gameover) {
-        } else {
+
+        if(!isPaused && !gameover) {
             GameObjectManager.Instance.Update(_deltaTime);
             EnemyManager.Instance.Update(_deltaTime);
             //Collision Update
             CollisionManager.instance.Update(_deltaTime);
+
+            ParticleManager.Instance.Update(_deltaTime);
         }
+
         //Update Media
         MediaManager.Instance.Update(_deltaTime);
     }

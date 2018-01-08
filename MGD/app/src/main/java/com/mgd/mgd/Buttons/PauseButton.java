@@ -2,6 +2,7 @@ package com.mgd.mgd.Buttons;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.SurfaceView;
 
 import com.mgd.mgd.Collision;
@@ -21,6 +22,8 @@ public class PauseButton implements EntityBase {
     private boolean isDone = false;
     private int xPos, yPos;
     private float minX,minY,maxX,maxY;
+    private boolean wasDown = false;
+
     @Override
     public boolean IsDone() {
         return isDone;
@@ -44,16 +47,22 @@ public class PauseButton implements EntityBase {
 
     @Override
     public void Update(float _dt) {
-        if (TouchManager.Instance.IsDown())
+
+        if (TouchManager.Instance.IsDown() && !wasDown)
         {
             // Check collision here!!!
 
             if(Collision.PointQuad(minX,minY,maxX,maxY,TouchManager.Instance.GetPosX(),TouchManager.Instance.GetPosY()))
             {
                 // Button clicked!
+                //Collision.PointQuad(minX,minY,maxX,maxY,TouchManager.Instance.GetPosX(),TouchManager.Instance.GetPosY());
                 SampleGame.Instance.SetIsPaused(!SampleGame.Instance.GetIsPaused());
+                Log.i("down", "1");
+                wasDown = true;
             }
         }
+        else if (!TouchManager.Instance.IsDown() && wasDown)
+            wasDown = false;
     }
 
     @Override

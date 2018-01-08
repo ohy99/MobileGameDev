@@ -15,6 +15,7 @@ import com.mgd.mgd.R;
 import com.mgd.mgd.SampleGame;
 
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by 161832Q on 3/12/2017.
@@ -33,6 +34,9 @@ public class Projectiles extends GameObject {
         type = pType;
     }
 
+    double elapsed = 0.0;
+    double spawnDelay= 0.1;
+    Random random = new Random();
 
     @Override
     public void Init() {
@@ -80,13 +84,30 @@ public class Projectiles extends GameObject {
 
     @Override
     public void Update(double dt) {
-        if(!SampleGame.Instance.GetIsPaused()) {
+
             for (Map.Entry<String, ComponentBase> entry : components.entrySet()) {
 
                 //physics component will update its movement
                 entry.getValue().Update(dt);
+
             }
+
+        elapsed += dt;
+        if (elapsed > spawnDelay)
+        {
+            Random random = new Random();
+
+            int randValue = random.nextInt(3);
+            for (int i = 0; i < randValue; ++i)
+            {
+                Transform transform = (Transform) GetComponent("transform");
+                ParticleManager.Instance.SpawnParticle(ParticleManager.PARTICLETYPE.PROJECTILE_TRAIL, transform.GetPosition(), transform.GetDir());
+            }
+
+            elapsed = 0.0;
+            spawnDelay = ParticleManager.Instance.random.nextDouble() * 0.3 + 0.2;
         }
+
     }
 
     @Override

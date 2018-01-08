@@ -36,35 +36,27 @@ public class RenderManager{
 
 
             //our x is the longer length of the phone
-            float worldX = 100.f * (canvas.getWidth() / (float)canvas.getHeight());
-            int screenWidth = canvas.getWidth();
-            int screenHeight = canvas.getHeight();
+            float worldX = 100.f * (canvasWidth / canvasHeight);
+
             int bmpWidth = bmp.getWidth();
             int bmpHeight = bmp.getHeight();
-            mtx.setTranslate(0, -bmpHeight);
-            mtx.postScale((transform.GetScale().x / worldX) * ((float)canvas.getWidth()/(float)bmpWidth),
-                     (transform.GetScale().y / 100.f) * ((float)canvas.getHeight()/(float)bmpHeight));
+            //mtx.setRotate((float)Math.atan2(transform.GetDir().y, transform.GetDir().x));
+            //mtx.setRotate(90);
+            float rad = (float)Math.atan2(transform.GetDir().y, transform.GetDir().x);
+            float deg = (float)Math.atan2(transform.GetDir().y, transform.GetDir().x) / (float)Math.PI * 180.f;
+            mtx.setRotate(-(float)Math.atan2(transform.GetDir().y, transform.GetDir().x) / (float)Math.PI * 180.f);
+            //mtx.postTranslate(-bmpWidth * 0.5f, -bmpHeight * 0.5f);
+            //mtx.postRotate(-(float)Math.atan2(transform.GetDir().y, transform.GetDir().x) / (float)Math.PI * 180.f, bmpWidth * 0.5f, bmpHeight * 0.5f);
+            //mtx.setRotate(-(float)Math.atan2(transform.GetDir().y, transform.GetDir().x) / (float)Math.PI * 180.f, bmpWidth * 0.5f, bmpHeight * 0.5f);
+            mtx.postTranslate(0, -bmpHeight);
 
-            Log.i("Canvas width", String.valueOf(canvas.getWidth()));
-            Log.i("Canvas height", String.valueOf(canvas.getHeight()));
+            mtx.postScale((transform.GetScale().x / worldX) * (canvasWidth/(float)bmpWidth),
+                     (transform.GetScale().y / 100.f) * (canvasHeight/(float)bmpHeight));
 
-            Log.i("bmp width", String.valueOf(bmp.getWidth()));
-            Log.i("bmp height", String.valueOf(bmp.getHeight()));
-
-            Log.i("worldX", String.valueOf(worldX));
-
-            Log.i("transformX", String.valueOf(transform.GetScale().x));
-            Log.i("transformY", String.valueOf(transform.GetScale().y));
-
-
-            //mtx.postTranslate((transform.GetPosition().x / worldX) * ((float)canvas.getWidth()),
-            //        (1.0f - (transform.GetPosition().y / 100.f)) * ((float)canvas.getHeight()) - bmpHeight);
-            mtx.postTranslate((transform.GetPosition().x / worldX) * ((float)canvas.getWidth()),
+            mtx.postTranslate((transform.GetPosition().x / worldX) * (canvasWidth),
                     //transform.GetPosition().y);
-                    (1.f - (transform.GetPosition().y / 100.f)) * ((float)canvas.getHeight()) -
-                            (transform.GetScale().y / 100.f) * ((float)canvas.getHeight()/(float)bmpHeight));
-            //mtx.postScale((transform.GetScale().x / worldX) * ((float)canvas.getWidth()/(float)bmpWidth),
-             //       (transform.GetScale().y / 100.f) * ((float)canvas.getHeight()/(float)bmpHeight));
+                    (1.f - (transform.GetPosition().y / 100.f)) * (canvasHeight) -
+                            (transform.GetScale().y / 100.f) * (canvasHeight/(float)bmpHeight));
             canvas.drawBitmap(bmp, mtx ,null);
 
         }
