@@ -65,7 +65,7 @@ public class SampleGame{
             gameover = true;
         }
 
-        if(!isPaused || !gameover) {
+        if(!isPaused && !gameover) {
             GameObjectManager.Instance.Update(_deltaTime);
             EnemyManager.Instance.Update(_deltaTime);
             //Collision Update
