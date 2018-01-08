@@ -29,7 +29,10 @@ public class StateMove extends State {
 
         Vector3 moveDirection = ((thisTransform.GetPosition().Negate()).Add(playerTransform.GetPosition()));
         Vector3 tempPos = thisTransform.GetPosition().Add(moveDirection.Multiply(enemy.GetMoveSpeed() * (float)(dt)));
-        thisTransform.SetPosition(tempPos.x,tempPos.y, 2);
+        //thisTransform.SetPosition(tempPos.x,tempPos.y, 2);
+
+        thisTransform.Move(moveDirection.Multiply(enemy.GetMoveSpeed() * (float)dt));
+        thisTransform.SetPosition(thisTransform.GetPosition().x, thisTransform.GetPosition().y, 2);
 
 
         float distSquared = (thisTransform.GetPosition().Add(playerTransform.GetPosition().Negate())).LengthSquared();

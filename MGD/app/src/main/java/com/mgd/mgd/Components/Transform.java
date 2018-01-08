@@ -39,5 +39,7 @@ public class Transform implements ComponentBase
     public void SetDir(float x, float y) {dir.set(x,y);}
     public void SetPosition(float x, float y, float z) {position.Set(x,y,z);}
     public void SetPosition2(Vector3 pos) {position = pos;}
+
+    public void Move(Vector3 pos) {position .AddEqual(pos);}
 }
 

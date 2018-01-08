@@ -52,7 +52,7 @@ public class Botulism extends Enemy {
 
         // add variables here
         attack = 30;
-        movespeed = 15;
+        movespeed = 2;
         attackRange = 7;
         detectRange = 40;
         attackspeed = 1.5f;

@@ -54,7 +54,7 @@ public class Shigella extends Enemy {
         CollisionManager.instance.addCollider(collider, this);
 
         //add variables here
-        movespeed = 50;
+        movespeed = 2;
         health = 60;
         attack = 50;
         attackRange = 10;
