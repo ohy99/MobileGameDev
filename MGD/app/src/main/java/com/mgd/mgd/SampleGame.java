@@ -69,8 +69,7 @@ public class SampleGame {
         if (player.GetHealth() <= 0) {
             gameover = true;
         }
-
-
+        
         if(!isPaused && !gameover) {
             GameObjectManager.Instance.Update(_deltaTime);
             EnemyManager.Instance.Update(_deltaTime);
