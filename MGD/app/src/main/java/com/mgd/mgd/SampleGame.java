@@ -62,8 +62,11 @@ public class SampleGame{
         if(player.GetHealth() <= 0) {
             gameover = true;
         }
-        
-        if(!isPaused || gameover) {
+
+        if(isPaused || gameover)
+        {
+        }
+        else {
             GameObjectManager.Instance.Update(_deltaTime);
             EnemyManager.Instance.Update(_deltaTime);
             //Collision Update
