@@ -92,7 +92,7 @@ public class Player extends GameObject{
             double len = Math.sqrt((double) (dir.x * dir.x) + (double) (dir.y * dir.y));
             dir.x = dir.x / (float)len;
             dir.y = dir.y / (float)len;
-            transform.SetDir(dir.x, dir.y);
+            //transform.SetDir(dir.x, dir.y);
 
             //shoot
             Projectiles proj = new Projectiles(Projectiles.ProjectileType.BULLET);

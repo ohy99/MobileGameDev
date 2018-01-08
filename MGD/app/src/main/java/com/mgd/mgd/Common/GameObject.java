@@ -15,7 +15,10 @@ public class GameObject{
 
     }
     public void Update(double dt) {
-
+        for (Map.Entry<String ,ComponentBase> entry : components.entrySet())
+        {
+            entry.getValue().Update(dt);
+        }
     }
 
     public void Destroy(){
