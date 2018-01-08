@@ -21,7 +21,7 @@ public class MuteButton implements EntityBase {
     private Bitmap bmp = null;
     private boolean isDone = false;
     private int xPos, yPos;
-
+    private float minX,minY,maxX,maxY;
     @Override
     public boolean IsDone() {
         return isDone;
@@ -37,6 +37,10 @@ public class MuteButton implements EntityBase {
         bmp = ResourceHandler.Instance.GetBitmap(R.drawable.mute);
         xPos = 300;
         yPos = 100;
+        minX = xPos - bmp.getWidth() * 0.5f;
+        maxX = xPos + bmp.getWidth() * 0.5f;
+        minY = yPos - bmp.getHeight() * 0.5f;
+        maxY = yPos + bmp.getHeight() * 0.5f;
     }
 
 
@@ -46,11 +50,10 @@ public class MuteButton implements EntityBase {
         if (TouchManager.Instance.IsDown())
         {
             // Check collision here!!!
-            float imgRadius = bmp.getHeight() * 0.5f;
-            if (Collision.SphereSphere(TouchManager.Instance.GetPosX(), TouchManager.Instance.GetPosY(), 0.0f, xPos, yPos, imgRadius))
+
+            if(Collision.PointQuad(minX,minY,maxX,maxY,TouchManager.Instance.GetPosX(),TouchManager.Instance.GetPosY()))
             {
                 // Button clicked!
-               // do stuff
                 MediaManager.Instance.ToggleSound();
             }
         }

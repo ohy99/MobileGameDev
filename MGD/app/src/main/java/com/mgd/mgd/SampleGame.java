@@ -72,6 +72,7 @@ public class SampleGame{
 
             ParticleManager.Instance.Update(_deltaTime);
         }
+
         //Update Media
         MediaManager.Instance.Update(_deltaTime);
     }

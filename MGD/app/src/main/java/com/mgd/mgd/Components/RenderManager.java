@@ -67,8 +67,8 @@ public class RenderManager{
         ScoreSystem ss = (ScoreSystem) Player.Instance.GetComponent("score");
 
         canvas.drawText("Score:" + String.valueOf(ss.GetScore()), 1350, 70, paint);
-        canvas.drawText("Combo:" + String.valueOf(ss.GetCombo()),1350,120,paint);
-
+        canvas.drawText("Combo:" + String.valueOf(ss.GetCombo()),1350,120, paint);
+        canvas.drawText("HP:" + String.valueOf(Player.Instance.GetHealth()),800,70, paint);
 
     }
 
