@@ -22,6 +22,7 @@ public class MuteButton implements EntityBase {
     private boolean isDone = false;
     private int xPos, yPos;
     private float minX,minY,maxX,maxY;
+    private boolean wasDown = false;
     @Override
     public boolean IsDone() {
         return isDone;
@@ -47,7 +48,7 @@ public class MuteButton implements EntityBase {
 
     @Override
     public void Update(float _dt) {
-        if (TouchManager.Instance.IsDown())
+        if (TouchManager.Instance.IsDown() && !wasDown)
         {
             // Check collision here!!!
 
@@ -55,8 +56,11 @@ public class MuteButton implements EntityBase {
             {
                 // Button clicked!
                 MediaManager.Instance.ToggleSound();
+                wasDown= true;
             }
         }
+        else if (!TouchManager.Instance.IsDown() && wasDown)
+            wasDown = false;
     }
 
     @Override

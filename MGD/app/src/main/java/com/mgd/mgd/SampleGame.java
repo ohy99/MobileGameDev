@@ -2,6 +2,7 @@ package com.mgd.mgd;
 
 import android.graphics.Canvas;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.SurfaceView;
 
 import com.mgd.mgd.Buttons.MuteButton;
@@ -63,7 +64,7 @@ public class SampleGame{
         if(player.GetHealth() <= 0) {
             gameover = true;
         }
-        
+
         if(!isPaused || !gameover) {
             GameObjectManager.Instance.Update(_deltaTime);
             EnemyManager.Instance.Update(_deltaTime);
