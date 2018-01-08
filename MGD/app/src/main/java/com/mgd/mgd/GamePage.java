@@ -8,6 +8,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class GamePage extends Activity {
+    // this is global access variable
+    public static GamePage Instance = null;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,6 +18,9 @@ public class GamePage extends Activity {
 
         setContentView(new GameView(this));
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+
+        // update global access reference variable
+        Instance = this;
     }
 
     @Override
