@@ -1,12 +1,18 @@
 package com.mgd.mgd;
 
+import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Display;
 import android.view.SurfaceView;
+import android.view.WindowManager;
 
 import com.mgd.mgd.Buttons.MuteButton;
 import com.mgd.mgd.Buttons.PauseButton;
+import com.mgd.mgd.Common.Constants;
 import com.mgd.mgd.Common.GameObjectManager;
 import com.mgd.mgd.Common.GenericRenderable;
 import com.mgd.mgd.Common.ParticleManager;
@@ -33,7 +39,20 @@ public class SampleGame{
 
     public void Init(SurfaceView _view)
     {
-      EntityManager.Instance.Init(_view);
+        WindowManager wm = (WindowManager) _view.getContext().getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+        //Display display = _view.getDisplay();//getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
+
+        float worldHeight = 100.f;
+        float worldWidth = worldHeight * ((float)width / (float)height);
+        Constants.worldWidth = worldWidth;
+        Constants.worldHeight = worldHeight;
+
+        EntityManager.Instance.Init(_view);
         ResourceHandler.Instance.Init(_view);
 
         MediaManager.Instance.Init(_view.getContext());

@@ -67,7 +67,7 @@ public class Projectiles extends GameObject {
 
         Render render = new Render();
         render.Init();
-        render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.play), transform);
+        render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.bullet), transform);
         this.components.put("render", render);
         RenderManager.Instance.AddRenderable(render);
 
@@ -119,10 +119,28 @@ public class Projectiles extends GameObject {
         Log.i("Proj", "Destroyed");
     }
 
-    public void Set(Vector3 pos, PointF dir, PointF scale){
+    private void Set(Vector3 pos, PointF dir, PointF scale){
         Transform transform = (Transform) this.components.get("transform");
         transform.SetDir(dir.x, dir.y);
         transform.SetPosition(pos.x, pos.y,pos.z);
         transform.SetScale(scale.x, scale.y);
+    }
+
+
+    public static Projectiles Create(ProjectileType type, Vector3 pos, PointF dir){
+        switch (type)
+        {
+            case BULLET:
+                Projectiles proj = new Projectiles(type);
+                proj.Init();
+                proj.Set(pos, dir, new PointF(10,10));
+                Physics physics = (Physics)proj.GetComponent("physics");
+                physics.speed = 50.f;
+                return proj;
+            case GRENADE:
+                //TO DO
+                break;
+        }
+        return null;
     }
 }

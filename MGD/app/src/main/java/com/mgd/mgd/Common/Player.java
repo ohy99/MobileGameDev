@@ -28,8 +28,8 @@ public class Player extends GameObject{
     public void Init(){
         Transform transform = new Transform();
         transform.Init();
-        transform.SetScale(30,30);
-        transform.SetPosition(0,0,2);
+        transform.SetScale(15,15);
+        transform.SetPosition(15,15,2);
         this.components.put("transform", transform);
 
         Render render = new Render();
@@ -95,9 +95,9 @@ public class Player extends GameObject{
             //transform.SetDir(dir.x, dir.y);
 
             //shoot
-            Projectiles proj = new Projectiles(Projectiles.ProjectileType.BULLET);
-            proj.Init();
-            proj.Set(new Vector3(transform.GetPosition().x, transform.GetPosition().y, 2), dir, new PointF(7,7));
+            Projectiles proj = Projectiles.Create(Projectiles.ProjectileType.BULLET, new Vector3(transform.GetPosition().x, transform.GetPosition().y, 2), dir);
+//            proj.Init();
+//            proj.Set(new Vector3(transform.GetPosition().x, transform.GetPosition().y, 2), dir, new PointF(7,7));
 
 
             //Play Sound

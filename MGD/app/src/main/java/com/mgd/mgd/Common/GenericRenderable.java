@@ -12,7 +12,8 @@ public class GenericRenderable extends GameObject{
 
         Transform transform = new Transform();
         transform.Init();
-        transform.SetScale(200, 100);
+        transform.SetScale(Constants.worldWidth, Constants.worldHeight);
+        transform.SetPosition(Constants.worldWidth * 0.5f, Constants.worldHeight * 0.5f, 0);
         this.components.put("transform", transform);
 
         Render render = new Render();
@@ -24,3 +25,4 @@ public class GenericRenderable extends GameObject{
 
     }
 }
+

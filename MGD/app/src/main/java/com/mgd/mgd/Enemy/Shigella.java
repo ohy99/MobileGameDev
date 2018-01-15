@@ -35,7 +35,7 @@ public class Shigella extends Enemy {
         Transform transform = new Transform();
         transform.Init();
         transform.SetPosition(spawnPos.x,spawnPos.y,spawnPos.z + 0.5f);
-        transform.SetScale(20,20);
+        transform.SetScale(10,10);
         this.components.put("transform", transform);
 
         Render render = new Render();

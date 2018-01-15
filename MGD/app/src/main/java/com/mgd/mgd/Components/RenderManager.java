@@ -6,6 +6,8 @@ import android.graphics.Color;
 import android.graphics.Matrix;
 import android.util.Log;
 import android.graphics.Paint;
+
+import com.mgd.mgd.Common.Constants;
 import com.mgd.mgd.Common.Player;
 
 import java.util.Vector;
@@ -21,6 +23,10 @@ public class RenderManager{
 
         canvasWidth = canvas.getWidth();
         canvasHeight = canvas.getHeight();
+//        float worldHeight = 100.f;
+//        float worldWidth = worldHeight * (canvasWidth / canvasHeight);
+        float worldHeight = Constants.worldHeight;
+        float worldWidth = Constants.worldWidth;
 
         //sort render order by z-axis
         quick_sort(renderables, 0, renderables.size() - 1);
@@ -36,7 +42,7 @@ public class RenderManager{
 
 
             //our x is the longer length of the phone
-            float worldX = 100.f * (canvasWidth / canvasHeight);
+
 
             int bmpWidth = bmp.getWidth();
             int bmpHeight = bmp.getHeight();
@@ -48,15 +54,15 @@ public class RenderManager{
             //mtx.postTranslate(-bmpWidth * 0.5f, -bmpHeight * 0.5f);
             //mtx.postRotate(-(float)Math.atan2(transform.GetDir().y, transform.GetDir().x) / (float)Math.PI * 180.f, bmpWidth * 0.5f, bmpHeight * 0.5f);
             //mtx.setRotate(-(float)Math.atan2(transform.GetDir().y, transform.GetDir().x) / (float)Math.PI * 180.f, bmpWidth * 0.5f, bmpHeight * 0.5f);
-            mtx.postTranslate(0, -bmpHeight);
+            mtx.postTranslate(-bmpWidth * 0.5f, -bmpHeight * 0.5f);
 
-            mtx.postScale((transform.GetScale().x / worldX) * (canvasWidth/(float)bmpWidth),
-                     (transform.GetScale().y / 100.f) * (canvasHeight/(float)bmpHeight));
+            mtx.postScale((transform.GetScale().x / worldWidth) * (canvasWidth/(float)bmpWidth),
+                     (transform.GetScale().y / worldHeight) * (canvasHeight/(float)bmpHeight));
 
-            mtx.postTranslate((transform.GetPosition().x / worldX) * (canvasWidth),
+            mtx.postTranslate((transform.GetPosition().x / worldWidth) * (canvasWidth),
                     //transform.GetPosition().y);
-                    (1.f - (transform.GetPosition().y / 100.f)) * (canvasHeight) -
-                            (transform.GetScale().y / 100.f) * (canvasHeight/(float)bmpHeight));
+                    (1.f - (transform.GetPosition().y / worldHeight)) * (canvasHeight) -
+                            (transform.GetScale().y / worldHeight) * (canvasHeight/(float)bmpHeight));
             canvas.drawBitmap(bmp, mtx ,null);
 
         }
