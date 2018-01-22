@@ -2,6 +2,9 @@ package com.mgd.mgd;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 
 import java.util.HashMap;
@@ -14,6 +17,16 @@ public class MediaManager
     public final static MediaManager Instance = new MediaManager();
 
     private Context contextHolder;
+    Vibrator vibrator;
+
+    class VibratorInstance
+    {
+        boolean isActive = false;
+        double vibrateElapsed = 0.0;
+        double vibrateDuration = 0.5;
+    }
+    VibratorInstance vibratorInstance = new VibratorInstance();
+
 
     //Storage
     class SoundHandler
@@ -36,6 +49,8 @@ public class MediaManager
         soundMap.put("yaruta", new SoundHandler(R.raw.yaruta));
         soundMap.put("blast", new SoundHandler(R.raw.blast));
         contextHolder = context;
+
+        vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     public void Update(double dt)
@@ -48,6 +63,16 @@ public class MediaManager
                 sound.remove(s);
             }
         }*/
+
+        if (vibratorInstance.isActive)
+        {
+            vibratorInstance.vibrateElapsed += dt;
+            if (vibratorInstance.vibrateElapsed >= vibratorInstance.vibrateDuration)
+            {
+                vibratorInstance.vibrateElapsed = 0.0;
+                StopVibrate();
+            }
+        }
     }
 
     //can add more params to edit the file
@@ -169,4 +194,24 @@ public class MediaManager
     {
         sound.remove(mp);
     }
+
+    //param can add type
+    public void RequestVibration()
+    {
+        long pattern[] = {0, 50, 0};
+
+        if (Build.VERSION.SDK_INT >= 26)
+        {
+            vibrator.vibrate(VibrationEffect.createOneShot(150,10));
+        }
+        else
+        {
+            vibrator.vibrate(pattern, -1);
+        }
+
+        vibratorInstance.isActive = true;
+        vibratorInstance.vibrateElapsed = 0.0;
+    }
+
+    void StopVibrate() {vibrator.cancel();}
 }

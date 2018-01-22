@@ -1,11 +1,14 @@
 package com.mgd.mgd.States;
 
+import android.os.Vibrator;
+
 import com.mgd.mgd.Common.Enemy;
 import com.mgd.mgd.Common.Player;
 import com.mgd.mgd.Common.State;
 import com.mgd.mgd.Components.Health;
 import com.mgd.mgd.Components.ScoreSystem;
 import com.mgd.mgd.Components.Transform;
+import com.mgd.mgd.MediaManager;
 
 import java.util.Random;
 
@@ -50,6 +53,9 @@ public class StateAttack extends State{
             score.ResetCombo();
 
             etAttack = 0.0;
+
+            MediaManager.Instance.RequestVibration();
+
         }
 
     }
