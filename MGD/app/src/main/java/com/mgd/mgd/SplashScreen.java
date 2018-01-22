@@ -39,6 +39,8 @@ public class SplashScreen extends Activity{
                     while (waited < 2000){
                         sleep(200);
                         waited += 200;
+                        if (this.isInterrupted())
+                            return;
                     }
                 }catch (InterruptedException e){
 
@@ -67,6 +69,7 @@ public class SplashScreen extends Activity{
                 startActivity(intent);
                 SplashScreen.this.finish();
                 SplashThread.interrupt();
+
                 break;
         }
 
