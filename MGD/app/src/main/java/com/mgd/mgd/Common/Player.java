@@ -7,6 +7,8 @@ import android.util.Pair;
 import com.mgd.mgd.Components.Collision.Collider;
 import com.mgd.mgd.Components.Collision.CollisionManager;
 import com.mgd.mgd.Components.Collision.PlayerResponse;
+import com.mgd.mgd.Components.ComponentBase;
+import com.mgd.mgd.Components.Health;
 import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.ScoreSystem;
@@ -15,11 +17,11 @@ import com.mgd.mgd.MediaManager;
 import com.mgd.mgd.R;
 import com.mgd.mgd.TouchManager;
 
+import java.util.Map;
+
 public class Player extends GameObject{
     public final static Player Instance = new Player();
     private Player() {}
-    public int health = 100;
-    final int maxHealth = 100;
 
 
     PointF prevPoint = new PointF(0,0);
@@ -38,9 +40,16 @@ public class Player extends GameObject{
         this.components.put("render", render);
         RenderManager.Instance.AddRenderable(render);
 
+        Health hp = new Health();
+        hp.Init();
+        hp.InitHp(100);
+        hp.SetRelativePos(transform.GetPosition(), new PointF(0, transform.GetScale().y * 0.5f + 2));
+        this.components.put("hp", hp);
+
         //init collision
         PlayerResponse playerResponse = new PlayerResponse();
         playerResponse.Init();
+        playerResponse.Init(hp);
 
         Collider collider = new Collider();
         collider.Init();
@@ -53,6 +62,9 @@ public class Player extends GameObject{
         score.Init();
         this.components.put("score",score);
 
+
+
+
         GameObjectManager.Instance.AddGo(this);
 
     }
@@ -60,12 +72,19 @@ public class Player extends GameObject{
     @Override
     public void Update(double dt) {
 
+        for(Map.Entry<String, ComponentBase> e : components.entrySet())
+        {
+            e.getValue().Update(dt);
+        }
+
+
         UpdateMovement(dt);
     }
 
     @Override
     public void Destroy(){
-
+        Health hp = (Health) GetComponent("hp");
+        hp.Destroy();
     }
 
 
@@ -140,14 +159,6 @@ public class Player extends GameObject{
 
     }
 
-    public void SetHealth(int hp) { health = hp;}
-
-    public int GetHealth() {return health;}
-
-    // used for rendering hp bar
-    public float GetPercentageHealth() {
-        return health / maxHealth;
-    }
 }
 
 

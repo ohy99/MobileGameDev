@@ -1,5 +1,6 @@
 package com.mgd.mgd.Enemy;
 
+import android.graphics.PointF;
 import android.util.Log;
 
 import com.mgd.mgd.Common.Enemy;
@@ -7,7 +8,10 @@ import com.mgd.mgd.Common.ResourceHandler;
 import com.mgd.mgd.Common.Vector3;
 import com.mgd.mgd.Components.Collision.Collider;
 import com.mgd.mgd.Components.Collision.CollisionManager;
+import com.mgd.mgd.Components.Collision.PlayerResponse;
 import com.mgd.mgd.Components.Collision.ProjectileResponse;
+import com.mgd.mgd.Components.ComponentBase;
+import com.mgd.mgd.Components.Health;
 import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.Transform;
@@ -16,6 +20,7 @@ import com.mgd.mgd.States.StateAttack;
 import com.mgd.mgd.States.StateMove;
 import com.mgd.mgd.States.StateRandomMove;
 
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -44,8 +49,17 @@ public class Shigella extends Enemy {
         this.components.put("render", render);
         RenderManager.Instance.AddRenderable(render);
 
-        ProjectileResponse response = new ProjectileResponse();
+        Health hp = new Health();
+        hp.Init();
+        hp.InitHp(10);
+        hp.SetRelativePos(transform.GetPosition(), new PointF(0, transform.GetScale().y * 0.5f + 2.0f));
+        this.components.put("hp", hp);
+
+        PlayerResponse response = new PlayerResponse();
         response.Init();
+        response.Init(hp);
+
+
         Collider collider = new Collider();
         collider.Init();
         collider.transform = transform;
@@ -55,7 +69,7 @@ public class Shigella extends Enemy {
 
         //add variables here
         movespeed = 2;
-        health = 60;
+        //health = 60;
         attack = 50;
         attackRange = 10;
         detectRange = 60;
@@ -74,8 +88,13 @@ public class Shigella extends Enemy {
     public void Update(double dt) {
         sm.Update(dt);
 
-        if(health <= 0)
-            SetIsDead(true);
+        for (Map.Entry<String, ComponentBase> e : components.entrySet())
+            e.getValue().Update(dt);
+
+        Health hp = (Health) GetComponent("hp");
+        if (hp.GetHpPercentage() <= 0.f)
+            this.SetIsDead(true);
+
     }
 
     @Override

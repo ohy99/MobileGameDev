@@ -3,6 +3,7 @@ package com.mgd.mgd.States;
 import com.mgd.mgd.Common.Enemy;
 import com.mgd.mgd.Common.Player;
 import com.mgd.mgd.Common.State;
+import com.mgd.mgd.Components.Health;
 import com.mgd.mgd.Components.ScoreSystem;
 import com.mgd.mgd.Components.Transform;
 
@@ -43,7 +44,8 @@ public class StateAttack extends State{
         etAttack += dt;
         if(etAttack > enemy.GetAttackSpeed()) {
             float dmgDealt = (random.nextFloat() + 0.5f) * enemy.GetAttack();
-            Player.Instance.SetHealth(Player.Instance.GetHealth() - (int)dmgDealt);
+            Health hpComponent =  (Health)Player.Instance.GetComponent("hp");
+            hpComponent.KenaHit((int)dmgDealt);
             score.MinusScore((int)dmgDealt);
             score.ResetCombo();
 

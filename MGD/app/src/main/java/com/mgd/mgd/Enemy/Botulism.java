@@ -1,12 +1,16 @@
 package com.mgd.mgd.Enemy;
 
+import android.graphics.PointF;
 import android.util.Log;
 
 import com.mgd.mgd.Common.Enemy;
 import com.mgd.mgd.Common.ResourceHandler;
 import com.mgd.mgd.Components.Collision.Collider;
 import com.mgd.mgd.Components.Collision.CollisionManager;
+import com.mgd.mgd.Components.Collision.PlayerResponse;
 import com.mgd.mgd.Components.Collision.ProjectileResponse;
+import com.mgd.mgd.Components.ComponentBase;
+import com.mgd.mgd.Components.Health;
 import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.Transform;
@@ -14,6 +18,7 @@ import com.mgd.mgd.R;
 import com.mgd.mgd.States.StateRandomMove;
 import com.mgd.mgd.States.StateSummon;
 
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -39,8 +44,15 @@ public class Botulism extends Enemy {
         this.components.put("render", render);
         RenderManager.Instance.AddRenderable(render);
 
-        ProjectileResponse response = new ProjectileResponse();
+        Health hp = new Health();
+        hp.Init();
+        hp.InitHp(50);
+        hp.SetRelativePos(transform.GetPosition(), new PointF(0, transform.GetScale().y * 0.5f + 2.0f));
+        this.components.put("hp", hp);
+
+        PlayerResponse response = new PlayerResponse();
         response.Init();
+        response.Init(hp);
 
         Collider collider = new Collider();
         collider.Init();
@@ -56,7 +68,7 @@ public class Botulism extends Enemy {
         attackRange = 7;
         detectRange = 40;
         attackspeed = 1.5f;
-        health = 100;
+        //health = 100;
         transitionOffset = 10;
         name = "botulism";
 
@@ -64,14 +76,21 @@ public class Botulism extends Enemy {
         sm.AddState(new StateSummon("summon",this));
         sm.AddState(new StateRandomMove("randommove",this));
         sm.SetNextState("summon");
+
+
     }
 
     @Override
     public void Update(double dt) {
         sm.Update(dt);
 
-        if(health <= 0)
-            SetIsDead(true);
+        for (Map.Entry<String, ComponentBase> e : components.entrySet())
+            e.getValue().Update(dt);
+
+        Health hp = (Health) GetComponent("hp");
+        if (hp.GetHpPercentage() <= 0.f)
+            this.SetIsDead(true);
+
     }
 
 
@@ -79,6 +98,8 @@ public class Botulism extends Enemy {
     public  void Destroy(){
         RenderManager.Instance.RemoveRenderable((Render) this.components.get("render"));
         CollisionManager.instance.removeCollider((Collider) this.components.get("collider"), this);
+        Health hp = (Health) GetComponent("hp");
+        hp.Destroy();
 
         Log.i("Boi", "Deleted");
     }

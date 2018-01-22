@@ -11,7 +11,7 @@ public class Enemy extends GameObject {
     public StateManager sm = new StateManager();
 
     protected boolean isDead = false;
-    protected int health = 100;
+    //protected int health = 100;
     protected int attack = 0;
     protected int movespeed = 0;
     protected float attackspeed = 0.f;
@@ -38,9 +38,9 @@ public class Enemy extends GameObject {
         return isDead;
     }
 
-    public void ReduceHealth(int hp) {
-        health -= hp;
-    }
+    //public void ReduceHealth(int hp) {
+    //    health -= hp;
+   // }
 
     public int GetMoveSpeed() { return movespeed;}
     public int GetAttack() {return attack;}

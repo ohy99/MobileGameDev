@@ -22,6 +22,7 @@ import com.mgd.mgd.Common.Player;
 import com.mgd.mgd.Common.ResourceHandler;
 import com.mgd.mgd.Common.Vector3;
 import com.mgd.mgd.Components.Collision.CollisionManager;
+import com.mgd.mgd.Components.Health;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Enemy.EnemyManager;
 
@@ -46,7 +47,7 @@ public class SampleGame {
     public void Init(SurfaceView _view)
     {
         //sharedPref = GamePage.Instance.getSharedPreferences(SHARED_PREF_ID, 0);
-        
+
         WindowManager wm = (WindowManager) _view.getContext().getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         //Display display = _view.getDisplay();//getWindowManager().getDefaultDisplay();
@@ -87,7 +88,7 @@ public class SampleGame {
 
         EntityManager.Instance.Update(_deltaTime);
 
-        if (player.GetHealth() <= 0) {
+        if (((Health)player.GetComponent("hp")).GetHpPercentage() <= 0) {
             gameover = true;
         }
         

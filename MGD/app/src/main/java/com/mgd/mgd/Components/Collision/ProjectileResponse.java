@@ -21,8 +21,8 @@ public class ProjectileResponse extends CollisionResponse{
             if (!this.isHit)
             {
                 me.Destroy();
-                Enemy e = (Enemy) other;
-                e.SetIsDead(true);
+                //Enemy e = (Enemy) other;
+                //e.SetIsDead(true);
                 ScoreSystem score = (ScoreSystem) Player.Instance.GetComponent("score");
                 score.IncreaseCombo();
                 score.AddScore(100);

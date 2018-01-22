@@ -66,7 +66,7 @@ public class EnemyManager {
                 AdditionList.add(b);
                 break;
             case CLOSTRIDIUM:
-                Clostridium c = new Clostridium();
+                //Clostridium c = new Clostridium();
                 break;
             case SHIGELLA:
                 Shigella s = new Shigella(spawnPos);
@@ -74,7 +74,7 @@ public class EnemyManager {
                 AdditionList.add(s);
                 break;
             case LISTERIA:
-                Listeria l = new Listeria();
+               // Listeria l = new Listeria();
                 break;
         }
 

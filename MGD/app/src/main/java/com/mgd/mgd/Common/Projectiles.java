@@ -37,6 +37,7 @@ public class Projectiles extends GameObject {
     double elapsed = 0.0;
     double spawnDelay= 0.1;
     Random random = new Random();
+    public int min, max;
 
     @Override
     public void Init() {
@@ -78,6 +79,9 @@ public class Projectiles extends GameObject {
 
         GameObjectManager.Instance.AddGo(this);
         CollisionManager.instance.addCollider(collider, this);
+
+        min = 7;
+        max = 15;
 
         Log.i("Proj", "Created");
     }
@@ -143,4 +147,9 @@ public class Projectiles extends GameObject {
         }
         return null;
     }
+
+    public int GetDamageToHit(){
+        return random.nextInt(max - min) + min;
+    }
 }
+
