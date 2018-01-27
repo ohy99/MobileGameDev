@@ -1,8 +1,8 @@
-package com.mgd.mgd.Buttons;
+package com.mgd.mgd;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.util.Log;
+
 import android.view.SurfaceView;
 
 import com.mgd.mgd.Collision;
@@ -11,7 +11,6 @@ import com.mgd.mgd.Dialog.PauseConfirmDialogFragment;
 import com.mgd.mgd.EntityBase;
 import com.mgd.mgd.EntityManager;
 import com.mgd.mgd.GamePage;
-import com.mgd.mgd.PauseScreen;
 import com.mgd.mgd.R;
 import com.mgd.mgd.SampleGame;
 import com.mgd.mgd.TouchManager;
@@ -20,7 +19,7 @@ import com.mgd.mgd.TouchManager;
  * Created by 161832Q on 7/1/2018.
  */
 
-public class PauseButton implements EntityBase {
+public class PauseScreen implements EntityBase {
     private Bitmap bmp = null;
     private boolean isDone = false;
     private int xPos, yPos;
@@ -39,9 +38,9 @@ public class PauseButton implements EntityBase {
 
     @Override
     public void Init(SurfaceView _view) {
-        bmp = ResourceHandler.Instance.GetBitmap(R.drawable.pause);
-        xPos = 100;
-        yPos = 100;
+        bmp = ResourceHandler.Instance.GetBitmap(R.drawable.pausescreen);
+        xPos = 600;
+        yPos = 400;
         minX = xPos - bmp.getWidth() * 0.5f;
         maxX = xPos + bmp.getWidth() * 0.5f;
         minY = yPos - bmp.getHeight() * 0.5f;
@@ -50,24 +49,9 @@ public class PauseButton implements EntityBase {
 
     @Override
     public void Update(float _dt) {
-
-        if (TouchManager.Instance.IsDown() && !wasDown)
-        {
-            // Check collision here!!!
-
-            if(Collision.PointQuad(minX,minY,maxX,maxY,TouchManager.Instance.GetPosX(),TouchManager.Instance.GetPosY()))
-            {
-                // Button clicked;
-                if(PauseConfirmDialogFragment.IsShown)
-                    return; //prevent creating another dialog fragment when one is shown alr
-
-                PauseConfirmDialogFragment newPauseConfirm = new PauseConfirmDialogFragment();
-                newPauseConfirm.show(GamePage.Instance.getFragmentManager(),"PauseConfirm");
-                wasDown = true;
-            }
-        }
-        else if (!TouchManager.Instance.IsDown() && wasDown)
-            wasDown = false;
+        // a screen does not need to do anything
+        if(!SampleGame.Instance.GetIsPaused())
+            isDone = true;
     }
 
     @Override
@@ -82,7 +66,7 @@ public class PauseButton implements EntityBase {
 
     @Override
     public int GetRenderLayer() {
-       return 0;
+        return 0;
     }
 
     @Override
@@ -90,14 +74,10 @@ public class PauseButton implements EntityBase {
         return;
     }
 
-    public static PauseButton Create()
+    public static PauseScreen Create()
     {
-        PauseButton result = new PauseButton();
+        PauseScreen result = new PauseScreen();
         EntityManager.Instance.AddEntity(result);
         return result;
-    }
-
-    public void Destroy() {
-       isDone = true;
     }
 }

@@ -20,7 +20,7 @@ import com.mgd.mgd.TouchManager;
  * Created by 161832Q on 7/1/2018.
  */
 
-public class PauseButton implements EntityBase {
+public class ResumeButton implements EntityBase {
     private Bitmap bmp = null;
     private boolean isDone = false;
     private int xPos, yPos;
@@ -39,9 +39,9 @@ public class PauseButton implements EntityBase {
 
     @Override
     public void Init(SurfaceView _view) {
-        bmp = ResourceHandler.Instance.GetBitmap(R.drawable.pause);
-        xPos = 100;
-        yPos = 100;
+        bmp = ResourceHandler.Instance.GetBitmap(R.drawable.resume);
+        xPos = 350;
+        yPos = 300;
         minX = xPos - bmp.getWidth() * 0.5f;
         maxX = xPos + bmp.getWidth() * 0.5f;
         minY = yPos - bmp.getHeight() * 0.5f;
@@ -57,12 +57,8 @@ public class PauseButton implements EntityBase {
 
             if(Collision.PointQuad(minX,minY,maxX,maxY,TouchManager.Instance.GetPosX(),TouchManager.Instance.GetPosY()))
             {
-                // Button clicked;
-                if(PauseConfirmDialogFragment.IsShown)
-                    return; //prevent creating another dialog fragment when one is shown alr
-
-                PauseConfirmDialogFragment newPauseConfirm = new PauseConfirmDialogFragment();
-                newPauseConfirm.show(GamePage.Instance.getFragmentManager(),"PauseConfirm");
+                SampleGame.Instance.SetIsPaused(false);
+                isDone = true; // request deletion of resume button since game is gonna be unpaused
                 wasDown = true;
             }
         }
@@ -82,7 +78,7 @@ public class PauseButton implements EntityBase {
 
     @Override
     public int GetRenderLayer() {
-       return 0;
+        return 0;
     }
 
     @Override
@@ -90,14 +86,12 @@ public class PauseButton implements EntityBase {
         return;
     }
 
-    public static PauseButton Create()
+    public static ResumeButton Create()
     {
-        PauseButton result = new PauseButton();
+        ResumeButton result = new ResumeButton();
         EntityManager.Instance.AddEntity(result);
         return result;
     }
 
-    public void Destroy() {
-       isDone = true;
-    }
+
 }
