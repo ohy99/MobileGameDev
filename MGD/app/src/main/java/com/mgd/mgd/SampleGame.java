@@ -145,7 +145,7 @@ public class SampleGame {
 
         //this does it in background, something like new thread?
         editor.apply();
-        //this does it in the same main thread so will lag
+        //this does it in the same main thread so will lag vv
         //editor.commit();
         editor = null;
     }
