@@ -78,7 +78,7 @@ public class SampleGame {
 
         //create button
         PauseButton.Create();
-        MuteButton.Create();
+
 
         //create static objs
         GenericRenderable renderable = new GenericRenderable();

@@ -36,8 +36,8 @@ public class MuteButton implements EntityBase {
     @Override
     public void Init(SurfaceView _view) {
         bmp = ResourceHandler.Instance.GetBitmap(R.drawable.mute);
-        xPos = 300;
-        yPos = 100;
+        xPos = 750;
+        yPos = 300;
         minX = xPos - bmp.getWidth() * 0.5f;
         maxX = xPos + bmp.getWidth() * 0.5f;
         minY = yPos - bmp.getHeight() * 0.5f;
@@ -61,6 +61,10 @@ public class MuteButton implements EntityBase {
         }
         else if (!TouchManager.Instance.IsDown() && wasDown)
             wasDown = false;
+
+        if(!SampleGame.Instance.GetIsPaused()) {
+            isDone = true;
+        }
     }
 
     @Override
