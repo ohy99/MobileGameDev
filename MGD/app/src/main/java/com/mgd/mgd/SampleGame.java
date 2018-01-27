@@ -24,7 +24,13 @@ import com.mgd.mgd.Common.Vector3;
 import com.mgd.mgd.Components.Collision.CollisionManager;
 import com.mgd.mgd.Components.Health;
 import com.mgd.mgd.Components.RenderManager;
+import com.mgd.mgd.Components.ScoreSystem;
 import com.mgd.mgd.Enemy.EnemyManager;
+
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 // Remark: Too lazy to change classname
 
@@ -36,8 +42,8 @@ public class SampleGame {
     private boolean isPaused = false;
     private boolean gameover = false;
 
-    //SharedPreferences sharedPref = null;
-    //SharedPreferences.Editor editor = null;
+    SharedPreferences sharedPref = null;
+    SharedPreferences.Editor editor = null;
 
     Player player = Player.Instance;
 
@@ -55,7 +61,6 @@ public class SampleGame {
         display.getSize(size);
         int width = size.x;
         int height = size.y;
-
         float worldHeight = 100.f;
         float worldWidth = worldHeight * ((float)width / (float)height);
         Constants.worldWidth = worldWidth;
@@ -82,6 +87,9 @@ public class SampleGame {
 /*        for(int i =0;i<4;++i) {
             EnemyManager.Instance.SpawnEnemy(EnemyManager.EnemyType.BOTULISM, new Vector3(0,0,0));
         }*/
+
+        sharedPref = _view.getContext().getSharedPreferences("score", Context.MODE_PRIVATE);
+
     }
 
     public void Update(float _deltaTime) {
@@ -90,8 +98,10 @@ public class SampleGame {
 
         if (((Health)player.GetComponent("hp")).GetHpPercentage() <= 0) {
             gameover = true;
+            this.SaveScore((ScoreSystem) player.GetComponent("score"));
         }
-        
+
+
         if(!isPaused && !gameover) {
             GameObjectManager.Instance.Update(_deltaTime);
             EnemyManager.Instance.Update(_deltaTime);
@@ -103,6 +113,8 @@ public class SampleGame {
 
         //Update Media
         MediaManager.Instance.Update(_deltaTime);
+
+
     }
 
     protected void Render(Canvas _canvas) {
@@ -119,36 +131,24 @@ public class SampleGame {
     }
 
 
-    //public void SetIntInSave(String key, int value) {
-      //  if(editor == null)
-        //    return;
+    public void SaveScore(ScoreSystem score)
+    {
+        editor = sharedPref.edit();
 
-        //save data here
-       // editor.putInt(key, value);
-    //}
+        int numOfSaves = sharedPref.getInt("num", 0);
+        Set<String> stringSet = new HashSet<String>();
+        stringSet.add("name");
+        stringSet.add(String.valueOf(score.GetScore()));
+        editor.putStringSet(String.valueOf(numOfSaves), stringSet);//0 , 1, 2, 3, 4,
+        editor.putInt("num", ++numOfSaves);
 
-    //public int GetIntFromSave(String key) {
 
-        //attempt to get using key, if fail provide default variable based on our input
-      //  return sharedPref.getInt(key, 0);
-    //}
+        //this does it in background, something like new thread?
+        editor.apply();
+        //this does it in the same main thread so will lag
+        //editor.commit();
+        editor = null;
+    }
 
-    //public void SaveEditBegin() {
-        //safety check, make sure no one else is doing an edit
-      //  if(editor != null)
-//            return;
-
-        // start the editng by providing editor
-  //      editor = sharedPref.edit();
-    //}
-
-    //public void SaveEditEnd() {
-        // safety check, only allow if editor is available
-      //  if(editor == null)
-        //    return;
-
-//        editor.commit();
-  //      editor = null; //clean up editor so editor can work
-    //}
 }
 

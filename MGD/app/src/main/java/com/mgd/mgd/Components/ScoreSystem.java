@@ -4,6 +4,7 @@ package com.mgd.mgd.Components;
  * Created by 161832Q on 3/12/2017.
  */
 
+
 public class ScoreSystem implements ComponentBase {
 
     int CurrentScore = 0;
