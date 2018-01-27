@@ -7,6 +7,7 @@ import android.view.SurfaceView;
 
 import com.mgd.mgd.Collision;
 import com.mgd.mgd.Common.ResourceHandler;
+import com.mgd.mgd.Dialog.ExitToMainMenuConfirmDialogFragment;
 import com.mgd.mgd.Dialog.PauseConfirmDialogFragment;
 import com.mgd.mgd.EntityBase;
 import com.mgd.mgd.EntityManager;
@@ -20,7 +21,7 @@ import com.mgd.mgd.TouchManager;
  * Created by 161832Q on 27/1/2018.
  */
 
-public class ResumeButton implements EntityBase {
+public class ExitMainMenuButton implements EntityBase {
     private Bitmap bmp = null;
     private boolean isDone = false;
     private int xPos, yPos;
@@ -39,8 +40,8 @@ public class ResumeButton implements EntityBase {
 
     @Override
     public void Init(SurfaceView _view) {
-        bmp = ResourceHandler.Instance.GetBitmap(R.drawable.resume);
-        xPos = 350;
+        bmp = ResourceHandler.Instance.GetBitmap(R.drawable.home);
+        xPos = 1050;
         yPos = 300;
         minX = xPos - bmp.getWidth() * 0.5f;
         maxX = xPos + bmp.getWidth() * 0.5f;
@@ -57,13 +58,22 @@ public class ResumeButton implements EntityBase {
 
             if(Collision.PointQuad(minX,minY,maxX,maxY,TouchManager.Instance.GetPosX(),TouchManager.Instance.GetPosY()))
             {
-                SampleGame.Instance.SetIsPaused(false);
-                isDone = true; // request deletion of resume button since game is gonna be unpaused
+                if(ExitToMainMenuConfirmDialogFragment.IsShown)
+                    return;
+
+                ExitToMainMenuConfirmDialogFragment exitToMainMenuConfirmDialogFragment = new ExitToMainMenuConfirmDialogFragment();
+                exitToMainMenuConfirmDialogFragment.show(GamePage.Instance.getFragmentManager(),"ExitMainMenuConfirm");
+
                 wasDown = true;
             }
         }
         else if (!TouchManager.Instance.IsDown() && wasDown)
             wasDown = false;
+
+        if(!SampleGame.Instance.GetIsPaused()) {
+            isDone = true;
+        }
+
     }
 
     @Override
@@ -86,12 +96,13 @@ public class ResumeButton implements EntityBase {
         return;
     }
 
-    public static ResumeButton Create()
+    public static ExitMainMenuButton Create()
     {
-        ResumeButton result = new ResumeButton();
+        ExitMainMenuButton result = new ExitMainMenuButton();
         EntityManager.Instance.AddEntity(result);
         return result;
     }
 
 
 }
+
