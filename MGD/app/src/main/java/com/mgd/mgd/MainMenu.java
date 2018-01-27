@@ -63,7 +63,9 @@ public class MainMenu extends Activity implements OnClickListener {
         }
 
         if(v == btn_highscore) {
-
+            intent.setClass(MainMenu.this, ScorePage.class);
+            startActivity(intent);
+            MainMenu.this.finish();
         }
     }
 
