@@ -37,13 +37,19 @@ public class StateMove extends State {
 
         float distSquared = (thisTransform.GetPosition().Add(playerTransform.GetPosition().Negate())).LengthSquared();
 
-        if(distSquared < enemy.GetAttackRange() * enemy.GetAttackRange()) {
-            enemy.sm.SetNextState("attack");
-        }
-        else if(distSquared > (enemy.GetDetectRange() + enemy.GetTransitionOffset()) * (enemy.GetDetectRange() + enemy.GetTransitionOffset())) {
-            enemy.sm.SetNextState("randommove");
+        if(enemy.GetName().equals("shigella")) {
+            if (distSquared < enemy.GetAttackRange() * enemy.GetAttackRange()) {
+                enemy.sm.SetNextState("attack");
+            } else if (distSquared > (enemy.GetDetectRange() + enemy.GetTransitionOffset()) * (enemy.GetDetectRange() + enemy.GetTransitionOffset())) {
+                enemy.sm.SetNextState("randommove");
+            }
         }
 
+        if(enemy.GetName().equals("botulism")) {
+            if (distSquared < enemy.GetDetectRange() * enemy.GetDetectRange()) {
+                enemy.sm.SetNextState("summon");
+            }
+        }
     }
 
     @Override

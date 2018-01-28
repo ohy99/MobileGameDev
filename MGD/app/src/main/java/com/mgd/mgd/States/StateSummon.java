@@ -32,7 +32,7 @@ public class StateSummon extends State{
 
         // transition
         if(distSquared > (enemy.GetDetectRange() + enemy.GetTransitionOffset()) * (enemy.GetDetectRange() + enemy.GetTransitionOffset()) )
-            enemy.sm.SetNextState("randommove");
+            enemy.sm.SetNextState("move");
 
         etSummon += dt;
         if(etSummon > 2) {

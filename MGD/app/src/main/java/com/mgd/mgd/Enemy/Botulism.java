@@ -15,6 +15,7 @@ import com.mgd.mgd.Components.Render;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.Transform;
 import com.mgd.mgd.R;
+import com.mgd.mgd.States.StateMove;
 import com.mgd.mgd.States.StateRandomMove;
 import com.mgd.mgd.States.StateSummon;
 
@@ -34,7 +35,7 @@ public class Botulism extends Enemy {
     public void Init() {
         Transform transform = new Transform();
         transform.Init();
-        transform.SetPosition(r.nextInt(150),r.nextInt(70),2);
+        transform.SetPosition(150,r.nextInt(20),2);
         transform.SetScale(10,10);
         this.components.put("transform" ,transform);
 
@@ -64,9 +65,9 @@ public class Botulism extends Enemy {
 
         // add variables here
         attack = 30;
-        movespeed = 2;
+        movespeed = 1;
         attackRange = 7;
-        detectRange = 40;
+        detectRange = 70;
         attackspeed = 1.5f;
         //health = 100;
         transitionOffset = 10;
@@ -74,7 +75,7 @@ public class Botulism extends Enemy {
 
         //add states here
         sm.AddState(new StateSummon("summon",this));
-        sm.AddState(new StateRandomMove("randommove",this));
+        sm.AddState(new StateMove("move",this));
         sm.SetNextState("summon");
 
 

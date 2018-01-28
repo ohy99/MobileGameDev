@@ -18,6 +18,8 @@ public class EnemyManager {
 
     private EnemyManager() {}
 
+    float etSpawn = 0.0f;
+    float spawnRate = 2.0f;
     public enum EnemyType
     {
         BOTULISM,
@@ -34,6 +36,12 @@ public class EnemyManager {
     }
 
     public void Update(double dt) {
+        etSpawn += dt;
+        if(etSpawn > spawnRate) {
+            SpawnEnemy(EnemyType.BOTULISM,new Vector3(0,0,0));
+            etSpawn = 0.0f;
+        }
+
         LinkedList<Enemy> RemovalList = new LinkedList<Enemy>();
 
         EnemyList.addAll(AdditionList);

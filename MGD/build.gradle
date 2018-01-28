@@ -4,7 +4,10 @@ buildscript {
     repositories {
         jcenter()
         mavenCentral() // fb use
-    }
+        maven {
+            url "https://maven.google.com"
+        }
+        }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
         apply plugin: 'maven'   //fb use
@@ -17,6 +20,9 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
     }
 }
 
