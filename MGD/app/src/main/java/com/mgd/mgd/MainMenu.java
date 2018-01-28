@@ -15,7 +15,7 @@ public class MainMenu extends Activity implements OnClickListener {
     private Button btn_start;
     private Button btn_settings;
     private Button btn_highscore;
-    private Button btn_facebook;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +36,7 @@ public class MainMenu extends Activity implements OnClickListener {
         btn_settings.setOnClickListener(this);
         btn_highscore = (Button)findViewById(R.id.highscore_button);
         btn_highscore.setOnClickListener(this);
-        btn_facebook = (Button)findViewById(R.id.facebook_button);
-        btn_facebook.setOnClickListener(this);
+
 
 
     }
@@ -54,12 +53,11 @@ public class MainMenu extends Activity implements OnClickListener {
             MainMenu.this.finish();
         }
 
-        if(v == btn_facebook) {
-
-        }
 
         if (v == btn_settings) {
-
+            intent.setClass(MainMenu.this,SettingsPage.class);
+            startActivity(intent);
+            MainMenu.this.finish();
         }
 
         if(v == btn_highscore) {
