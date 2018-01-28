@@ -81,6 +81,7 @@ public class RenderManager{
 
     public void AddRenderable(Render render) {renderables.add(render);}
     public void RemoveRenderable(Render render) {renderables.remove(render);}
+    public void RemoveAll() {renderables.clear();}
 
 
     private void quick_sort( Vector<Render> data_list, int first_index, int last_index){

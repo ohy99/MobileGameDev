@@ -80,6 +80,8 @@ public class UpdateThread extends Thread
 
 
         }
+
+        SampleGame.Instance.OnDestroy();
     }
 }
 

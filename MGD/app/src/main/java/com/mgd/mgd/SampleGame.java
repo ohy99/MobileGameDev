@@ -105,7 +105,8 @@ public class SampleGame {
         //scoreInputDialogFragment.InitDialogTextBox(_view.getContext());
         //touchDown = false;
 
-
+        isPaused=  false;
+        gameover = false;
     }
 
     public void Update(float _deltaTime) {
@@ -186,6 +187,19 @@ public class SampleGame {
         editor = null;
 
         gameSaved = true;
+    }
+
+
+    public void OnDestroy()
+    {
+        RenderManager.Instance.RemoveAll();
+        ParticleManager.Instance.RemoveAll();
+        CollisionManager.instance.RemoveAll();
+        EnemyManager.Instance.RemoveAll();
+        GameObjectManager.Instance.RemoveAll();
+        MediaManager.Instance.RemoveAll();
+
+        EntityManager.Instance.RemoveAllEntity();
     }
 
 }

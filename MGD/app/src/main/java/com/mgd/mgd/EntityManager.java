@@ -3,6 +3,7 @@ package com.mgd.mgd;
 import android.graphics.Canvas;
 import android.view.SurfaceView;
 
+import java.util.ConcurrentModificationException;
 import java.util.LinkedList;
 
 
@@ -74,13 +75,23 @@ public class EntityManager {
     }
 
     public void Render(Canvas _canvas){
-        for (EntityBase currEntity : entityList) {
-            currEntity.Render(_canvas);
+        try{
+            for (EntityBase currEntity : entityList) {
+                currEntity.Render(_canvas);
+            }
+        }catch (ConcurrentModificationException e)
+        {
+
         }
+
     }
 
     public void AddEntity(EntityBase _newEntity) {
         _newEntity.Init(view);
         entityList.add(_newEntity);
+    }
+
+    public void RemoveAllEntity(){
+        entityList.clear();
     }
 }

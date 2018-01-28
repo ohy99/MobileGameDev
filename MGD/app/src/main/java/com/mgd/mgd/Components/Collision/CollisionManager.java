@@ -57,4 +57,6 @@ public class CollisionManager{
         //this.colliderVector.remove(Pair.create(collider, go));
         removalList.add(Pair.create(collider, go));
         }
+
+    public void RemoveAll () {colliderVector.clear(); removalList.clear(); }
 }

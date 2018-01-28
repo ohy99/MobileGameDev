@@ -233,4 +233,18 @@ public class MediaManager
     }
 
     void StopVibrate() {vibrator.cancel();}
+
+    void RemoveAll() {
+        StopVibrate();
+        for (MediaPlayer s: sound) {
+            s.stop();
+            s.release();
+        }
+        for (MediaPlayer s: music) {
+            s.stop();
+            s.release();
+        }
+        sound.clear();
+        music.clear();
+    }
 }

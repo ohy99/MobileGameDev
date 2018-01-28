@@ -52,4 +52,5 @@ public class GameObjectManager{
         removalList.add(go);
     }
     public void AddGo(GameObject go) {additionList.add(go);}
+    public void RemoveAll(){removalList.clear(); additionList.clear(); gameObjects.clear();}
 }

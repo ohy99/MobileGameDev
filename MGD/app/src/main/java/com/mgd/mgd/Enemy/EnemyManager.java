@@ -87,5 +87,7 @@ public class EnemyManager {
         }
 
     }
+
+    public void RemoveAll() { EnemyList.clear(); AdditionList.clear(); }
 }
 

@@ -121,5 +121,7 @@ public class ParticleManager {
         particles.add(particleClass);
 
     }
+
+    public void RemoveAll() {particles.clear();}
 }
 

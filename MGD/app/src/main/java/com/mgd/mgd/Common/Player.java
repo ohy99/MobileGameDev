@@ -4,6 +4,7 @@ import android.graphics.PointF;
 import android.util.Log;
 import android.util.Pair;
 
+import com.mgd.mgd.Collision;
 import com.mgd.mgd.Components.Collision.Collider;
 import com.mgd.mgd.Components.Collision.CollisionManager;
 import com.mgd.mgd.Components.Collision.PlayerResponse;
@@ -26,15 +27,78 @@ public class Player extends GameObject{
     class Joystick
     {
         PointF dir;
+        PointF center;
         float maxRadius;
 
-        public void JoyStick(float maxRadius)
+        Transform bg_transform = new Transform();
+        Render bg_render = new Render();
+
+        Transform front_transform = new Transform();
+        Render front_render = new Render();
+
+        public boolean active = false;
+
+        public void Init (PointF center, float maxRadius)
         {
+            this.center = center;
             this.maxRadius = maxRadius;
             this.dir = new PointF();
+
+            bg_transform.Init();
+            bg_transform.SetPosition(center.x, center.y, 5);
+            bg_transform.SetScale(maxRadius, maxRadius);
+
+            bg_render.Init();
+            bg_render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.joystick_background), bg_transform);
+            RenderManager.Instance.AddRenderable(bg_render);
+
+            front_transform.Init();
+            front_transform.SetPosition(center.x, center.y, 5.5f);
+            front_transform.SetScale(maxRadius * 0.5f, maxRadius *0.5f);
+
+            front_render.Init();
+            front_render.Start(ResourceHandler.Instance.GetBitmap(R.drawable.joystick_background), front_transform);
+            RenderManager.Instance.AddRenderable(front_render);
+        }
+
+        public void UpdateValues(PointF newPos)
+        {
+            PointF dir = new PointF();
+            dir.set(-center.x + newPos.x, -center.y + newPos.y);
+            double length = Math.sqrt(dir.x * dir.x + dir.y * dir.y);
+            if (length > maxRadius)
+            {
+                dir.set(dir.x / (float)length, dir.y / (float)length);
+                dir.x = dir.x * maxRadius * 0.5f;
+                dir.y = dir.y * maxRadius * 0.5f;
+            }
+
+            this.dir = dir;
+
+
+            front_transform.SetPosition(center.x + dir.x, center.y + dir.y, 5.5f);
+        }
+
+        public void AddToRenderables()
+        {
+            RenderManager.Instance.AddRenderable(bg_render);
+            RenderManager.Instance.AddRenderable(front_render);
+        }
+
+        public void RemoveFromRenderables()
+        {
+            RenderManager.Instance.RemoveRenderable(bg_render);
+            RenderManager.Instance.RemoveRenderable(front_render);
+
+            Log.i("JoyStick", "Destroyed");
+        }
+
+        public void Reset()
+        {
+            dir.set(0,0);
+            front_transform.SetPosition(center.x, center.y, 5.5f);
         }
     };
-
     Joystick joystick;
 
     PointF prevPoint = new PointF(0,0);
@@ -76,11 +140,10 @@ public class Player extends GameObject{
         this.components.put("score",score);
 
 
-
-
         GameObjectManager.Instance.AddGo(this);
 
-
+        joystick = new Joystick();
+        joystick.Init(new PointF(25, 20), 30);
 
     }
 
@@ -100,6 +163,8 @@ public class Player extends GameObject{
     public void Destroy(){
         Health hp = (Health) GetComponent("hp");
         hp.Destroy();
+
+        joystick.RemoveFromRenderables();
     }
 
 
@@ -115,12 +180,14 @@ public class Player extends GameObject{
             float worldwidth = ratio * 100.f;
             //if touch screen, move char
 
+
             //shoot
             Log.i("touch", String.valueOf(touch.y));
             Transform transform = (Transform) this.components.get("transform");
             PointF dir = new PointF();
             PointF pos = new PointF(transform.GetPosition().x, transform.GetPosition().y);
             PointF touchWorld = new PointF(touch.x / canvasSize.x * worldwidth, touch.y / canvasSize.y * 100.f);
+
             dir.x = -pos.x + touchWorld.x;
             dir.y = -pos.y + touchWorld.y;
             double len = Math.sqrt((double) (dir.x * dir.x) + (double) (dir.y * dir.y));
@@ -136,6 +203,12 @@ public class Player extends GameObject{
 
             //Play Sound
             MediaManager.Instance.PlaySound(R.raw.blast);
+
+
+            if (Collision.SphereSphere(joystick.center.x, joystick.center.y, joystick.maxRadius, touchWorld.x, touchWorld.y, 0.5f))
+            {
+                joystick.active = true;
+            }
         }
 
         if (TouchManager.Instance.HasTouch())
@@ -154,23 +227,54 @@ public class Player extends GameObject{
             PointF pos = new PointF(transform.GetPosition().x, transform.GetPosition().y);
             PointF touchWorld = new PointF(touch.x / canvasSize.x * worldwidth, touch.y / canvasSize.y * 100.f);
 
-            if (!prevPoint.equals(0,0))
+
+
+            if (joystick.active)
             {
-                PointF displacement = new PointF();
-                displacement.x = -prevPoint.x + touchWorld.x;
-                displacement.y = -prevPoint.y + touchWorld.y;
+                joystick.UpdateValues(touchWorld);
 
+                Vector3 vpos3 = transform.GetPosition();
+                vpos3.x += joystick.dir.x * 3.f * (float)dt;
+                vpos3.y += joystick.dir.y * 3.f * (float)dt;
 
-                Vector3 pos3 = transform.GetPosition();
-                pos3.x += displacement.x * 10.f * dt;
-                pos3.y += displacement.y * 10.f * dt;
-
-                Log.i("MOVE", String.valueOf(displacement.x) + " , " + String.valueOf(displacement.y));
             }
+
+
+//            if (!prevPoint.equals(0,0))
+//            {
+//                PointF displacement = new PointF();
+//                displacement.x = -prevPoint.x + touchWorld.x;
+//                displacement.y = -prevPoint.y + touchWorld.y;
+//
+//
+//                Vector3 pos3 = transform.GetPosition();
+//                pos3.x += displacement.x * 10.f * dt;
+//                pos3.y += displacement.y * 10.f * dt;
+//
+//                Log.i("MOVE", String.valueOf(displacement.x) + " , " + String.valueOf(displacement.y));
+//            }
             prevPoint.set(touchWorld);
         }
         else
+        {
+            joystick.Reset();
+            joystick.active = false;
             prevPoint.set(0,0);
+        }
+
+
+        //BOUNDS
+        Transform transform = (Transform)GetComponent("transform");
+        Vector3 pos = transform.GetPosition();
+        PointF scale = transform.GetScale();
+        if (pos.x < 0 +scale.x)
+            pos.x = 0 + scale.x;
+        else if (pos.x > Constants.worldWidth - scale.x)
+            pos.x = Constants.worldWidth - scale.x;
+        if (pos.y < 0 + scale.y)
+            pos.y = 0 + scale.y;
+        else if (pos.y > Constants.worldHeight - scale.y)
+            pos.y = Constants.worldHeight - scale.y;
 
     }
 
