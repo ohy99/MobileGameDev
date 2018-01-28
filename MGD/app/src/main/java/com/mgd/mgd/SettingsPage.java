@@ -2,13 +2,17 @@ package com.mgd.mgd;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.ToggleButton;
+
+import com.mgd.mgd.Common.ResourceHandler;
 
 public class SettingsPage extends Activity implements OnClickListener {
 
@@ -33,8 +37,10 @@ public class SettingsPage extends Activity implements OnClickListener {
         btn_back.setOnClickListener(this);
         btn_toggleBGM = (Button)findViewById(R.id.bgmtoggle_button);
         btn_toggleBGM.setOnClickListener(this);
+        btn_toggleBGM.setTag(R.drawable.sound);
         btn_toggleSFX = (Button)findViewById(R.id.sfxtoggle_button);
         btn_toggleSFX.setOnClickListener(this);
+        btn_toggleSFX.setTag(R.drawable.sound);
     }
 
     @Override
@@ -50,11 +56,39 @@ public class SettingsPage extends Activity implements OnClickListener {
         }
 
         if(v == btn_toggleSFX) {
-            // change background img of button and mute/unmute
 
+            if (btn_toggleSFX.getTag().equals(R.drawable.sound))
+            {
+                btn_toggleSFX.setBackgroundResource(R.drawable.mute);
+                btn_toggleSFX.setTag(R.drawable.mute);
+
+                MediaManager.Instance.MuteSound(0);
+            }
+            else
+            {
+                btn_toggleSFX.setBackgroundResource(R.drawable.sound);
+                btn_toggleSFX.setTag(R.drawable.sound);
+
+                MediaManager.Instance.UnMuteSound(0);
+            }
         }
 
         if(v == btn_toggleBGM) {
+            if (btn_toggleBGM.getTag().equals(R.drawable.sound))
+            {
+                btn_toggleBGM.setBackgroundResource(R.drawable.mute);
+                btn_toggleBGM.setTag(R.drawable.mute);
+
+                MediaManager.Instance.MuteSound(1);
+            }
+            else
+            {
+                btn_toggleBGM.setBackgroundResource(R.drawable.sound);
+                btn_toggleBGM.setTag(R.drawable.sound);
+
+                MediaManager.Instance.UnMuteSound(1);
+            }
+
 
         }
 

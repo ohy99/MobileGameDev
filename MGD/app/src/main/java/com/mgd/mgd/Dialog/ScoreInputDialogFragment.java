@@ -23,6 +23,7 @@ import com.mgd.mgd.Common.Player;
 import com.mgd.mgd.Components.ScoreSystem;
 import com.mgd.mgd.GamePage;
 import com.mgd.mgd.MainMenu;
+import com.mgd.mgd.PostGameScreen;
 import com.mgd.mgd.R;
 import com.mgd.mgd.SampleGame;
 
@@ -105,7 +106,7 @@ public class ScoreInputDialogFragment extends DialogFragment{
 
 
                 Intent intent = new Intent();
-                intent.setClass(GamePage.Instance, MainMenu.class);
+                intent.setClass(GamePage.Instance, PostGameScreen.class);
                 GamePage.Instance.startActivity(intent);
                 GamePage.Instance.finish();
             }

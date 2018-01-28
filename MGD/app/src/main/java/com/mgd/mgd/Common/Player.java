@@ -23,6 +23,19 @@ public class Player extends GameObject{
     public final static Player Instance = new Player();
     private Player() {}
 
+    class Joystick
+    {
+        PointF dir;
+        float maxRadius;
+
+        public void JoyStick(float maxRadius)
+        {
+            this.maxRadius = maxRadius;
+            this.dir = new PointF();
+        }
+    };
+
+    Joystick joystick;
 
     PointF prevPoint = new PointF(0,0);
 
@@ -66,6 +79,8 @@ public class Player extends GameObject{
 
 
         GameObjectManager.Instance.AddGo(this);
+
+
 
     }
 

@@ -41,7 +41,9 @@ public class MediaManager
     Vector<MediaPlayer> music = new Vector<>();
 
     float defaultVolume = 0.1f;
-    float currentVolume = defaultVolume;
+    //float currentVolume = defaultVolume;
+    float currentSoundVolume = defaultVolume;
+    float currentMusicVolume = defaultVolume;
 
     public void Init(Context context)
     {
@@ -110,7 +112,7 @@ public class MediaManager
                     }
                 });
                 tempMediaPlayer.start();
-                tempMediaPlayer.setVolume(currentVolume,currentVolume);
+                tempMediaPlayer.setVolume(currentSoundVolume,currentSoundVolume);
                 sound.add(tempMediaPlayer);
 
                 return true;
@@ -134,7 +136,7 @@ public class MediaManager
                     }
                 });
                 tempMediaPlayer.setLooping(true);
-                tempMediaPlayer.setVolume(currentVolume,currentVolume);
+                tempMediaPlayer.setVolume(currentMusicVolume,currentMusicVolume);
                 tempMediaPlayer.start();
                 music.add(tempMediaPlayer);
 
@@ -160,32 +162,49 @@ public class MediaManager
         music.clear();
     }
 
+    @Deprecated
     public void ToggleSound()
     {
-        if (currentVolume == 0.f)
-            UnMuteSound();
-        else
-            MuteSound();
+        //if (currentVolume == 0.f)
+        //    UnMuteSound();
+        //else
+        //    MuteSound(0);
     }
 
-    public void MuteSound()
+    public void MuteSound(int type)
     {
-        currentVolume = 0.f;
-        for (MediaPlayer s: sound) {
-            s.setVolume(currentVolume, currentVolume);
+        if (type == 0)
+        {
+            //sound
+            currentSoundVolume = 0.f;
+            for (MediaPlayer s: sound) {
+                s.setVolume(currentSoundVolume, currentSoundVolume);
+            }
         }
-        for (MediaPlayer s: music) {
-            s.setVolume(currentVolume, currentVolume);
+        else
+        {
+            currentMusicVolume = 0.f;
+            for (MediaPlayer s: music) {
+                s.setVolume(currentMusicVolume, currentMusicVolume);
+            }
         }
+
     }
-    public void UnMuteSound()
+    public void UnMuteSound(int type)
     {
-        currentVolume = defaultVolume;
-        for (MediaPlayer s: sound) {
-            s.setVolume(currentVolume, currentVolume);
+        if (type == 0)
+        {
+            currentSoundVolume = defaultVolume;
+            for (MediaPlayer s: sound) {
+                s.setVolume(currentSoundVolume, currentSoundVolume);
+            }
         }
-        for (MediaPlayer s: music) {
-            s.setVolume(currentVolume, currentVolume);
+        else
+        {
+            currentMusicVolume = defaultVolume;
+            for (MediaPlayer s: music) {
+                s.setVolume(currentMusicVolume, currentMusicVolume);
+            }
         }
     }
 
