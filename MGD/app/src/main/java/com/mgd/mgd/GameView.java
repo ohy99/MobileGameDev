@@ -1,6 +1,7 @@
 package com.mgd.mgd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -9,7 +10,7 @@ public class GameView extends SurfaceView
     private SurfaceHolder holder = null;
     private UpdateThread updateThread = new UpdateThread(this);
 
-    public GameView(Context _context)
+    public GameView(final Context _context)
     {
         // do what the base surface view will do to setup
         super(_context);

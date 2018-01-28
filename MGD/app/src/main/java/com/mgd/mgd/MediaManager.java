@@ -55,7 +55,7 @@ public class MediaManager
 
     public void Update(double dt)
     {
-        Log.i("soundSize", Integer.toString(sound.size()));
+        //Log.i("soundSize", Integer.toString(sound.size()));
 /*        for (MediaPlayer s: sound) {
             if (!s.isPlaying())
             {

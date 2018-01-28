@@ -1,6 +1,7 @@
 package com.mgd.mgd;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,9 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.w3c.dom.UserDataHandler;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ScorePage extends Activity implements View.OnClickListener {
 
     private ScrollView scrollView;
@@ -34,6 +38,7 @@ public class ScorePage extends Activity implements View.OnClickListener {
     private int scrollViewWidth, scrollViewHeight;
 
     private Activity myself = this;
+    private Button backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,29 +86,36 @@ public class ScorePage extends Activity implements View.OnClickListener {
                 Log.i("IndexWidth", String.valueOf(indexWidth));
 
                 indexTextView.setLayoutParams(new TableRow.LayoutParams(indexWidth, TableRow.LayoutParams.WRAP_CONTENT));
+                indexTextView.setTextSize(20);
                 nameTextView.setLayoutParams(new TableRow.LayoutParams(nameWidth, TableRow.LayoutParams.WRAP_CONTENT));
+                nameTextView.setTextSize(20);
                 scoreTextView.setLayoutParams(new TableRow.LayoutParams(scoreWidth, TableRow.LayoutParams.WRAP_CONTENT));
+                scoreTextView.setTextSize(20);
 
 
                 SharedPreferences sharedPreference = getSharedPreferences("score", MODE_PRIVATE);
+                //SharedPreferences.Editor editor = sharedPreference.edit();
                 int numOfSaves = sharedPreference.getInt("num", 0);
+                Log.i("numOfSaves", String.valueOf(numOfSaves));
 
                 for (int i = 0; i < numOfSaves;++i){
-                    //TableRow tableRow = new TableRow(this);
+                    String name = sharedPreference.getString("name" + String.valueOf(i), "nil");
+                    int score = sharedPreference.getInt("score" + String.valueOf(i), 0);
 
+                    Log.i("i", String.valueOf(i));
                     TextView textView = new TextView(myself);
                     textView.setText(String.valueOf(i + 1));
-                    textView.setTextSize(30);
+                    textView.setTextSize(20);
                     textView.setLayoutParams(new TableRow.LayoutParams(indexWidth, TableRow.LayoutParams.WRAP_CONTENT));
 
                     TextView textView2 = new TextView(myself);
-                    textView2.setText("Name");
-                    textView2.setTextSize(30);
+                    textView2.setText(name);
+                    textView2.setTextSize(20);
                     textView2.setLayoutParams(new TableRow.LayoutParams(nameWidth, TableRow.LayoutParams.WRAP_CONTENT));
 
                     TextView textView3 = new TextView(myself);
-                    textView3.setText(String.valueOf(1000));
-                    textView3.setTextSize(30);
+                    textView3.setText(String.valueOf(score));
+                    textView3.setTextSize(20);
                     textView3.setLayoutParams(new TableRow.LayoutParams(scoreWidth, TableRow.LayoutParams.WRAP_CONTENT));
 
                     TableRow tableRow = new TableRow(myself);
@@ -122,6 +134,9 @@ public class ScorePage extends Activity implements View.OnClickListener {
 
 
 
+        backButton = (Button) findViewById(R.id.backbutton);
+        backButton.setOnClickListener(this);
+
     }
 
     @Override
@@ -129,6 +144,13 @@ public class ScorePage extends Activity implements View.OnClickListener {
     public void onClick(View v)
     {
         //Intent intent = new Intent();
+        if(v == backButton)
+        {
+            Intent intent = new Intent();
+            intent.setClass(this, MainMenu.class);
+            this.finish();
+            startActivity(intent);
+        }
 
 //        if(v == btn_start) {
 //            intent.setClass(MainMenu.this, GamePage.class);

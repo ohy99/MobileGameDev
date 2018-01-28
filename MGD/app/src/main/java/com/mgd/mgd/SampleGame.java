@@ -1,6 +1,7 @@
 package com.mgd.mgd;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +12,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Display;
 import android.view.SurfaceView;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.mgd.mgd.Buttons.MuteButton;
@@ -26,6 +28,7 @@ import com.mgd.mgd.Components.Collision.CollisionManager;
 import com.mgd.mgd.Components.Health;
 import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.ScoreSystem;
+import com.mgd.mgd.Dialog.ScoreInputDialogFragment;
 import com.mgd.mgd.Enemy.EnemyManager;
 
 import java.util.HashMap;
@@ -39,14 +42,20 @@ public class SampleGame {
     public final static SampleGame Instance = new SampleGame();
     //public final static String SHARED_PREF_ID = "GameSaveFile"; //game save file id
 
+    Context context = null;
+
     float timer = 0.0f;
     private boolean isPaused = false;
-    private boolean gameover = false;
+    public boolean gameover = false;
 
     SharedPreferences sharedPref = null;
     SharedPreferences.Editor editor = null;
 
     Player player = Player.Instance;
+    private boolean gameSaved = false;
+
+    ScoreInputDialogFragment scoreInputDialogFragment = null;
+    private boolean touchDown;
 
     private SampleGame() {
     }
@@ -66,6 +75,7 @@ public class SampleGame {
         float worldWidth = worldHeight * ((float)width / (float)height);
         Constants.worldWidth = worldWidth;
         Constants.worldHeight = worldHeight;
+        context = _view.getContext();
 
         EntityManager.Instance.Init(_view);
         ResourceHandler.Instance.Init(_view);
@@ -90,6 +100,11 @@ public class SampleGame {
         }*/
 
         sharedPref = _view.getContext().getSharedPreferences("score", Context.MODE_PRIVATE);
+        gameSaved = false;
+        scoreInputDialogFragment = new ScoreInputDialogFragment();
+        //scoreInputDialogFragment.InitDialogTextBox(_view.getContext());
+        touchDown = false;
+
 
     }
 
@@ -99,12 +114,37 @@ public class SampleGame {
 
         if (((Health)player.GetComponent("hp")).GetHpPercentage() <= 0) {
             gameover = true;
+
             this.SaveScore((ScoreSystem) player.GetComponent("score"));
 
             Intent intent = new Intent();
             intent.setClass(GamePage.Instance,PostGameScreen.class);
             startActivity(intent);
             GamePage.Instance.finish();
+        }
+
+        if (gameover)
+        {
+            if (!scoreInputDialogFragment.IsShown)
+            {
+                scoreInputDialogFragment.show(GamePage.Instance.getFragmentManager(), "scoreInput");
+                scoreInputDialogFragment.IsShown = true;
+            }
+
+
+
+
+            //transit to mainmenu
+            if (!TouchManager.Instance.IsDown() && touchDown)
+            {
+                //
+
+
+
+                return;
+            }
+
+            touchDown = TouchManager.Instance.IsDown();
         }
 
 
@@ -137,24 +177,32 @@ public class SampleGame {
     }
 
 
-    public void SaveScore(ScoreSystem score)
+    public void SaveScore(ScoreSystem score, String inputName)
     {
+        if (gameSaved)
+            return;
         editor = sharedPref.edit();
 
         int numOfSaves = sharedPref.getInt("num", 0);
-        Set<String> stringSet = new HashSet<String>();
-        stringSet.add("name");
-        stringSet.add(String.valueOf(score.GetScore()));
-        editor.putStringSet(String.valueOf(numOfSaves), stringSet);//0 , 1, 2, 3, 4,
+//        Set<String> stringSet = new HashSet<String>();
+//        stringSet.add("name");
+//        stringSet.add(String.valueOf(score.GetScore()));
+//        editor.putStringSet(String.valueOf(numOfSaves), stringSet);//0 , 1, 2, 3, 4,
+
+        editor.putString("name" + String.valueOf(numOfSaves), inputName);
+        editor.putInt("score" + String.valueOf(numOfSaves), score.GetScore());
         editor.putInt("num", ++numOfSaves);
 
-
+        Log.i("score", String.valueOf(score.GetScore()));
         //this does it in background, something like new thread?
         editor.apply();
-        //this does it in the same main thread so will lag
+        //this does it in the same main thread so will lag vv
         //editor.commit();
         editor = null;
+
+        gameSaved = true;
     }
 
 }
+
 
