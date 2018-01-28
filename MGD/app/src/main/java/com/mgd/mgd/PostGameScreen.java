@@ -60,8 +60,9 @@ public class PostGameScreen extends Activity implements View.OnClickListener{
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        String appId = "893864077461983";
         //init for fb use
-        //FacebookSdk.setApplicationId(getString(R.string.app_id));
+        FacebookSdk.setApplicationId(appId);
         FacebookSdk.sdkInitialize(this.getApplicationContext());
 
         setContentView(R.layout.activity_post_game);

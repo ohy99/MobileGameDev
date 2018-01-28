@@ -42,7 +42,7 @@ public class ExitMainMenuButton implements EntityBase {
     public void Init(SurfaceView _view) {
         bmp = ResourceHandler.Instance.GetBitmap(R.drawable.home);
         xPos = 1050;
-        yPos = 300;
+        yPos = 450;
         minX = xPos - bmp.getWidth() * 0.5f;
         maxX = xPos + bmp.getWidth() * 0.5f;
         minY = yPos - bmp.getHeight() * 0.5f;

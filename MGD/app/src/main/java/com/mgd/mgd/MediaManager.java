@@ -247,4 +247,6 @@ public class MediaManager
         sound.clear();
         music.clear();
     }
+
+    public float GetVolume() { return currentMusicVolume;}
 }

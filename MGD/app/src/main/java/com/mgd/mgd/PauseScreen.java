@@ -56,7 +56,9 @@ public class PauseScreen implements EntityBase {
 
     @Override
     public void Render(Canvas _canvas) {
-        _canvas.drawBitmap(bmp, xPos - bmp.getWidth() * 0.5f, yPos - bmp.getHeight() * 0.5f, null);
+        float canvasX = _canvas.getWidth();
+        float canvasY = _canvas.getHeight();
+        _canvas.drawBitmap(bmp,-0.5f * canvasX  ,0 , null);
     }
 
     @Override

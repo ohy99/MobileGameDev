@@ -41,7 +41,7 @@ public class ResumeButton implements EntityBase {
     public void Init(SurfaceView _view) {
         bmp = ResourceHandler.Instance.GetBitmap(R.drawable.resume);
         xPos = 350;
-        yPos = 300;
+        yPos = 450;
         minX = xPos - bmp.getWidth() * 0.5f;
         maxX = xPos + bmp.getWidth() * 0.5f;
         minY = yPos - bmp.getHeight() * 0.5f;
@@ -64,6 +64,10 @@ public class ResumeButton implements EntityBase {
         }
         else if (!TouchManager.Instance.IsDown() && wasDown)
             wasDown = false;
+
+        if(!SampleGame.Instance.GetIsPaused()) {
+            isDone = true;
+        }
     }
 
     @Override
