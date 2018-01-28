@@ -55,7 +55,7 @@ public class SampleGame {
     private boolean gameSaved = false;
 
     ScoreInputDialogFragment scoreInputDialogFragment = null;
-    private boolean touchDown;
+    //private boolean touchDown;
 
     private SampleGame() {
     }
@@ -103,7 +103,7 @@ public class SampleGame {
         gameSaved = false;
         scoreInputDialogFragment = new ScoreInputDialogFragment();
         //scoreInputDialogFragment.InitDialogTextBox(_view.getContext());
-        touchDown = false;
+        //touchDown = false;
 
 
     }
@@ -123,21 +123,6 @@ public class SampleGame {
                 scoreInputDialogFragment.show(GamePage.Instance.getFragmentManager(), "scoreInput");
                 scoreInputDialogFragment.IsShown = true;
             }
-
-
-
-
-            //transit to mainmenu
-            if (!TouchManager.Instance.IsDown() && touchDown)
-            {
-                //
-
-
-
-                return;
-            }
-
-            touchDown = TouchManager.Instance.IsDown();
         }
 
 
