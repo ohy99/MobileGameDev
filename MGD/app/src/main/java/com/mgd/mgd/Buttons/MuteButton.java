@@ -2,6 +2,7 @@ package com.mgd.mgd.Buttons;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.provider.MediaStore;
 import android.view.SurfaceView;
 
 import com.mgd.mgd.Collision;
@@ -35,9 +36,9 @@ public class MuteButton implements EntityBase {
 
     @Override
     public void Init(SurfaceView _view) {
-        bmp = ResourceHandler.Instance.GetBitmap(R.drawable.mute);
+        bmp = ResourceHandler.Instance.GetBitmap(R.drawable.sound);
         xPos = 750;
-        yPos = 300;
+        yPos = 450;
         minX = xPos - bmp.getWidth() * 0.5f;
         maxX = xPos + bmp.getWidth() * 0.5f;
         minY = yPos - bmp.getHeight() * 0.5f;
@@ -55,7 +56,17 @@ public class MuteButton implements EntityBase {
             if(Collision.PointQuad(minX,minY,maxX,maxY,TouchManager.Instance.GetPosX(),TouchManager.Instance.GetPosY()))
             {
                 // Button clicked!
-                MediaManager.Instance.ToggleSound();
+                //MediaManager.Instance.ToggleSound();
+                if(MediaManager.Instance.GetVolume() != 0.0) {
+                    MediaManager.Instance.MuteSound(1);
+                    MediaManager.Instance.MuteSound(0);
+                    bmp = ResourceHandler.Instance.GetBitmap(R.drawable.mute);
+                }
+                else {
+                    MediaManager.Instance.UnMuteSound(1);
+                    MediaManager.Instance.UnMuteSound(0);
+                    bmp = ResourceHandler.Instance.GetBitmap(R.drawable.sound);
+                }
                 wasDown= true;
             }
         }

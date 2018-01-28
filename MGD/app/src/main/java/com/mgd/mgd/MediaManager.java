@@ -233,4 +233,6 @@ public class MediaManager
     }
 
     void StopVibrate() {vibrator.cancel();}
+
+    public float GetVolume() { return currentMusicVolume;}
 }
