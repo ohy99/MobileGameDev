@@ -30,8 +30,8 @@ public class ExitToMainMenuConfirmDialogFragment extends DialogFragment {
                         //return to mainmenu
                         Intent intent = new Intent();
                         intent.setClass(GamePage.Instance, MainMenu.class);
-                        startActivity(intent);
                         GamePage.Instance.finish();
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -51,3 +51,4 @@ public class ExitToMainMenuConfirmDialogFragment extends DialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {IsShown = false;}
 }
+

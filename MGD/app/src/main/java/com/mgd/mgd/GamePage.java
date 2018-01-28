@@ -1,11 +1,16 @@
 package com.mgd.mgd;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.util.EventLog;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.mgd.mgd.Common.Constants;
 
 public class GamePage extends Activity {
     // this is global access variable
@@ -21,6 +26,10 @@ public class GamePage extends Activity {
 
         // update global access reference variable
         Instance = this;
+
+
+
+
     }
 
     @Override
@@ -29,6 +38,7 @@ public class GamePage extends Activity {
         int y = (int) event.getY();
 
         TouchManager.Instance.Update(x,y,event.getAction());
+
         return true;
     }
 }

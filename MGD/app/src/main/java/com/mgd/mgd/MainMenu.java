@@ -2,6 +2,8 @@ package com.mgd.mgd;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -25,8 +27,8 @@ public class MainMenu extends Activity implements OnClickListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         // hide top bar
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_main_menu);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         //setContentView(new GameView(this));
 
         // set listener to button
@@ -39,6 +41,26 @@ public class MainMenu extends Activity implements OnClickListener {
         btn_facebook = (Button)findViewById(R.id.facebook_button);
         btn_facebook.setOnClickListener(this);
 
+
+        boolean loadedBefore = false;
+
+        SharedPreferences settings = getSharedPreferences("SETTINGS", MODE_PRIVATE);
+        loadedBefore = settings.getBoolean("FIRST_RUN", false);
+        if (!loadedBefore) {
+            // do the thing for the first time
+            settings = getSharedPreferences("SETTINGS", 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean("FIRST_RUN", true);
+            editor.apply();
+
+            SharedPreferences.Editor score = getSharedPreferences("score", MODE_PRIVATE).edit();
+            score.putInt("num", 0);
+            score.apply();
+
+
+        } else {
+            // other time your app loads
+        }
 
     }
 
