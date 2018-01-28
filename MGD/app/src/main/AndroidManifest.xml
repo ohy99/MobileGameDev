@@ -3,6 +3,10 @@
     package="com.mgd.mgd">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+    <meta-data android:name = "com.facebook.sdk.ApplicationId"
+        android:value="893864077461983"/>
 
     <application
         android:allowBackup="true"
@@ -41,6 +45,12 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SettingsPage">
+            <intent-filter>
+                <action  android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
     </application>
