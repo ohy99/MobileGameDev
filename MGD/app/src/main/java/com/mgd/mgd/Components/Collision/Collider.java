@@ -4,7 +4,9 @@ import com.mgd.mgd.Common.Vector3;
 import com.mgd.mgd.Components.ComponentBase;
 import com.mgd.mgd.Components.Transform;
 
-
+/**
+ * Created by HongYu
+ */
 public class Collider implements ComponentBase {
 
     //use aabb for now

@@ -27,6 +27,10 @@ import com.mgd.mgd.PostGameScreen;
 import com.mgd.mgd.R;
 import com.mgd.mgd.SampleGame;
 
+/**
+ * Created by HongYu
+ */
+
 public class ScoreInputDialogFragment extends DialogFragment{
     public static boolean IsShown = false;
     public AlertDialog.Builder builder = null;

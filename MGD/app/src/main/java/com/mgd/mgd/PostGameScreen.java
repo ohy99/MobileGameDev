@@ -34,7 +34,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by 161832Q on 28/1/2018.
+ * Created by MarcusTan on 28/1/2018.
  */
 
 public class PostGameScreen extends Activity implements View.OnClickListener{

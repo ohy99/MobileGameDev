@@ -2,6 +2,9 @@ package com.mgd.mgd.Components;
 
 import com.mgd.mgd.Common.Vector3;
 
+/**
+ * Created by HongYu
+ */
 public class Physics implements ComponentBase{
 
     boolean gravity = false;

@@ -20,6 +20,10 @@ import com.mgd.mgd.TouchManager;
 
 import java.util.Map;
 
+/**
+ * Created by HongYu
+ */
+
 public class Player extends GameObject{
     public final static Player Instance = new Player();
     private Player() {}

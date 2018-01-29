@@ -7,6 +7,10 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.Vector;
 
+/**
+ * Created by HongYu
+ */
+
 public class GameObject{
 
     protected Map<String, ComponentBase> components = new HashMap<>();

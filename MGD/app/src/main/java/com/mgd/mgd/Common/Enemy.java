@@ -4,7 +4,7 @@ import com.mgd.mgd.Components.StateManager;
 import com.mgd.mgd.Components.Transform;
 
 /**
- * Created by 161832Q on 3/12/2017.
+ * Created by MarcusTan on 3/12/2017.
  */
 
 public class Enemy extends GameObject {

@@ -17,7 +17,7 @@ import com.mgd.mgd.SampleGame;
 import com.mgd.mgd.TouchManager;
 
 /**
- * Created by 161832Q on 7/1/2018.
+ * Created by MarcusTan on 7/1/2018.
  */
 
 public class PauseButton implements EntityBase {

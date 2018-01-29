@@ -9,6 +9,10 @@ import com.mgd.mgd.Components.Transform;
 
 import java.util.Vector;
 
+/**
+ * Created by HongYu
+ */
+
 public class GameObjectManager{
     public final static GameObjectManager Instance = new GameObjectManager();
     Vector<GameObject> gameObjects = new Vector<>();

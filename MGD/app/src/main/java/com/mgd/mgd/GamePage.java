@@ -12,6 +12,10 @@ import android.view.WindowManager;
 
 import com.mgd.mgd.Common.Constants;
 
+/**
+ * Created by MarcusTan
+ */
+
 public class GamePage extends Activity {
     // this is global access variable
     public static GamePage Instance = null;

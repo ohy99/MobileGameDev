@@ -1,5 +1,8 @@
 package com.mgd.mgd.Components;
 
+/**
+ * Created by HongYu
+ */
 public class Damage implements ComponentBase
 {
 

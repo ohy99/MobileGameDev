@@ -5,6 +5,9 @@ import com.mgd.mgd.Components.RenderManager;
 import com.mgd.mgd.Components.Transform;
 import com.mgd.mgd.R;
 
+/**
+ * Created by HongYu
+ */
 public class GenericRenderable extends GameObject{
 
     @Override

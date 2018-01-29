@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.view.SurfaceView;
 
+// Not used
+
 public class SampleBackground implements EntityBase {
     private Bitmap bmp = null;
     private boolean isDone = false;

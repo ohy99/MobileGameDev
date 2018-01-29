@@ -12,6 +12,9 @@ import com.mgd.mgd.Common.Player;
 
 import java.util.Vector;
 
+/**
+ * Created by HongYu
+ */
 public class RenderManager{
     public final static RenderManager Instance = new RenderManager();
     Vector<Render> renderables = new Vector<>();

@@ -15,7 +15,7 @@ import com.mgd.mgd.SampleGame;
 import com.mgd.mgd.TouchManager;
 
 /**
- * Created by 161832Q on 8/1/2018.
+ * Created by MarcusTan on 8/1/2018.
  */
 
 public class MuteButton implements EntityBase {

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
+/**
+ * Created by MarcusTan
+ */
 public class GameView extends SurfaceView
 {
     private SurfaceHolder holder = null;

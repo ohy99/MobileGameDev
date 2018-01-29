@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by 161832Q on 3/12/2017.
+ * Created by MarcusTan on 3/12/2017.
  */
 
 public class StateManager {

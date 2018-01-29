@@ -3,6 +3,9 @@ package com.mgd.mgd;
 import android.graphics.Canvas;
 import android.view.SurfaceView;
 
+/**
+ * Created by MarcusTan
+ */
 public interface EntityBase {
     boolean IsDone();
     void SetIsDone(boolean _isDone);
