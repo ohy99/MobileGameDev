@@ -5,6 +5,10 @@ import android.graphics.PointF;
 
 import com.mgd.mgd.Common.Vector3;
 
+/**
+ * Created by HongYu
+ */
+
 public class Transform implements ComponentBase
 {
     private Vector3 position = new Vector3(0,0,0);

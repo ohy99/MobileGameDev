@@ -6,6 +6,10 @@ import com.mgd.mgd.Common.ResourceHandler;
 import com.mgd.mgd.Common.Vector3;
 import com.mgd.mgd.R;
 
+/**
+ * Created by HongYu
+ */
+
 public class Health implements ComponentBase
 {
 

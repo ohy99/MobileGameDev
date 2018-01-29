@@ -9,7 +9,7 @@ import com.mgd.mgd.Components.Transform;
 import java.util.Random;
 
 /**
- * Created by 161832Q on 7/1/2018.
+ * Created by MarcusTan on 7/1/2018.
  */
 
 public class StateRandomMove extends State {

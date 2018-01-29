@@ -1,7 +1,7 @@
 package com.mgd.mgd.Common;
 
 /**
- * Created by 162183P on 12/1/2017.
+ * Created by HongYu on 12/1/2017.
  */
 
 public class Vector3 {

@@ -14,6 +14,10 @@ import android.widget.ToggleButton;
 
 import com.mgd.mgd.Common.ResourceHandler;
 
+/**
+ * Created by MarcusTan
+ */
+
 public class SettingsPage extends Activity implements OnClickListener {
 
     //Define button as an obj

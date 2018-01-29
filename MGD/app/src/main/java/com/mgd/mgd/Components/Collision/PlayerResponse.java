@@ -5,6 +5,9 @@ import com.mgd.mgd.Common.GameObject;
 import com.mgd.mgd.Common.Projectiles;
 import com.mgd.mgd.Components.Health;
 
+/**
+ * Created by HongYu
+ */
 public class PlayerResponse extends CharacterResponse{
 
     Health ownerHp;

@@ -5,6 +5,10 @@ import android.graphics.Color;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+/**
+ * Created by MarcusTan
+ */
+
 public class UpdateThread extends Thread
 {
     static final long targetFPS = 60;

@@ -34,6 +34,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
+/**
+ * Created by HongYu
+ */
+
 public class ScorePage extends Activity implements View.OnClickListener {
 
     private ScrollView scrollView;
@@ -49,6 +53,8 @@ public class ScorePage extends Activity implements View.OnClickListener {
         String name;
         int score;
     }
+
+    //THIS IS DYNAMIC. CREATED BASED ON SAVE
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

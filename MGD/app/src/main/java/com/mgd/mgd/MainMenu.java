@@ -11,6 +11,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 
+/**
+ * Created by MarcusTan
+ */
 public class MainMenu extends Activity implements OnClickListener {
 
     //Define button as an obj

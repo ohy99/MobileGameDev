@@ -8,7 +8,7 @@ import com.mgd.mgd.Common.Vector3;
 import java.util.LinkedList;
 
 /**
- * Created by 161832Q on 3/12/2017.
+ * Created by MarcusTan on 3/12/2017.
  */
 
 public class EnemyManager {

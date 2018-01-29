@@ -2,6 +2,10 @@ package com.mgd.mgd;
 
 import android.view.MotionEvent;
 
+/**
+ * Created by MarcusTan
+ */
+
 // this is to create a common class so that it can be use for cross platform
 public class TouchManager {
     public final static TouchManager Instance = new TouchManager();

@@ -38,6 +38,11 @@ import java.util.Set;
 
 // Remark: Too lazy to change classname
 
+/**
+ * Created by MarcusTan
+ * Both written stuff here
+ */
+
 public class SampleGame {
     public final static SampleGame Instance = new SampleGame();
     //public final static String SHARED_PREF_ID = "GameSaveFile"; //game save file id

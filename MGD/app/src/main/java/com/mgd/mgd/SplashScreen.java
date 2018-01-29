@@ -14,6 +14,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+/**
+ * Created by MarcusTan
+ */
+
 public class SplashScreen extends Activity{
 
     Thread SplashThread;

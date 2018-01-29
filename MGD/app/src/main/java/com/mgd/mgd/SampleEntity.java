@@ -7,6 +7,8 @@ import android.view.SurfaceView;
 
 import java.util.Random;
 
+// Not used
+
 public class SampleEntity implements EntityBase, Collidable {
 
     private Bitmap bmp = null;

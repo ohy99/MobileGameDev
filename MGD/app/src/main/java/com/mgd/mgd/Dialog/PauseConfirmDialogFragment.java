@@ -13,7 +13,7 @@ import com.mgd.mgd.PauseScreen;
 import com.mgd.mgd.SampleGame;
 
 /**
- * Created by 161832Q on 27/1/2018.
+ * Created by MarcusTan on 27/1/2018.
  */
 
 public class PauseConfirmDialogFragment extends DialogFragment {

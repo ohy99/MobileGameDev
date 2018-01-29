@@ -7,7 +7,7 @@ import com.mgd.mgd.Common.Vector3;
 import com.mgd.mgd.Components.Transform;
 
 /**
- * Created by 161832Q on 7/1/2018.
+ * Created by MarcusTan on 7/1/2018.
  */
 
 public class StateMove extends State {

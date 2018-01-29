@@ -8,6 +8,9 @@ import com.mgd.mgd.Common.GameObjectManager;
 import com.mgd.mgd.Common.Player;
 import com.mgd.mgd.Components.ScoreSystem;
 
+/**
+ * Created by HongYu
+ */
 public class ProjectileResponse extends CollisionResponse{
 
     @Override

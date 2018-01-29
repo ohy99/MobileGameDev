@@ -13,6 +13,10 @@ import com.mgd.mgd.R;
 import java.util.Random;
 import java.util.Vector;
 
+/**
+ * Created by HongYu
+ */
+
 public class ParticleManager {
     public static final ParticleManager Instance = new ParticleManager();
 

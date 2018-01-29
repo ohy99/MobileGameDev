@@ -10,6 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
 
+/**
+ * Created by HongYu
+ */
+
 public class ResourceHandler{
     final static public ResourceHandler Instance = new ResourceHandler();
 

@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
 /**
- * Created by 162183P on 12/1/2017.
+ * Created by HongYu on 12/1/2017.
  */
 
 public class Render implements ComponentBase {
