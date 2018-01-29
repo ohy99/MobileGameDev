@@ -68,7 +68,7 @@ public class RenderManager{
         }
 
         Paint paint = new Paint();
-        paint.setColor(Color.BLUE);
+        paint.setColor(Color.YELLOW);
         paint.setTextSize(60);
         ScoreSystem ss = (ScoreSystem) Player.Instance.GetComponent("score");
 
