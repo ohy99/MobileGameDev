@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
@@ -69,6 +70,10 @@ public class PostGameScreen extends Activity implements View.OnClickListener{
 
         // get final score
         score = ss.GetScore();
+
+        TextView finalScore;
+        finalScore = (TextView) findViewById(R.id.finalscore);
+        finalScore.setText(String.valueOf(score));
 
         btn_skip = (Button) findViewById(R.id.skip_button);
         btn_skip.setOnClickListener(this);

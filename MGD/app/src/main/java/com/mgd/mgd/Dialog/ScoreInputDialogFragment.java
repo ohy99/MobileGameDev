@@ -106,7 +106,10 @@ public class ScoreInputDialogFragment extends DialogFragment{
 
 
                 Intent intent = new Intent();
-                intent.setClass(GamePage.Instance, PostGameScreen.class);
+                // transition to postgame
+                // commented out cause crash, temporary transition to mainmenu
+                //intent.setClass(GamePage.Instance, PostGameScreen.class);
+                intent.setClass(GamePage.Instance,MainMenu.class);
                 GamePage.Instance.startActivity(intent);
                 GamePage.Instance.finish();
             }
